@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 02, 2024 at 07:07 PM
+-- Generation Time: Jun 06, 2024 at 08:01 PM
 -- Server version: 10.6.16-MariaDB-0ubuntu0.22.04.1
--- PHP Version: 8.1.2-1ubuntu2.14
+-- PHP Version: 8.1.2-1ubuntu2.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -75,7 +75,9 @@ CREATE TABLE `CompanyTB` (
 
 INSERT INTO `CompanyTB` (`CompanyID`, `Companyname`, `Companydescription`, `Contactno`, `Companyemail`) VALUES
 (1, 'RV', 'for clothing', '9685456985', 'rv@gmail.com'),
-(2, 'srushti', 'srushti ni company', '7894563152', 's@gmail.com');
+(2, 'srushti', 'srushti ni company', '7894563152', 's@gmail.com'),
+(8, 'SR', 'Sagar Rajesh', '9988774455', 'sgr@gmail.com'),
+(18, 'Binal', 'For Phones', '8852634178', 'abcd@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -105,15 +107,6 @@ CREATE TABLE `OrderDetailsTB` (
   `Orderdate` varchar(255) NOT NULL,
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `OrderDetailsTB`
---
-
-INSERT INTO `OrderDetailsTB` (`OdetailsID`, `ProductID`, `OrderID`, `CustomizeImage`, `Customizetext`, `Orderdate`, `quantity`) VALUES
-(2, 1, 2, 'ABC.JPG', 'xyz', '2024-04-18T16:49:35.057277', 2),
-(3, 1, 3, 'ABC.JPG', 'xyz', '18/04/2024 16:55:18', 2),
-(4, 1, 4, 'ABC.JPG', 'xyz', '18/04/2024 20:52:32', 2);
 
 -- --------------------------------------------------------
 
@@ -152,15 +145,6 @@ CREATE TABLE `OrderTrackingTB` (
   `EndingDate` varchar(255) NOT NULL,
   `Description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `OrderTrackingTB`
---
-
-INSERT INTO `OrderTrackingTB` (`OrdertrackID`, `OrderdetailsID`, `StageID`, `Place`, `StartingDate`, `EndingDate`, `Description`) VALUES
-(2, 2, 3, 'mdc', '2024-04-18T16:49:35.080110', '2024-04-18T16:49:35.080212', 'cdh'),
-(3, 3, 3, 'mdc', '18/04/2024 16:55:18', '18/04/2024 16:55:18', 'cdh'),
-(4, 4, 3, 'mdc', '18/04/2024 20:52:32', '18/04/2024 20:52:32', 'cdh');
 
 -- --------------------------------------------------------
 
@@ -206,9 +190,11 @@ CREATE TABLE `productTB` (
 --
 
 INSERT INTO `productTB` (`productID`, `productname`, `pcatID`, `productdescription`, `productprice`, `productimage`, `isimageinclude`, `istextinclude`, `companyID`, `quantity`) VALUES
-(1, 'Jeans', 1, 'cotten', 2000, 'abc.jpg', 0, 0, 1, 10),
-(2, 'mobile', 2, 'vcdvcfd', 40000, '9.jpg', 0, 0, 2, 2),
-(3, 'dkejn', 2, 'dkdnej', 80000, '9.jpg', 0, 0, 1, 10);
+(39, 'T-shirt', 1, 'for Men', 4000, '7.jpg', 0, 0, 1, 40),
+(40, 'jeans', 1, 'For men', 8000, '8.jpg', 1, 1, 2, 10),
+(44, 'Kurta', 1, 'For Men', 5000, '15.jpg', 0, 0, 1, 4),
+(45, 'sari', 1, 'foe women', 7000, '17.jpg', 1, 0, 2, 10),
+(47, 'galaxy', 1, 'samsung phone', 1000000, '17.jpg', 0, 0, 1, 10);
 
 -- --------------------------------------------------------
 
@@ -255,15 +241,6 @@ CREATE TABLE `StagemasterTB` (
   `Stagedescription` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `StagemasterTB`
---
-
-INSERT INTO `StagemasterTB` (`StageID`, `ProductID`, `Stagename`, `Stagedescription`) VALUES
-(1, 1, 'by material', 'cgdgcvfhiv'),
-(2, 1, 'finish production', 'cbhdgcfyetur'),
-(3, 1, 'Ordered', 'Product Orderd');
-
 -- --------------------------------------------------------
 
 --
@@ -287,7 +264,14 @@ CREATE TABLE `UserTB` (
 --
 
 INSERT INTO `UserTB` (`UserID`, `Username`, `Useremail`, `Password`, `RoleID`, `Gender`, `DOB`, `Address`, `Mobileno`) VALUES
-(1, 'abxcd', 'sgcv@gmail.com', 'abc@123', 2, 'Male', '2-12-2000', 'surat', '7894561235');
+(1, 'abxcd', 'sgcv@gmail.com', 'PBKDF2WithHmacSHA256:2048:b0TrD9Q5w7ILPf+Rq6lbNrlKSJhEFRRgdTe7v/WMDRM=:F32keogVMe4BFkYPTK77gSLpzQvdu08CdJ46EXRI6XE=', 2, 'Male', '2-12-2000', 'surat', '7894561235'),
+(2, 'rohan', 'rohan123@gmail.com', 'PBKDF2WithHmacSHA256:2048:b0TrD9Q5w7ILPf+Rq6lbNrlKSJhEFRRgdTe7v/WMDRM=:F32keogVMe4BFkYPTK77gSLpzQvdu08CdJ46EXRI6XE=', 2, 'Male', '3-11-2002', 'udhana', '7894561235'),
+(3, 'admin', 'admin@123@gmail.com', 'PBKDF2WithHmacSHA256:2048:Cu/0JpeS+yt/VrytKeGHYIuutHqgeFzUWTEU3tb82bQ=:jq+fWURHTWz21P6eOeG2wwKI3aeJHRWD4qRdxjOk8hM=', 1, 'Male', '7-8-1999', 'Daman', '1234569875'),
+(4, 'yug', 'yug@123@gmail.com', 'PBKDF2WithHmacSHA256:2048:w1PXVAw8bbVk2Lu3UqSwcUAAynyXwQQeYHPzxSYUhNk=:IWzHVuO8sOQ7f8/mhFAfdbtvIT3fBbTrfeSmpOqTMg4=', 2, 'Male', '7-12-2003', 'Adajan', '4569871235'),
+(5, 'znj', 'x ', 'PBKDF2WithHmacSHA256:2048:I/Q2VPZuxChsZ/UyqV9cwuOel1Wu8dQ/IJqj2xqRUGE=:hpQ9Ua8VE8tBkJ4O+eE2iuPLn8G4B4fZpodfrpkQhGI=', 2, 'b', 'n ', 'hnb', '656'),
+(6, 'sa', 'sac', 'PBKDF2WithHmacSHA256:2048:0eGbypq4yOLidiUtFPcffYWcuTVA5mY5Ctwr3edWZaw=:W7mdsjJlrROOxwa3T/ddwMSFaYzlsnytwEnPFUboAAM=', 2, 'sa', 'sa', 'sa', '854'),
+(7, 'vikas', 'vikas@gmail.com', 'PBKDF2WithHmacSHA256:2048:k8SONl870LlC7qIWviDD3uXEGswLWTzqMBCCQmtlNIs=:vS+A9epRx0T+BP7cWr/82bfFnw7xK6EF1vEogjbjhwA=', 2, 'Male', '7-8-9000', 'kat', '1256348975'),
+(8, 'sakshi', 'sakshi@gmail.com', 'PBKDF2WithHmacSHA256:2048:KQLAmmZtZnVicDzhoyWoBvUyqXlxOIuDzMGi6KWYkoE=:b+QbDzaqX/vYQ0jZlUeM+BWMGj9ONlIQ8QnU1C+axwo=', 2, 'Female', '2024-05-08', 'adajan', '1236547895');
 
 --
 -- Indexes for dumped tables
@@ -406,7 +390,7 @@ ALTER TABLE `CartTB`
 -- AUTO_INCREMENT for table `CompanyTB`
 --
 ALTER TABLE `CompanyTB`
-  MODIFY `CompanyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `CompanyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `ImagemasterTB`
@@ -442,7 +426,7 @@ ALTER TABLE `ProductCategoryTB`
 -- AUTO_INCREMENT for table `productTB`
 --
 ALTER TABLE `productTB`
-  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `RelationTB`
@@ -466,7 +450,7 @@ ALTER TABLE `StagemasterTB`
 -- AUTO_INCREMENT for table `UserTB`
 --
 ALTER TABLE `UserTB`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
