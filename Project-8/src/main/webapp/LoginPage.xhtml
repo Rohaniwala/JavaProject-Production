@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+     <h:head>
+        <title>Facelet Title</title>
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="https://jthemes.net/favicon.ico"/>
+
+        <!-- Google Webfont -->
+        <link href='http://fonts.googleapis.com/css?family=Raleway:400,200,100,300,500,600,700,800,900' rel='stylesheet' type='text/css'/>
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,100,300,300italic,700,900' rel='stylesheet' type='text/css'/>
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'/>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css"/>
+        <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
+        <link rel="stylesheet" href="css/bootstrap.css"/>
+        <link rel="stylesheet" href="js/vendors/isotope/isotope.css"/>
+        <link rel="stylesheet" href="js/vendors/slick/slick.css"/>
+        <link rel="stylesheet" href="js/vendors/rs-plugin/css/settings.css"/>
+        <link rel="stylesheet" href="js/vendors/select/jquery.selectBoxIt.css"/>
+        <link rel="stylesheet" href="css/subscribe-better.css"/>
+        <link rel="stylesheet" href="../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css"/>
+        <link rel="stylesheet" href="css/style.css"/>
+
+        <style>
+            .card {
+                padding: 30px;
+                border-radius: 4px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+                background-color: transparent;
+                opacity: 0.9;
+
+            }
+
+            .form-login {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .form-list {
+                margin-bottom: 20px;
+            }
+
+            .form-list li {
+                margin-bottom: 10px;
+            }
+
+            .input-text {
+
+                width: 100%;
+                padding: 10px;
+                border-radius: 4px;
+                border: 1px solid #ccc;
+            }
+
+            .input-chkbox {
+                margin-right: 10px;
+            }
+
+            .pwd {
+                font-size: 0.9em;
+            }
+
+
+        </style>
+    </h:head>
+
+<body>
+    <div class="account-form" style="max-width:760px; margin: auto; margin-top: 200px; display: grid; place-items: center; background: none">
+        <div class="card" style="background-color:none ; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.9);">
+            <h1 style="text-align: center; margin-bottom: 30px; color: black">Login</h1>
+            <form class="form-login" method="post">
+                <ul class="form-list row">
+                    <li class="col-md-12 col-sm-12">
+                        <label style="color: black; font-size: 20px;">User name or email <em>*</em></label>
+                        <!--<input type="text" class="input-style input-text" placeholder="Enter your username or email" name="username"/>-->
+                             <input class="login" placeholder="username" type="text" name="username"  value=""/> 
+                    </li>
+                    <li class="col-md-12 col-sm-12">
+                        <label style="color: black; font-size: 20px;">Your password <em>*</em></label>
+                        <!--<input type="password" class="input-style input-text" placeholder="Enter your password" name="password"/>-->
+                        <input class="login" placeholder="Password" type="password" name="password" value=""/> 
+                    </li>
+                    <li class="col-md-6 col-sm-12">
+                        <input class="input-chkbox" type="checkbox"/>
+                        <label style="color: black; font-size: 20px;" >Remember me</label>
+                    </li>
+                    <li class="col-md-6 col-sm-12 pwd text-right">
+                        <label style="color: black; font-size: 20px;" > <a href="#"> forgot password? </a> </label>
+                    </li>
+                </ul>
+                <div class="buttons-set">
+                          <input type="submit" class="btn Login_btn" value="login" style="background-color: black; border: 2px solid black; color: white"/>
+                    <!--<button type="button" class="btn-black" style="background-color: black; border: 2px solid black">Login</button>&nbsp;-->
+                    <!--<button type="button" class="btn-black" style="background-color: black; border: 2px solid black">Reset</button>-->
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+        <script src="js/jquery.js"></script>
+
+        <!-- ADDTHIS -->
+        <script type="text/javascript" src="../../../../../s7.addthis.com/js/300/addthis_widget.js#pubid=ra-557a95e76b3e51d9" async="async"></script>
+        <script type="text/javascript">
+            // Call this function once the rest of the document is loaded
+            function loadAddThis() {
+                addthis.init()
+            }
+        </script>
+
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/bs-navbar.js"></script>
+        <script src="js/vendors/isotope/isotope.pkgd.js"></script>
+        <script src="js/vendors/slick/slick.min.js"></script>/
+        <script src="js/vendors/tweets/tweecool.min.js"></script>
+        <script src="js/vendors/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+        <script src="js/vendors/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+        <script src="js/jquery.sticky.js"></script>
+        <script src="js/jquery.subscribe-better.js"></script>
+        <script src="../../../../../code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+        <script src="js/vendors/select/jquery.selectBoxIt.min.js"></script>
+        <script src="js/main.js"></script>/
+
+    
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>User Registration</title>
+        <!-- Include Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+        <!-- Include PrimeFaces Theme -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/primeicons/4.1.0/css/primeicons.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/primefaces/11.0.0/css/primefaces.min.css" />
+
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="https://jthemes.net/favicon.ico"/>
+
+        <!-- Google Webfont -->
+        <link href='http://fonts.googleapis.com/css?family=Raleway:400,200,100,300,500,600,700,800,900' rel='stylesheet' type='text/css'/>
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,100,300,300italic,700,900' rel='stylesheet' type='text/css'/>
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'/>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css"/>
+        <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
+        <link rel="stylesheet" href="css/bootstrap.css"/>
+        <link rel="stylesheet" href="js/vendors/isotope/isotope.css"/>
+        <link rel="stylesheet" href="js/vendors/slick/slick.css"/>
+        <link rel="stylesheet" href="js/vendors/rs-plugin/css/settings.css"/>
+        <link rel="stylesheet" href="js/vendors/select/jquery.selectBoxIt.css"/>
+        <link rel="stylesheet" href="css/subscribe-better.css"/>
+        <link rel="stylesheet" href="../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css"/>
+        <link rel="stylesheet" href="css/style.css"/>
+
+        <style>
+            .card {
+                padding: 30px;
+                border-radius: 4px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+                background-color: transparent;
+                opacity: 0.9;
+
+            }
+
+            .form-login {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .form-list {
+                margin-bottom: 20px;
+            }
+
+            .form-list li {
+                margin-bottom: 10px;
+            }
+
+            .input-text {
+
+                width: 100%;
+                padding: 10px;
+                border-radius: 4px;
+                border: 1px solid #ccc;
+            }
+
+            .input-chkbox {
+                margin-right: 10px;
+            }
+
+            .pwd {
+                font-size: 0.9em;
+            }
+
+            /*        .datepicker-container {
+                        background-color: white !important;
+                    }*/
+            .datepicker-container .ui-datepicker {
+                background-color: black !important;
+            }
+
+        </style>
+
+    </h:head>
+    <h:body>
+
+
+
+
+        <div class="account-form" style="max-width:760px; margin: auto; margin-top: 50px; display: grid; place-items: center; background: none">
+            <div class="card" style="background-color:none ; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.9); width: 100%">
+                <h1 style="text-align: center; margin-bottom: 30px; color: black">User Registration</h1>
+                <h:form>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <h:inputText id="username" value="#{cDIBean.utb.username}" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="useremail">Email:</label>
+                        <h:inputText id="useremail" value="#{cDIBean.utb.useremail}" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <h:inputSecret id="password" value="#{cDIBean.utb.password}" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Gender:</label><br/>
+                        <div class="form-check form-check-inline">
+                            <p:selectOneRadio id="gender" value="#{cDIBean.utb.gender}" style="font-size: 20px">
+                                <f:selectItem itemLabel="Male" itemValue="Male" />
+                                <f:selectItem itemLabel="Female" itemValue="Female" />
+                            </p:selectOneRadio>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dob">Date of Birth:</label>
+                        <p:inputText type="date" id="dob" value="#{cDIBean.utb.dob}" class="form-control" />
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <h:inputText id="address" value="#{cDIBean.utb.address}" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mobileno">Mobile No:</label>
+                        <h:inputText id="mobileno" value="#{cDIBean.utb.mobileno}" class="form-control" />
+                    </div>
+
+                    <!-- Add more fields here if needed -->
+
+                    <h:commandButton value="Register" action="#{cDIBean.userRegistration()}" class="btn btn-black" />
+                </h:form>
+            </div>
+        </div>
+
+    </h:body>
+    <script type="text/javascript">
+        //For calendar
+        $(".datepicker").datepicker({
+            inline: true,
+            showWeek: true,
+            firstDay: 1
+        });
+
+    </script>
+</html>

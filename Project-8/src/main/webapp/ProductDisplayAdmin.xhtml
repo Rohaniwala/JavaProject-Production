@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+
+        <meta charset="utf-8" />
+        <meta name="keywords" content="HTML5 Template" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+
+        <title>Smile | Responsive Bootstrap Ecommerce Template</title>
+
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+        <link rel="shortcut icon" href="https://jthemes.net/favicon.ico"/>
+
+
+        <link href='http://fonts.googleapis.com/css?family=Raleway:400,200,100,300,500,600,700,800,900' rel='stylesheet' type='text/css' />
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,100,300,300italic,700,900' rel='stylesheet' type='text/css'/>
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'/>
+
+
+        <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css"/>
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="js/vendors/isotope/isotope.css"/>
+        <link rel="stylesheet" href="js/vendors/slick/slick.css"/>
+        <link rel="stylesheet" href="js/vendors/rs-plugin/css/settings.css"/>
+        <link rel="stylesheet" href="js/vendors/select/jquery.selectBoxIt.css"/>
+        <link rel="stylesheet" href="css/subscribe-better.css"/>
+        <link rel="stylesheet" href="../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css"/>     
+        <link rel="stylesheet" href="plugin/owl-carousel/owl.carousel.css"/>
+        <link rel="stylesheet" href="plugin/owl-carousel/owl.theme.css"/>
+        <link rel="stylesheet" href="css/style.css"/>
+        <link rel="stylesheet" href="css/Product.css" />
+        <title>Facelet Title</title>
+
+        <style>
+            .product-list-list {
+                display: flex;
+                flex-wrap: wrap;
+                /*justify-content: space-evenly;*/
+            }
+
+            .product-item {
+                width: calc(33.33% - 20px); /* Set each product item to occupy one-third of the container width */
+                box-sizing: border-box; /* Include padding and border in the element's total width and height */
+                margin-bottom: 30px; /* Add bottom margin to create space between rows */
+            }
+
+            .item-thumb {
+                position: relative;
+            }
+
+            .product-item-content {
+                width: 100%;
+            }
+
+            @media screen and (max-width: 991px) {
+                .product-item {
+                    width: calc(50% - 20px); /* Set each product item to occupy 50% of the container width on smaller screens */
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                .product-item {
+                    width: 100%; /* Set each product item to occupy 100% of the container width on smaller screens */
+                }
+                .delete-button {
+                    background-color: red !important;
+                    color: white !important;
+                }
+
+            }
+
+
+        </style>
+
+
+    </h:head>
+    <h:body>
+        
+        hello form #{cDIBean.uname}
+      
+
+        <h:form>
+
+       
+    <p:commandButton value="Add Product" action="#{cDIBean.addProd()}" icon="fa fa-plus" styleClass="btn btn-primary" />
+
+
+        </h:form>
+
+
+        <div class="featured-products">
+            <div class="container">
+                <div class="row">
+                    <div id="isotope" class="isotope">
+                        <div class="product-list-list">
+                            <!-- Loop through your data and generate product items -->
+                            <c:forEach items="#{cDIBean.cprod}" var="data">
+                                <div class="isotope-item clothing product-item">
+                                    <div class="item-thumb">
+                                        <img src="images/Product/#{data.productimage}" class="img-responsive" alt=""/>
+                                        <div class="overlay-rmore fa fa-search quickview" data-toggle="modal" data-target="#myModal"></div>
+                                        <div class="product-overlay">
+                                            <a href="#" class="addcart fa fa-shopping-cart"></a>
+                                            <a href="#" class="compare fa fa-signal"></a>
+                                            <a href="#" class="likeitem fa fa-heart-o"></a>
+                                        </div>
+                                    </div>
+                                    <div class="product-info">
+                                        <h4 class="product-title"><a href="single-product.html">#{data.productname}</a></h4>
+                                        <span class="product-price">#{data.productprice}<em>- Pre order</em></span>
+                                        <h:form>
+                                          <p:commandButton value="Delete" action="#{cDIBean.deleteProduct(data.productID)}" icon="fa fa-trash" styleClass="ui-button-danger"></p:commandButton> &nbsp;
+
+<p:commandButton value="Update" action="#{cDIBean.getproddata(data)}" icon="fa fa-edit"></p:commandButton>
+
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <script src="js/bootstrap.min.js"></script>        
+        <script src="plugin/owl-carousel/owl.carousel.min.js"></script>
+        <script src="js/bs-navbar.js"></script>
+        <script src="js/vendors/isotope/isotope.pkgd.js"></script>
+        <script src="js/vendors/slick/slick.min.js"></script>
+        <script src="js/vendors/tweets/tweecool.min.js"></script>
+        <script src="js/vendors/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+        <script src="js/vendors/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+        <script src="js/jquery.sticky.js"></script>
+        <script src="js/jquery.subscribe-better.js"></script>
+        <script src="../../../../../code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+        <script src="js/vendors/select/jquery.selectBoxIt.min.js"></script>
+        <script src="js/main.js"></script>
+
+    </h:body>
+
+
+
+
+</html>

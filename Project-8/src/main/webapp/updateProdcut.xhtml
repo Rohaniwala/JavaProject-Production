@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Update Product</title>
+        <!-- Include Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    </h:head>
+    <h:body>
+        <h:form enctype="multipart/form-data">
+            <div class="container">
+                <p:panel header="Update Product">
+                    <div class="form-group">
+                        <h:outputLabel for="productID" value="Product ID:"/>
+                        <h:inputHidden value="#{cDIBean.prod.productID}" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <h:outputLabel for="productName" value="Product Name:"/>
+                        <p:inputText id="productName" value="#{cDIBean.prod.productname}" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="productCategory" value="Product Category:"/>
+                        <p:selectOneMenu id="productCategory" value="#{cDIBean.pcatID}" class="form-control">
+                            <f:selectItems value="#{cDIBean.cprodcat}" var="data" itemValue="#{data.pcatID}" itemLabel="#{data.pcatname}" />
+                        </p:selectOneMenu>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="productDescription" value="Product Description:"/>
+                        <p:inputTextarea id="productDescription" value="#{cDIBean.prod.productdescription}" rows="4" cols="30" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="productPrice" value="Product Price:"/>
+                        <p:inputText id="productPrice" value="#{cDIBean.prod.productprice}" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="productImage" value="Product Image:"/><br/>
+                        <p:fileUpload id="productImage" value="#{cDIBean.file}" mode="simple" skinSimple="true" />
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Is Image Uploaded:"/>
+                        <p:selectOneRadio id="isImageUploaded" value="#{cDIBean.prod.isimageinclude}" class="form-control">
+                            <f:selectItem itemLabel="Yes" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" />
+                        </p:selectOneRadio>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Is Text Included:"/>
+                        <p:selectOneRadio id="isTextIncluded" value="#{cDIBean.prod.istextinclude}" class="form-control">
+                            <f:selectItem itemLabel="Yes" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" />
+                        </p:selectOneRadio>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="productCompany" value="Product Company"/>
+                        <p:selectOneMenu id="productCompany" value="#{cDIBean.companyID}" class="form-control">
+                            <f:selectItems value="#{cDIBean.ccomp}" var="c" itemValue="#{c.companyID}" itemLabel="#{c.companyname}" />
+                        </p:selectOneMenu>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="productQuantity" value="Quantity:"/>
+                        <p:inputText id="productQuantity" value="#{cDIBean.prod.quantity}" class="form-control"/>
+                    </div>
+                    <!-- Add more fields here as needed -->
+                    <p:commandButton value="Update Product" action="#{cDIBean.updateProddata()}" class="btn btn-primary" />
+                </p:panel>
+            </div>
+        </h:form>
+    </h:body>
+</html>
