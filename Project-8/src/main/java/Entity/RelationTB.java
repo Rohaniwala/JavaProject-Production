@@ -24,7 +24,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "RelationTB")
 @NamedQueries({
-    @NamedQuery(name = "RelationTB.findAll", query = "SELECT r FROM RelationTB r"),
+    @NamedQuery(name = "RelationTB.findAll", query = "SELECT r FROM RelationTB r"),  
+    @NamedQuery(name = "RelationTB.findByUid", query = "SELECT r FROM RelationTB r WHERE r.userID = :userID"),
     @NamedQuery(name = "RelationTB.findByRelationID", query = "SELECT r FROM RelationTB r WHERE r.relationID = :relationID")})
 public class RelationTB implements Serializable {
 

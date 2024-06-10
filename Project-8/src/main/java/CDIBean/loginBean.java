@@ -4,6 +4,7 @@
  */
 package CDIBean;
 
+//import CBean.TempData;
 import ClassPackage.KeyGenrator;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -119,9 +120,10 @@ Credential c = new UsernamePasswordCredential(username, password);
             int uid = (int) em.createNamedQuery("UserTB.findIDByUsername").setParameter("username", username).getSingleResult();
             
             KeepRecord.setUid(uid);
-            
+//            TempData.uid = uid;
 //                        KeepRecord.setUid(uid);
-
+                TempData.Loginuid = uid;
+                
             System.out.println("uid"+uid);
                         
             ck.setMaxAge(8000);

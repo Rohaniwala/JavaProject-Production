@@ -10,10 +10,10 @@ CDIBean/CDIBean$2.class
 com/mycompany/project/resources/JakartaEE8Resource.class
 ClassPackage/KeyGenrator.class
 Entity/StagemasterTB.class
-Entity/RelationTB.class
-Entity/UserTB.class
 CDIBean/Config.class
 CDIBean/KeepRecord.class
+Entity/RelationTB.class
+Entity/UserTB.class
 Entity/ImagemasterTB.class
 CBean/ClientSessionBean.class
 RestClient/RestClient.class

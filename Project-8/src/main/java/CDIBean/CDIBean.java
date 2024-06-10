@@ -134,7 +134,7 @@ public class CDIBean {
         System.out.println(catserach == null || catserach == 0);
         cprod = new ArrayList<>();
         if (catserach == null || catserach == 0) {
-            rs = rc.displayProduct(Response.class);
+            rs = rc.getProductByCid(Response.class);
             cprod = rs.readEntity(gprod);
             System.out.println(cprod);
         } else {
@@ -263,16 +263,6 @@ public class CDIBean {
         return "ProductDisplayAdmin.jsf";
     }
 
-//    
-//    public InputStream getImageStream(byte[] imageData) {
-//        if (imageData != null) {
-//            return new ByteArrayInputStream(imageData);
-//        } else {
-//            // If image data is null, return a default image or handle as per your requirement
-//             InputStream inputStream = getClass().getClassLoader().getResourceAsStream("default-image.jpg");
-//             return inputStream;
-//        }
-//    }
     public String deleteProduct(Integer productID) {
         if (KeyGenrator.verifytoken(KeyGenrator.genratetoken(KeepRecord.getUsername()))) {
             rc.deleteProduct(productID);
@@ -291,27 +281,6 @@ public class CDIBean {
         return "updateProdcut.jsf";
     }
 
-//    public String updateProductdata() {
-////        try {
-////            upload(); // Call the upload method to upload the file
-////        } catch (IOException ex) {
-////            Logger.getLogger(CDIBean.class.getName()).log(Level.SEVERE, null, ex);
-////        }
-////        String imageName = file.getFileName();
-//        System.out.println(prod.getProductID());
-//        System.out.println(prod.getProductname());
-//        System.out.println(prod.getProductdescription());
-//        System.out.println(prod.getProductprice());
-//        System.out.println(prod.getIsimageinclude());
-//        System.out.println(prod.getIstextinclude());
-//        System.out.println(companyID);
-//        System.out.println(pcatID);
-//        System.out.println(prod.getQuantity());
-//        rc.updateProductdata(prod.getProductID().toString(), prod.getProductname(), pcatID, prod.getProductdescription(), String.valueOf(prod.getProductprice()),
-//                String.valueOf(prod.getIsimageinclude()), String.valueOf(prod.getIstextinclude()), companyID, String.valueOf(prod.getQuantity()));
-//        
-//        return "ProductDisplayAdmin.jsf";
-//    }
     public String updateProddata() throws IOException {
         if (KeyGenrator.verifytoken(KeyGenrator.genratetoken(KeepRecord.getUsername()))) {
             upload(); // Call the upload method to upload the file
@@ -359,5 +328,9 @@ public class CDIBean {
 
     public double averegePprice() {
         return rc.AveregePprice(double.class);
+    }
+    
+    public void adminRegistration(){
+        rc.adminRegistration(utb.getUsername(), utb.getUseremail(), utb.getPassword(), utb.getMobileno(), utb.getAddress());
     }
 }

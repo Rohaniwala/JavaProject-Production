@@ -18,7 +18,7 @@ import javax.ws.rs.client.WebTarget;
  *        client.close();
  * </pre>
  *
- * @author rohan
+ * @author ravindrasinh
  */
 public class RestClient {
 
@@ -165,12 +165,22 @@ public class RestClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    public <T> T getProductByCid(Class<T> responseType) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("admin/getProductByCid");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
     public void deleteCompnay(String CompanyID) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("admin/deleteCompnay/{0}", new Object[]{CompanyID})).request().delete();
     }
 
     public void updateProductdata(String productID, String pname, String pcatID, String Prodescription, String productprice, String productimage, String isimageinclude, String istextinclude, String companyID, String quantity) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("admin/updateProductdata/{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}/{9}", new Object[]{productID, pname, pcatID, Prodescription, productprice, productimage, isimageinclude, istextinclude, companyID, quantity})).request().post(null);
+    }
+
+    public void adminRegistration(String Cname, String Cemail, String Password, String CMobileno, String Cdescription) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("admin/adminRegistration/{0}/{1}/{2}/{3}/{4}", new Object[]{Cname, Cemail, Password, CMobileno, Cdescription})).request().post(null);
     }
 
     public void close() {

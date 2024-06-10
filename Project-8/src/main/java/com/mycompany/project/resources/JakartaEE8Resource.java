@@ -224,4 +224,18 @@ public class JakartaEE8Resource {
     public double AveregePprice(){
         return ab.AveregePprice();
     }
+    
+    @POST
+    @Path("admin/adminRegistration/{Cname}/{Cemail}/{Password}/{CMobileno}/{Cdescription}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public void adminRegistration(@PathParam("Cname") String Cname, @PathParam("Cemail") String Cemail, @PathParam("Password") String Password, @PathParam("CMobileno") String CMobileno,@PathParam("Cdescription") String Cdescription) {
+        ab.adminRegistration(Cname, Cemail, Password, CMobileno, Cdescription);
     }
+    
+    @GET
+    @Path("admin/getProductByCid")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<ProductTB> getProductByCid(){
+        return ab.getProductByCid();
+    }
+}

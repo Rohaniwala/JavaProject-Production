@@ -4,18 +4,23 @@
  */
 package CBean;
 
+import CDIBean.TempData;
 import Entity.CartTB;
 import Entity.CompanyTB;
 import Entity.ProductCategoryTB;
 import Entity.ProductTB;
+import Entity.RelationTB;
+import Entity.RoleTB;
 import Entity.UserTB;
 import java.util.Collection;
 import javax.ejb.Stateless;
+import javax.management.relation.Relation;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.swing.text.StyledEditorKit;
 import javax.ws.rs.Path;
+import org.glassfish.soteria.identitystores.hash.Pbkdf2PasswordHashImpl;
 
 /**
  *
@@ -26,6 +31,7 @@ public class AdminSessionBean {
 
     @PersistenceContext(unitName = "my_persistence_unit")
     EntityManager em;
+    Pbkdf2PasswordHashImpl pb;
 
     public void addProdCat(String Pcatname, String Pcatdescription) {
         ProductCategoryTB categoryTB = new ProductCategoryTB();
@@ -152,5 +158,69 @@ public class AdminSessionBean {
         TypedQuery<Double> avgprice=em.createQuery("SELECT AVG(p.productprice) FROM ProductTB p",Double.class);
         return avgprice.getSingleResult();
     }
-//    public void updateProddata;
+        
+    public void adminRegistration(String Cname,String Cemail,String Password,String CMobileno,String Cdescription){
+    
+       RoleTB roleTB=em.find(RoleTB.class, 1);
+       Collection<UserTB> utbs=roleTB.getUserTBCollection();
+       pb=new Pbkdf2PasswordHashImpl();
+       
+       UserTB userTB=new UserTB();
+       
+       userTB.setUsername(Cname);
+       userTB.setUseremail(Cemail);
+       userTB.setPassword(pb.generate(Password.toCharArray()));
+       userTB.setRoleID(roleTB);
+       userTB.setGender("none");
+       userTB.setDob("none");
+       userTB.setAddress("none");
+       userTB.setMobileno(CMobileno);
+       
+       utbs.add(userTB);
+       
+       em.persist(userTB);
+       em.merge(roleTB);
+       
+       CompanyTB companyTB = new CompanyTB();
+       
+       companyTB.setCompanyemail(Cemail);
+       companyTB.setCompanyname(Cname);
+       companyTB.setContactno(CMobileno);
+       companyTB.setCompanydescription(Cdescription);
+       
+       roleTB.setUserTBCollection(utbs);
+
+       em.persist(companyTB);
+    
+        RelationTB relationTB = new RelationTB();
+        
+        relationTB.setCompanyID(companyTB);
+        relationTB.setUserID(userTB);
+        relationTB.setRoleID(roleTB);
+        
+        Collection<RelationTB> urelationTBs = userTB.getRelationTBCollection();      
+        Collection<RelationTB> crelationTBs = companyTB.getRelationTBCollection();
+        Collection<RelationTB> rrelationTBs = roleTB.getRelationTBCollection();
+
+        urelationTBs.add(relationTB);
+        crelationTBs.add(relationTB);
+        rrelationTBs.add(relationTB);
+        
+        userTB.setRelationTBCollection(urelationTBs);
+        companyTB.setRelationTBCollection(crelationTBs);
+        roleTB.setRelationTBCollection(rrelationTBs);
+        
+        em.persist(relationTB);
+        em.merge(userTB);
+        em.merge(companyTB);
+        em.merge(roleTB);
+   }
+    
+    public Collection<ProductTB> getProductByCid(){
+      
+      UserTB utb = em.find(UserTB.class, TempData.Loginuid);
+      RelationTB relationTB = em.createNamedQuery("RelationTB.findByUid", RelationTB.class).setParameter("userID",utb ).getSingleResult();
+      
+      return em.createNamedQuery("ProductTB.findByProductCID", ProductTB.class).setParameter("companyID",relationTB.getCompanyID()).getResultList();
+    }
 }
