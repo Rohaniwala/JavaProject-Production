@@ -376,5 +376,10 @@ public class ClientBean {
         rc.updateCart(cId.toString(), qut.toString());
         return "Cart.jsf";
     }
+    
+  public String orderForm(CartTB carttb){
+      this.carttb=carttb;
+      return "OrderForm.jsf";
+  }
    
 }

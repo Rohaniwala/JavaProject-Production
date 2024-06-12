@@ -25,7 +25,7 @@
             }
 
             .sidebar {
-                margin-top: -60px;
+                margin-top: -30px;
                 height: 100%;
                 width: 250px;
                 background-color: #2a3042;
@@ -426,7 +426,7 @@
                     </ul>
                     <ul class="menu">
                         <li class="menu-item">
-                            <a href="Admin/AddProduct.jsf"><i class="fas fa-plus-circle"></i> Add Product</a>
+                            <a href="AddProduct.jsf"><i class="fas fa-plus-circle"></i> Add Product</a>
                         </li>
                     </ul>
                 </li>
@@ -449,9 +449,9 @@
                                         <h4 class="product-title"><a href="single-product.html">#{data.productname}</a></h4>
                                         <span class="product-price">$#{data.productprice}</span>
                                         <div class="product-actions">
-                                            <h:form>
-                                                <p:commandButton value="Delete" action="#{CompanyBean.deleteProduct(data.productID)}" icon="fa fa-trash" styleClass="ui-button-danger" />
-                                                <p:commandButton value="Update" action="#{CompanyBean.getproddata(data)}" icon="fa fa-edit" />
+                                            <h:form id="fordelup"> 
+                                                <p:commandButton value="Delete" action="#{CompanyBean.deleteProduct(data.productID)}" icon="fa fa-trash" styleClass="ui-button-danger" ajax="false" update="fordelup" />
+                                                <p:commandButton value="Update" action="#{CompanyBean.getproddata(data)}" icon="fa fa-edit"  />
                                             </h:form>
                                         </div>
                                     </div>

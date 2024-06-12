@@ -58,9 +58,9 @@ public class ClientSessionBean {
     public void addToCart(Integer UserID,Integer ProductID,Integer Qunatity){
         UserTB ut=em.find(UserTB.class, UserID);
         ProductTB pt=em.find(ProductTB.class, ProductID);
-        CartTB caTB = em.createNamedQuery("CartTB.findByUserIDAndProductID",CartTB.class).setParameter("userID", ut).setParameter("productID", ut).getSingleResult();
+        Collection<CartTB> caTBs = em.createNamedQuery("CartTB.findByUserIDAndProductID",CartTB.class).setParameter("userID", ut).setParameter("productID", pt).getResultList();
 
-        if(caTB == null){
+        if(caTBs.isEmpty()){
             
 //            UserTB ut=em.find(UserTB.class, UserID);
 //            ProductTB pt=em.find(ProductTB.class, ProductID);
@@ -68,7 +68,7 @@ public class ClientSessionBean {
             Collection<CartTB> ct=ut.getCartTBCollection();
             Collection<CartTB> ctt=pt.getCartTBCollection();
 
-//            CartTB caTB = new CartTB();
+            CartTB caTB = new CartTB();
             caTB.setUserID(ut);
             caTB.setProductID(pt);
             caTB.setQuantity(Qunatity);
@@ -83,7 +83,7 @@ public class ClientSessionBean {
             em.merge(ut);
             em.merge(pt);
         }else{
-            updateCart(caTB.getCartID(),1);
+            updateCart(caTBs.iterator().next().getCartID(),1);
         }
 
     }

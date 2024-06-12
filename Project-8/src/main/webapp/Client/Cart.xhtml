@@ -8,9 +8,14 @@
         <title>Facelet Title</title>
         <link rel="stylesheet" href="../css/Cartcss.css"></link>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
 
     </h:head>
     <h:body>
+
+
         <div class="shopping-cart">
             <!-- Title -->
             <div class="title">
@@ -32,15 +37,26 @@
                     </div>
 
                     <div class="quantity">
-                        <p:commandButton icon="fas fa-plus"  action="#{ClientBean.updateQutOfCart(cart.cartID, 1)}" />
-                        <input type="text" name="name" value="#{cart.quantity}"  />
-                        <p:commandButton icon="fas fa-minus"  action="#{ClientBean.updateQutOfCart(cart.cartID, -1)}" />
+                        <h:form id="forqty">
+                            <p:commandButton icon="fas fa-plus"  action="#{ClientBean.updateQutOfCart(cart.cartID, 1)}" ajax="false" update="forqty" />
+                            <input type="text" name="name" value="#{cart.quantity}"  />
+                            <p:commandButton icon="fas fa-minus"  action="#{ClientBean.updateQutOfCart(cart.cartID, -1)}" ajax="false" update="forqty" />
+                        </h:form>
                     </div>
 
-                    <div class="total-price">#{cart.productID.productprice}</div>
+                    <div class="total-price">#{cart.productID.productprice * cart.quantity}</div>
+
+                    <div class="order-button" style="margin-top: 18px; margin-right: 5px;">
+                        <h:form>
+                            <p:commandButton value="Order" styleClass="order-button" action="#{ClientBean.orderForm(cart)}" />
+                        </h:form>
+                    </div>
                 </div>
+
             </ui:repeat>
+
         </div>
+
         <script src="js/main.js"></script>
     </h:body>
 </html>

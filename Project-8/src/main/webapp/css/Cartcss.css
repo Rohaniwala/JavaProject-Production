@@ -183,7 +183,8 @@ input:focus {
     }
     .image,
     .quantity,
-    .description {
+    .description,
+    .order-button{
         width: 100%;
         text-align: center;
         margin: 6px 0;
@@ -191,5 +192,25 @@ input:focus {
     .buttons {
         margin-right: 20px;
     }
+
+/*    .order-button-wrapper {
+        margin-left: 10px;
+    }
+
+    .order-button {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-size: 18px;
+        display: flex;
+    }
+
+    .order-button:hover {
+        background-color: #c82333;
+    }*/
 }
 
