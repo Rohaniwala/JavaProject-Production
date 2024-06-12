@@ -105,8 +105,8 @@ public class RestClient {
         webTarget.path(java.text.MessageFormat.format("admin/addProductdata/{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}", new Object[]{pname, pcatID, Prodescription, productprice, productimage, isimageinclude, istextinclude, companyID, quantity})).request().post(null);
     }
 
-    public void updateCart(String CartID, String UserID, String ProductID, String Quantity) throws ClientErrorException {
-        webTarget.path(java.text.MessageFormat.format("updateCart/{0}/{1}/{2}/{3}", new Object[]{CartID, UserID, ProductID, Quantity})).request().post(null);
+    public void updateCart(String CartID, String Quantity) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("updateCart/{0}/{1}", new Object[]{CartID, Quantity})).request().post(null);
     }
 
     public void deleteProduct(Integer productID) throws ClientErrorException {

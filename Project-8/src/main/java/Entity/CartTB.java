@@ -28,6 +28,7 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "CartTB.findAll", query = "SELECT c FROM CartTB c"),
     @NamedQuery(name = "CartTB.findByCartID", query = "SELECT c FROM CartTB c WHERE c.cartID = :cartID"),
     @NamedQuery(name = "CartTB.findByUserID", query = "SELECT c FROM CartTB c WHERE c.userID = :userID"),
+    @NamedQuery(name = "CartTB.findByUserIDAndProductID", query = "SELECT c FROM CartTB c WHERE c.userID = :userID AND c.productID = :productID"),
     @NamedQuery(name = "CartTB.findByQuantity", query = "SELECT c FROM CartTB c WHERE c.quantity = :quantity")})
 public class CartTB implements Serializable {
 

@@ -372,5 +372,9 @@ public class ClientBean {
         return "Cart.jsf";
     }
     
+    public String updateQutOfCart(Integer cId,Integer qut){
+        rc.updateCart(cId.toString(), qut.toString());
+        return "Cart.jsf";
+    }
    
 }

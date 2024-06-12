@@ -58,39 +58,45 @@ public class ClientSessionBean {
     public void addToCart(Integer UserID,Integer ProductID,Integer Qunatity){
         UserTB ut=em.find(UserTB.class, UserID);
         ProductTB pt=em.find(ProductTB.class, ProductID);
-        
-        Collection<CartTB> ct=ut.getCartTBCollection();
-        Collection<CartTB> ctt=pt.getCartTBCollection();
-        
-        CartTB caTB = new CartTB();
-        caTB.setUserID(ut);
-        caTB.setProductID(pt);
-        caTB.setQuantity(Qunatity);
-        
-        ct.add(caTB);
-        ctt.add(caTB);
-        
-        ut.setCartTBCollection(ct);
-        pt.setCartTBCollection(ctt);
-        
-        em.persist(caTB);
-        em.merge(ut);
-        em.merge(pt);
+        CartTB caTB = em.createNamedQuery("CartTB.findByUserIDAndProductID",CartTB.class).setParameter("userID", ut).setParameter("productID", ut).getSingleResult();
+
+        if(caTB == null){
+            
+//            UserTB ut=em.find(UserTB.class, UserID);
+//            ProductTB pt=em.find(ProductTB.class, ProductID);
+
+            Collection<CartTB> ct=ut.getCartTBCollection();
+            Collection<CartTB> ctt=pt.getCartTBCollection();
+
+//            CartTB caTB = new CartTB();
+            caTB.setUserID(ut);
+            caTB.setProductID(pt);
+            caTB.setQuantity(Qunatity);
+
+            ct.add(caTB);
+            ctt.add(caTB);
+
+            ut.setCartTBCollection(ct);
+            pt.setCartTBCollection(ctt);
+
+            em.persist(caTB);
+            em.merge(ut);
+            em.merge(pt);
+        }else{
+            updateCart(caTB.getCartID(),1);
+        }
 
     }
     
     // Update Cart For Client
 
-     public void updateCart(Integer CartID,Integer UserID,Integer ProductID,Integer Qunatity){
+     public void updateCart(Integer CartID,Integer newQunatity){
         CartTB caTB = em.find(CartTB.class, CartID);
-        UserTB ut=em.find(UserTB.class, UserID);
-        ProductTB pt=em.find(ProductTB.class, ProductID);
-
-        caTB.setUserID(ut);
-        caTB.setProductID(pt);
-        caTB.setQuantity(Qunatity);
-        
+        caTB.setQuantity(newQunatity + caTB.getQuantity());
         em.merge(caTB);
+        if(caTB.getQuantity() <1){
+            deleteCart(CartID);
+        }
     }
     
      // Delete cart data

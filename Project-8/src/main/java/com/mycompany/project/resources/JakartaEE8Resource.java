@@ -63,9 +63,9 @@ public class JakartaEE8Resource {
     }
     
     @POST
-    @Path("updateCart/{CartID}/{UserID}/{ProductID}/{Quantity}")
-    public void updateCart(@PathParam("CartID") Integer CartID, @PathParam("UserID") Integer UserID, @PathParam("ProductID") Integer ProductID, @PathParam("Quantity") Integer Quantity) {
-        sb.updateCart(CartID, UserID, ProductID, Quantity);
+    @Path("updateCart/{CartID}/{Quantity}")
+    public void updateCart(@PathParam("CartID") Integer CartID,@PathParam("Quantity") Integer Quantity) {
+        sb.updateCart(CartID, Quantity);
     }
     
     @DELETE

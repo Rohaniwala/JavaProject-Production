@@ -32,9 +32,9 @@
                     </div>
 
                     <div class="quantity">
-                        <p:commandButton icon="fas fa-plus"  />
-                        <input type="text" name="name" value="#{cart.quantity}" />
-                        <p:commandButton icon="fas fa-minus"  />
+                        <p:commandButton icon="fas fa-plus"  action="#{ClientBean.updateQutOfCart(cart.cartID, 1)}" />
+                        <input type="text" name="name" value="#{cart.quantity}"  />
+                        <p:commandButton icon="fas fa-minus"  action="#{ClientBean.updateQutOfCart(cart.cartID, -1)}" />
                     </div>
 
                     <div class="total-price">#{cart.productID.productprice}</div>
