@@ -1,0 +1,304 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+
+        <meta charset="utf-8" />
+        <meta name="keywords" content="HTML5 Template" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+
+        <title>Smile | Responsive Bootstrap Ecommerce Template</title>
+
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+        <link rel="shortcut icon" href="https://jthemes.net/favicon.ico"/>
+
+
+        <link href='http://fonts.googleapis.com/css?family=Raleway:400,200,100,300,500,600,700,800,900' rel='stylesheet' type='text/css' />
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,100,300,300italic,700,900' rel='stylesheet' type='text/css'/>
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'/>
+
+
+        <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css"/>
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="js/vendors/isotope/isotope.css"/>
+        <link rel="stylesheet" href="js/vendors/slick/slick.css"/>
+        <link rel="stylesheet" href="js/vendors/rs-plugin/css/settings.css"/>
+        <link rel="stylesheet" href="js/vendors/select/jquery.selectBoxIt.css"/>
+        <link rel="stylesheet" href="css/subscribe-better.css"/>
+        <link rel="stylesheet" href="../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css"/>     
+        <link rel="stylesheet" href="plugin/owl-carousel/owl.carousel.css"/>
+        <link rel="stylesheet" href="plugin/owl-carousel/owl.theme.css"/>
+        <link rel="stylesheet" href="css/style.css"/>
+        <link rel="stylesheet" href="css/Product.css" />
+        <title>Facelet Title</title>
+
+        <style>
+            .product-list-list {
+                display: flex;
+                flex-wrap: wrap;
+                /*justify-content: space-evenly;*/
+            }
+
+            .product-item {
+                width: calc(33.33% - 20px); /* Set each product item to occupy one-third of the container width */
+                box-sizing: border-box; /* Include padding and border in the element's total width and height */
+                margin-bottom: 30px; /* Add bottom margin to create space between rows */
+            }
+
+            .item-thumb {
+                position: relative;
+            }
+
+            .product-item-content {
+                width: 100%;
+            }
+
+            @media screen and (max-width: 991px) {
+                .product-item {
+                    width: calc(50% - 20px); /* Set each product item to occupy 50% of the container width on smaller screens */
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                .product-item {
+                    width: 100%; /* Set each product item to occupy 100% of the container width on smaller screens */
+                }
+            }
+
+
+        </style>
+
+
+    </h:head>
+    <h:body>
+        <!-- HEADER -->
+        <header>
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <div class="row">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <!-- Logo -->
+                            <a class="navbar-brand" href="index.html"><img src="./images/products/logo.png" style="background-color: yellow"  class="img-responsive" alt="hiii"/></a>
+                        </div>
+                        <!-- Cart & Search -->
+                        <div class="header-xtra pull-right">
+                            <div class="topcart">
+                                <span>
+                                    <h:form>
+                                        <h:commandLink action="#{ClientBean.gotoCart()}">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    </h:commandLink>
+                                </h:form>
+                                </span>
+                            </div>
+
+                        </div>
+                        <!-- Navmenu -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                    <a href="index.html" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-expanded="false">Home</a>
+                                </li>
+                                <li class="dropdown mmenu">
+                                    <a href="categories-grid.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Women</a>
+                                    
+                                </li>
+                                <li class="dropdown">
+                                    <a href="categories-grid.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop</a>
+                                   
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Blog</a>
+                                   
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Get inspired</a>
+                                   
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Technology</a>
+                                    
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Pages</a>
+                                    <ul class="dropdown-menu submenu" role="menu">                                         
+                                        <li><a href="contact-1.html">Contact Style 1</a></li>
+                                        <li><a href="contact-2.html">Contact Style 2</a></li>
+                                        <li><a href="account-information.html"> Account Information </a></li>
+                                        <li><a href="my-account.html">My Account</a></li>                                        
+                                        <li><a href="cng-pw.html">Change Password</a></li>
+                                        <li><a href="address-book.html">Address Books</a></li>
+                                        <li><a href="order-history.html">Order History</a></li>
+                                        <li><a href="review-rating.html">Reviews and Ratings</a></li>
+                                        <li><a href="return.html">Returns Requests</a></li>
+                                        <li><a href="newsletter.html">Newsletter</a></li>
+                                        <li><a href="myaccount-leftsidebar.html">Left Sidebar</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div style="margin-top: 15px;">
+            <ul class="filter" data-option-key="filter">
+                <h:form>
+                    <li><p:commandLink class="selected"  value="All" action="#{ClientBean.getProductByCat(0)}"></p:commandLink></li>
+                    <c:forEach items="#{ClientBean.cprodcat}" var="category">
+                        <li><p:commandLink action="#{ClientBean.getProductByCat(category.pcatID)}" value="#{category.pcatname}"></p:commandLink></li>
+                    </c:forEach>
+                </h:form>
+            </ul>
+        </div>
+
+        <div class="featured-products" style="margin-top: 50px">
+            <div class="container">
+                <div class="row">
+                    <div id="isotope" class="isotope">
+                        <div class="product-list-list">
+                            <!-- Loop through your data and generate product items -->
+                            <c:forEach items="#{ClientBean.cprod}" var="data">
+                                <div class="isotope-item clothing product-item">
+                                    <div class="item-thumb">
+                                        <img src="images/Product/#{data.productimage}" class="img-responsive" alt=""/>
+                                        <div class="overlay-rmore fa fa-search quickview" data-toggle="modal" data-target="#myModal"></div>
+                                        <div class="product-overlay">
+                                            <h:form>
+                                                <h:commandLink action="#{ClientBean.addToCart(data.productID)}" class="addcart fa fa-shopping-cart"></h:commandLink>
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                    <div class="product-info">
+                                        <h4 class="product-title"><a href="single-product.html">#{data.productname}</a></h4>
+                                        <span class="product-price">#{data.productprice}<em>- Pre order</em></span>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 widget-footer col-sm-3">
+                        <h5>About Store</h5>
+                        <img src="images/basic/logo-lite.png" class="img-responsive space10" alt=""/>
+                        <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus</p>
+                        <div class="clearfix"></div>
+                        <ul class="f-social">
+                            <li><a href="https://www.facebook.com/" class="fa fa-facebook"></a></li>
+                            <li><a href="https://www.twitter.com/" class="fa fa-twitter"></a></li>
+                            <li><a href="https://feedburner.google.com/" class="fa fa-rss"></a></li>
+                            <li><a href="mailto:email@website.com" class="fa fa-envelope"></a></li>
+                            <li><a href="https://www.pinterest.com/" class="fa fa-pinterest"></a></li>
+                            <li><a href="https://www.instagram.com/" class="fa fa-instagram"></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-3 widget-footer">
+                        <h5>Latest Tweets</h5>
+                        <div class="tweet-info">
+                            <div id="twitterfeed"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 widget-footer">
+                        <h5>Product tags</h5>
+                        <ul class="widget-tags">
+                            <li><a href="categories-grid.html">fashion</a></li>
+                            <li><a href="categories-grid.html">sports</a></li>
+                            <li><a href="categories-grid.html">business</a></li>
+                            <li><a href="categories-grid.html">news</a></li>
+                            <li><a href="categories-grid.html">night</a></li>
+                            <li><a href="categories-grid.html">freedom</a></li>
+                            <li><a href="categories-grid.html">design</a></li>
+                            <li><a href="categories-grid.html">miracle</a></li>
+                            <li><a href="categories-grid.html">gallery</a></li>
+                            <li><a href="categories-grid.html">collection</a></li>
+                            <li><a href="categories-grid.html">pen</a></li>
+                            <li><a href="categories-grid.html">pants</a></li>
+                            <li><a href="categories-grid.html">jeans</a></li>
+                            <li><a href="categories-grid.html">photos</a></li>
+                            <li><a href="categories-grid.html">oscar</a></li>
+                            <li><a href="categories-grid.html">smile</a></li>
+                            <li><a href="categories-grid.html">love</a></li>
+                            <li><a href="categories-grid.html">sunshine</a></li>
+                            <li><a href="categories-grid.html">luxury</a></li>
+                            <li><a href="categories-grid.html">forever</a></li>
+                            <li><a href="categories-grid.html">inlove</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-3 widget-footer">
+                        <h5>Newsletter</h5>
+                        <p>Sign up for our newsletter and promotions</p>
+                        <form class="newsletter">
+                            <input type="text" placeholder="Enter your email address here." />
+                            <button type="submit">Subscribe !</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7 col-sm-7">
+                        <ul class="flinks">
+                            <li><a href="index.html">Site Map</a></li>
+                            <li><a href="index.html">Search Terms</a></li>
+                            <li><a href="index.html">Advanced Search</a></li>
+                            <li><a href="index.html">Orders and Returns</a></li>
+                            <li><a href="index.html">Customer Service</a></li>
+                        </ul>
+                        <br />
+                        <p>Copyright 2015 &middot; Designed and Developed by <a href="#" >jThemes Studio.</a> All rights reserved</p>
+                    </div>
+                    <div class="col-md-5 col-sm-5">
+                        <img src="images/basic/payment.png" class="pull-right img-responsive payment" alt=""/>
+                    </div>
+                </div>
+            </div>
+        </div>	
+
+
+
+
+
+        <script src="js/bootstrap.min.js"></script>        
+        <script src="plugin/owl-carousel/owl.carousel.min.js"></script>
+        <script src="js/bs-navbar.js"></script>
+        <script src="js/vendors/isotope/isotope.pkgd.js"></script>
+        <script src="js/vendors/slick/slick.min.js"></script>
+        <script src="js/vendors/tweets/tweecool.min.js"></script>
+        <script src="js/vendors/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+        <script src="js/vendors/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+        <script src="js/jquery.sticky.js"></script>
+        <script src="js/jquery.subscribe-better.js"></script>
+        <script src="../../../../../code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+        <script src="js/vendors/select/jquery.selectBoxIt.min.js"></script>
+        <script src="js/main.js"></script>
+
+    </h:body>
+
+
+
+
+</html>

@@ -1,0 +1,490 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+
+        <meta charset="utf-8" />
+        <meta name="keywords" content="HTML5 Template" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+
+        <title>Facelet Title</title>
+
+
+<style> 
+    body {
+                margin: 0;
+                font-family: Arial, sans-serif;
+            }
+
+            .sidebar {
+                margin-top: -60px;
+                height: 100%;
+                width: 250px;
+                background-color: #2a3042;
+                color: #fff;
+                position: fixed;
+                overflow-y: auto;
+                z-index: 1;
+            }
+
+            .sidebar-header {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+                background-color: #1f2537;
+            }
+
+            .sidebar-header h2 {
+                margin: 0;
+                font-size: 20px;
+            }
+
+            .menu {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .menu-item {
+                border-bottom: 1px solid #3a3f51;
+            }
+
+            .menu-item a {
+                display: flex;
+                align-items: center;
+                padding: 15px 20px;
+                color: #fff;
+                text-decoration: none;
+            }
+
+            .menu-item a i {
+                margin-right: 10px;
+            }
+
+            .menu-item .submenu {
+                list-style: none;
+                padding-left: 20px;
+                display: none;
+            }
+
+            .menu-item:hover .submenu {
+                display: block;
+            }
+
+            .top-navbar {
+                height: 60px;
+                width: calc(100% - 250px);
+                background-color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 20px;
+                position: fixed;
+                top: 0;
+                left: 250px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                z-index: 2;
+            }
+
+            .menu-toggle {
+                display: flex;
+                align-items: center;
+                font-size: 20px;
+                cursor: pointer;
+            }
+
+            .search-bar {
+                display: flex;
+                align-items: center;
+                background-color: #f4f5f7;
+                padding: 10px 20px;
+                border-radius: 50px;
+                flex-grow: 1;
+                margin: 0 20px;
+            }
+
+            .search-bar i {
+                margin-right: 10px;
+            }
+
+            .search-bar input {
+                border: none;
+                outline: none;
+                background: none;
+                width: 100%;
+                font-size: 14px;
+            }
+
+            .menu-items {
+                display: flex;
+                align-items: center;
+            }
+
+            .mega-menu {
+                margin-right: 20px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+            }
+
+            .icon-items {
+                display: flex;
+                align-items: center;
+            }
+
+            .icon-items i {
+                margin-right: 20px;
+                cursor: pointer;
+                position: relative;
+            }
+
+            .icon-items .badge {
+                position: absolute;
+                top: -5px;
+                right: -10px;
+                background-color: #e74c3c;
+                color: #fff;
+                border-radius: 50%;
+                padding: 2px 6px;
+                font-size: 10px;
+            }
+
+            .profile {
+                display: flex;
+                align-items: center;
+                margin-right: 20px;
+                cursor: pointer;
+            }
+
+            .profile img {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+
+            .profile span {
+                margin-right: 5px;
+            }
+
+            .fa-caret-down {
+                margin-left: 5px;
+            }
+
+            .fa-flag-usa {
+                display: inline-block;
+                width: 18px;
+                height: 12px;
+                background: url('https://cdnjs.cloudflare.com/ajax/libs/twemoji/13.0.1/svg/1f1fa-1f1f8.svg') no-repeat center center;
+                background-size: contain;
+                margin-right: 20px;
+            }
+
+            .main-content {
+                margin-top: 60px;
+                margin-left: 250px;
+                padding: 20px;
+            }
+
+            h1 {
+                margin-top: 20px;
+                font-size: 24px;
+                font-weight: normal;
+            }
+
+            .dashboard-cards {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .card {
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                flex: 1;
+                min-width: 250px;
+                height: 100%;
+            }
+
+            .welcome-card {
+                background-color: #f0f4ff;
+            }
+
+            .welcome-card h2 {
+                font-size: 20px;
+                margin: 0;
+            }
+
+            .welcome-card p {
+                color: #999;
+            }
+
+            .profile-info {
+                display: flex;
+                align-items: center;
+                margin-top: 20px;
+            }
+
+            .profile-info img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+
+            .stats {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 20px;
+            }
+
+            .stat {
+                text-align: center;
+            }
+
+            .stat h3 {
+                margin: 0;
+                font-size: 24px;
+            }
+
+            .stat p {
+                color: #999;
+            }
+
+            .btn {
+                background-color: #007bff;
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 50px;
+                cursor: pointer;
+                margin-top: 20px;
+            }
+
+            .charts {
+                display: flex;
+                gap: 20px;
+                margin-top: 20px;
+            }
+
+            .chart {
+                flex: 1;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+            }
+
+            .activities {
+                display: flex;
+                gap: 20px;
+                margin-top: 20px;
+            }
+
+            .activity {
+                flex: 1;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+            }
+            
+            .main-content {
+    margin-top: 60px;
+    padding: 20px;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    /*justify-content: space-evenly;*/
+}
+
+.product-item {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.product-card {
+    border: 1px solid #e3e6f0;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    text-align: center;
+    width: 70%;
+    box-sizing: border-box;
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+    max-width: 100%;
+    border-bottom: 1px solid #e3e6f0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.product-info {
+    padding: 15px;
+}
+
+.product-title {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.product-title a {
+    text-decoration: none;
+    color: #333;
+}
+
+.product-price {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.product-actions {
+    margin-top: 10px;
+}
+
+.product-actions .ui-button-danger,
+.product-actions .ui-button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+            
+
+        </style>
+
+
+    </h:head>
+    <h:body>
+        
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="images/products/logo.png" alt="alt" height="100px" width="250px"/>
+            </div>
+            <ul class="menu">
+                <li class="menu-item">
+                    <a href="#"><i class="fas fa-home"></i> Dashboards</a>
+                </li>
+
+                <li class="menu-item">
+                    <!--                <a href="#"><i class="fas fa-shopping-cart"></i> Ecommerce</a>-->
+                    <!--                <ul class="submenu">-->
+                    <ul class="menu">
+                        <li class="menu-item">
+                            <a href="ProductDisplayAdmin.jsf"><i class="fas fa-box"></i> Products</a>
+                        </li>
+                    </ul>
+                    <ul class="menu">
+                        <li class="menu-item">
+                            <a href="#"><i class="fas fa-info-circle"></i> Product Detail</a>
+                        </li>
+                    </ul>
+                    <ul class="menu">
+                        <li class="menu-item">
+                            <a href="#"><i class="fas fa-list"></i> Orders</a>
+                        </li>
+                    </ul>
+                    <ul class="menu">
+                        <li class="menu-item">
+                            <a href="#"><i class="fas fa-users"></i> Customers</a>
+                        </li>
+                    </ul>
+                    <ul class="menu">
+                        <li class="menu-item">
+                            <a href="#"><i class="fas fa-shopping-basket"></i> Cart</a>
+                        </li>
+                    </ul>
+                    <ul class="menu">
+                        <li class="menu-item">
+                            <a href="#"><i class="fas fa-credit-card"></i> Checkout</a>
+                        </li>
+                    </ul>
+                    <ul class="menu">
+                        <li class="menu-item">
+                            <a href="#"><i class="fas fa-store"></i> Shops</a>
+                        </li>
+                    </ul>
+                    <ul class="menu">
+                        <li class="menu-item">
+                            <a href="AddProduct.jsf"><i class="fas fa-plus-circle"></i> Add Product</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>     
+
+        <h2 style="text-align: center; bac" > #{cDIBean.uname}</h2>
+<div class="col-lg-9 main-content">
+    <div class="featured-products">
+        <div class="container">
+            <div class="row">
+                <div id="isotope" class="isotope">
+                    <div class="product-list row">
+                        <!-- Loop through your data and generate product items -->
+                        <c:forEach items="#{cDIBean.cprod}" var="data">
+                            <div class="col-lg-4 col-md-6 product-item">
+                                <div class="product-card">
+                                    <img src="images/Product/#{data.productimage}" alt="#{data.productname}" class="product-image"/>
+                                    <div class="product-info">
+                                        <h4 class="product-title"><a href="single-product.html">#{data.productname}</a></h4>
+                                        <span class="product-price">$#{data.productprice}</span>
+                                        <div class="product-actions">
+                                            <h:form>
+                                                <p:commandButton value="Delete" action="#{cDIBean.deleteProduct(data.productID)}" icon="fa fa-trash" styleClass="ui-button-danger" />
+                                                <p:commandButton value="Update" action="#{cDIBean.getproddata(data)}" icon="fa fa-edit" />
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="js/main.js"></script>
+
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+        <script src="simplebar.min.js"></script>
+        <script src="assets/libs/node-waves/waves.min.js"></script>
+
+        <!-- apexcharts -->
+        <script src="js/apexcharts.min.js"></script>
+
+        <!-- dashboard init -->
+        <script src="js/dashboard.init.js"></script>
+
+        <!-- App js -->
+        <script src="js/app.js"></script>
+    </h:body>
+
+
+
+
+</html>
