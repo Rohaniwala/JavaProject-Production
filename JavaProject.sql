@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 06, 2024 at 08:01 PM
+-- Generation Time: Jun 12, 2024 at 09:40 PM
 -- Server version: 10.6.16-MariaDB-0ubuntu0.22.04.1
 -- PHP Version: 8.1.2-1ubuntu2.17
 
@@ -55,6 +55,13 @@ CREATE TABLE `CartTB` (
   `Quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `CartTB`
+--
+
+INSERT INTO `CartTB` (`CartID`, `UserID`, `ProductID`, `Quantity`) VALUES
+(21, 2, 58, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -74,10 +81,9 @@ CREATE TABLE `CompanyTB` (
 --
 
 INSERT INTO `CompanyTB` (`CompanyID`, `Companyname`, `Companydescription`, `Contactno`, `Companyemail`) VALUES
-(1, 'RV', 'for clothing', '9685456985', 'rv@gmail.com'),
-(2, 'srushti', 'srushti ni company', '7894563152', 's@gmail.com'),
-(8, 'SR', 'Sagar Rajesh', '9988774455', 'sgr@gmail.com'),
-(18, 'Binal', 'For Phones', '8852634178', 'abcd@gmail.com');
+(20, 'rr', 'for iphones and mac', '1256348975', 'rr@gmailcom'),
+(21, 'rs', 'for cloaths', '1256348975', 'rs@gmail.com'),
+(22, 'Poojan', 'for cloths', '1236547895', 'Poojan@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -190,11 +196,8 @@ CREATE TABLE `productTB` (
 --
 
 INSERT INTO `productTB` (`productID`, `productname`, `pcatID`, `productdescription`, `productprice`, `productimage`, `isimageinclude`, `istextinclude`, `companyID`, `quantity`) VALUES
-(39, 'T-shirt', 1, 'for Men', 4000, '7.jpg', 0, 0, 1, 40),
-(40, 'jeans', 1, 'For men', 8000, '8.jpg', 1, 1, 2, 10),
-(44, 'Kurta', 1, 'For Men', 5000, '15.jpg', 0, 0, 1, 4),
-(45, 'sari', 1, 'foe women', 7000, '17.jpg', 1, 0, 2, 10),
-(47, 'galaxy', 1, 'samsung phone', 1000000, '17.jpg', 0, 0, 1, 10);
+(50, 'T-shirt', 1, 'for women', 5000, '7.jpg', 0, 0, 21, 5),
+(58, 'iphone', 1, 'for use', 10000, 'iphone.jpeg', 1, 0, 20, 1);
 
 -- --------------------------------------------------------
 
@@ -208,6 +211,15 @@ CREATE TABLE `RelationTB` (
   `CompanyID` int(11) NOT NULL,
   `RoleID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `RelationTB`
+--
+
+INSERT INTO `RelationTB` (`RelationID`, `UserID`, `CompanyID`, `RoleID`) VALUES
+(2, 10, 20, 1),
+(3, 11, 21, 1),
+(4, 12, 22, 1);
 
 -- --------------------------------------------------------
 
@@ -266,12 +278,14 @@ CREATE TABLE `UserTB` (
 INSERT INTO `UserTB` (`UserID`, `Username`, `Useremail`, `Password`, `RoleID`, `Gender`, `DOB`, `Address`, `Mobileno`) VALUES
 (1, 'abxcd', 'sgcv@gmail.com', 'PBKDF2WithHmacSHA256:2048:b0TrD9Q5w7ILPf+Rq6lbNrlKSJhEFRRgdTe7v/WMDRM=:F32keogVMe4BFkYPTK77gSLpzQvdu08CdJ46EXRI6XE=', 2, 'Male', '2-12-2000', 'surat', '7894561235'),
 (2, 'rohan', 'rohan123@gmail.com', 'PBKDF2WithHmacSHA256:2048:b0TrD9Q5w7ILPf+Rq6lbNrlKSJhEFRRgdTe7v/WMDRM=:F32keogVMe4BFkYPTK77gSLpzQvdu08CdJ46EXRI6XE=', 2, 'Male', '3-11-2002', 'udhana', '7894561235'),
-(3, 'admin', 'admin@123@gmail.com', 'PBKDF2WithHmacSHA256:2048:Cu/0JpeS+yt/VrytKeGHYIuutHqgeFzUWTEU3tb82bQ=:jq+fWURHTWz21P6eOeG2wwKI3aeJHRWD4qRdxjOk8hM=', 1, 'Male', '7-8-1999', 'Daman', '1234569875'),
 (4, 'yug', 'yug@123@gmail.com', 'PBKDF2WithHmacSHA256:2048:w1PXVAw8bbVk2Lu3UqSwcUAAynyXwQQeYHPzxSYUhNk=:IWzHVuO8sOQ7f8/mhFAfdbtvIT3fBbTrfeSmpOqTMg4=', 2, 'Male', '7-12-2003', 'Adajan', '4569871235'),
 (5, 'znj', 'x ', 'PBKDF2WithHmacSHA256:2048:I/Q2VPZuxChsZ/UyqV9cwuOel1Wu8dQ/IJqj2xqRUGE=:hpQ9Ua8VE8tBkJ4O+eE2iuPLn8G4B4fZpodfrpkQhGI=', 2, 'b', 'n ', 'hnb', '656'),
 (6, 'sa', 'sac', 'PBKDF2WithHmacSHA256:2048:0eGbypq4yOLidiUtFPcffYWcuTVA5mY5Ctwr3edWZaw=:W7mdsjJlrROOxwa3T/ddwMSFaYzlsnytwEnPFUboAAM=', 2, 'sa', 'sa', 'sa', '854'),
 (7, 'vikas', 'vikas@gmail.com', 'PBKDF2WithHmacSHA256:2048:k8SONl870LlC7qIWviDD3uXEGswLWTzqMBCCQmtlNIs=:vS+A9epRx0T+BP7cWr/82bfFnw7xK6EF1vEogjbjhwA=', 2, 'Male', '7-8-9000', 'kat', '1256348975'),
-(8, 'sakshi', 'sakshi@gmail.com', 'PBKDF2WithHmacSHA256:2048:KQLAmmZtZnVicDzhoyWoBvUyqXlxOIuDzMGi6KWYkoE=:b+QbDzaqX/vYQ0jZlUeM+BWMGj9ONlIQ8QnU1C+axwo=', 2, 'Female', '2024-05-08', 'adajan', '1236547895');
+(8, 'sakshi', 'sakshi@gmail.com', 'PBKDF2WithHmacSHA256:2048:KQLAmmZtZnVicDzhoyWoBvUyqXlxOIuDzMGi6KWYkoE=:b+QbDzaqX/vYQ0jZlUeM+BWMGj9ONlIQ8QnU1C+axwo=', 2, 'Female', '2024-05-08', 'adajan', '1236547895'),
+(10, 'rr', 'rr@gmailcom', 'PBKDF2WithHmacSHA256:2048:J9calPOiQAZEp+BAacCNY2ZF4m6wwv7tsit3VdJvq1I=:uX3x3jcYXBjpl26PtDzfU/fp6nUXYwdQ1BJV8X9oh2c=', 1, 'none', 'none', 'none', '1256348975'),
+(11, 'rs', 'rs@gmail.com', 'PBKDF2WithHmacSHA256:2048:fSCva0sftU67Q4wr1WjyoSaI02e2reb0TzooFIxOhHU=:+TxbZSeZhXjSZVvdsZNEv5l0YbXcENbIKWipSen0beY=', 1, 'none', 'none', 'none', '1256348975'),
+(12, 'Poojan', 'Poojan@gmail.com', 'PBKDF2WithHmacSHA256:2048:pX3IOvzRQxXXQRbaSVZxHVVk0D4XBmtU8Sh5TQIGqKc=:Vy2wJmdUAdhQtujkW2GhnxqNdCHngWjgBEnye2/RiTU=', 1, 'none', 'none', 'none', '1236547895');
 
 --
 -- Indexes for dumped tables
@@ -384,13 +398,13 @@ ALTER TABLE `BillingTB`
 -- AUTO_INCREMENT for table `CartTB`
 --
 ALTER TABLE `CartTB`
-  MODIFY `CartID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `CartID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `CompanyTB`
 --
 ALTER TABLE `CompanyTB`
-  MODIFY `CompanyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `CompanyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `ImagemasterTB`
@@ -426,13 +440,13 @@ ALTER TABLE `ProductCategoryTB`
 -- AUTO_INCREMENT for table `productTB`
 --
 ALTER TABLE `productTB`
-  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `RelationTB`
 --
 ALTER TABLE `RelationTB`
-  MODIFY `RelationID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `RelationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `RoleTB`
@@ -450,7 +464,7 @@ ALTER TABLE `StagemasterTB`
 -- AUTO_INCREMENT for table `UserTB`
 --
 ALTER TABLE `UserTB`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
