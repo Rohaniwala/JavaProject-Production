@@ -379,7 +379,7 @@
         
         <div class="sidebar">
             <div class="sidebar-header">
-                <img src="images/products/logo.png" alt="alt" height="100px" width="250px"/>
+                <img src="../images/products/logo.png" alt="alt" height="100px" width="250px"/>
             </div>
             <ul class="menu">
                 <li class="menu-item">
@@ -426,14 +426,14 @@
                     </ul>
                     <ul class="menu">
                         <li class="menu-item">
-                            <a href="AddProduct.jsf"><i class="fas fa-plus-circle"></i> Add Product</a>
+                            <a href="Admin/AddProduct.jsf"><i class="fas fa-plus-circle"></i> Add Product</a>
                         </li>
                     </ul>
                 </li>
             </ul>
         </div>     
 
-        <h2 style="text-align: center; bac" > #{cDIBean.uname}</h2>
+        <h2 style="text-align: center;" > #{CompanyBean.uname}</h2>
 <div class="col-lg-9 main-content">
     <div class="featured-products">
         <div class="container">
@@ -441,17 +441,17 @@
                 <div id="isotope" class="isotope">
                     <div class="product-list row">
                         <!-- Loop through your data and generate product items -->
-                        <c:forEach items="#{cDIBean.cprod}" var="data">
+                        <c:forEach items="#{CompanyBean.cprod}" var="data">
                             <div class="col-lg-4 col-md-6 product-item">
                                 <div class="product-card">
-                                    <img src="images/Product/#{data.productimage}" alt="#{data.productname}" class="product-image"/>
+                                    <img src="../images/Product/#{data.productimage}" alt="#{data.productname}" class="product-image"/>
                                     <div class="product-info">
                                         <h4 class="product-title"><a href="single-product.html">#{data.productname}</a></h4>
                                         <span class="product-price">$#{data.productprice}</span>
                                         <div class="product-actions">
                                             <h:form>
-                                                <p:commandButton value="Delete" action="#{cDIBean.deleteProduct(data.productID)}" icon="fa fa-trash" styleClass="ui-button-danger" />
-                                                <p:commandButton value="Update" action="#{cDIBean.getproddata(data)}" icon="fa fa-edit" />
+                                                <p:commandButton value="Delete" action="#{CompanyBean.deleteProduct(data.productID)}" icon="fa fa-trash" styleClass="ui-button-danger" />
+                                                <p:commandButton value="Update" action="#{CompanyBean.getproddata(data)}" icon="fa fa-edit" />
                                             </h:form>
                                         </div>
                                     </div>

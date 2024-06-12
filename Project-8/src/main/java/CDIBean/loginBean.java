@@ -133,7 +133,7 @@ Credential c = new UsernamePasswordCredential(username, password);
 
             if (ctx.isCallerInRole("Admin")) {
                 role = "Admin";
-                return "Admin/ProductDisplayAdmin.jsf";
+                return "Admin/AdminDashBoard.jsf";
             } else if (ctx.isCallerInRole("User")) {
                 role = "User";
                 return "Client/Display.jsf";

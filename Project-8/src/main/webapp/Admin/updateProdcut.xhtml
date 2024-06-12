@@ -15,39 +15,39 @@
                 <p:panel header="Update Product">
                     <div class="form-group">
                         <h:outputLabel for="productID" value="Product ID:"/>
-                        <h:inputHidden value="#{cDIBean.prod.productID}" />
+                        <h:inputHidden value="#{CompanyBean.prod.productID}" />
                     </div>
                     
                     <div class="form-group">
                         <h:outputLabel for="productName" value="Product Name:"/>
-                        <p:inputText id="productName" value="#{cDIBean.prod.productname}" class="form-control"/>
+                        <p:inputText id="productName" value="#{CompanyBean.prod.productname}" class="form-control"/>
                     </div>
 
                     <div class="form-group">
                         <h:outputLabel for="productCategory" value="Product Category:"/>
-                        <p:selectOneMenu id="productCategory" value="#{cDIBean.pcatID}" class="form-control">
-                            <f:selectItems value="#{cDIBean.cprodcat}" var="data" itemValue="#{data.pcatID}" itemLabel="#{data.pcatname}" />
+                        <p:selectOneMenu id="productCategory" value="#{CompanyBean.pcatID}" class="form-control">
+                            <f:selectItems value="#{CompanyBean.cprodcat}" var="data" itemValue="#{data.pcatID}" itemLabel="#{data.pcatname}" />
                         </p:selectOneMenu>
                     </div>
 
                     <div class="form-group">
                         <h:outputLabel for="productDescription" value="Product Description:"/>
-                        <p:inputTextarea id="productDescription" value="#{cDIBean.prod.productdescription}" rows="4" cols="30" class="form-control"/>
+                        <p:inputTextarea id="productDescription" value="#{CompanyBean.prod.productdescription}" rows="4" cols="30" class="form-control"/>
                     </div>
 
                     <div class="form-group">
                         <h:outputLabel for="productPrice" value="Product Price:"/>
-                        <p:inputText id="productPrice" value="#{cDIBean.prod.productprice}" class="form-control"/>
+                        <p:inputText id="productPrice" value="#{CompanyBean.prod.productprice}" class="form-control"/>
                     </div>
 
                     <div class="form-group">
                         <h:outputLabel for="productImage" value="Product Image:"/><br/>
-                        <p:fileUpload id="productImage" value="#{cDIBean.file}" mode="simple" skinSimple="true" />
+                        <p:fileUpload id="productImage" value="#{CompanyBean.file}" mode="simple" skinSimple="true" />
                     </div>
 
                     <div class="form-group">
                         <h:outputLabel value="Is Image Uploaded:"/>
-                        <p:selectOneRadio id="isImageUploaded" value="#{cDIBean.prod.isimageinclude}" class="form-control">
+                        <p:selectOneRadio id="isImageUploaded" value="#{CompanyBean.prod.isimageinclude}" class="form-control">
                             <f:selectItem itemLabel="Yes" itemValue="true" />
                             <f:selectItem itemLabel="No" itemValue="false" />
                         </p:selectOneRadio>
@@ -55,7 +55,7 @@
 
                     <div class="form-group">
                         <h:outputLabel value="Is Text Included:"/>
-                        <p:selectOneRadio id="isTextIncluded" value="#{cDIBean.prod.istextinclude}" class="form-control">
+                        <p:selectOneRadio id="isTextIncluded" value="#{CompanyBean.prod.istextinclude}" class="form-control">
                             <f:selectItem itemLabel="Yes" itemValue="true" />
                             <f:selectItem itemLabel="No" itemValue="false" />
                         </p:selectOneRadio>
@@ -63,17 +63,17 @@
 
                     <div class="form-group">
                         <h:outputLabel for="productCompany" value="Product Company"/>
-                        <p:selectOneMenu id="productCompany" value="#{cDIBean.companyID}" class="form-control">
-                            <f:selectItems value="#{cDIBean.ccomp}" var="c" itemValue="#{c.companyID}" itemLabel="#{c.companyname}" />
+                        <p:selectOneMenu id="productCompany" value="#{CompanyBean.companyID}" class="form-control">
+                            <f:selectItems value="#{CompanyBean.ccomp}" var="c" itemValue="#{c.companyID}" itemLabel="#{c.companyname}" />
                         </p:selectOneMenu>
                     </div>
 
                     <div class="form-group">
                         <h:outputLabel for="productQuantity" value="Quantity:"/>
-                        <p:inputText id="productQuantity" value="#{cDIBean.prod.quantity}" class="form-control"/>
+                        <p:inputText id="productQuantity" value="#{CompanyBean.prod.quantity}" class="form-control"/>
                     </div>
                     <!-- Add more fields here as needed -->
-                    <p:commandButton value="Update Product" action="#{cDIBean.updateProddata()}" class="btn btn-primary" />
+                    <p:commandButton value="Update Product" action="#{CompanyBean.updateProddata()}" class="btn btn-primary" />
                 </p:panel>
             </div>
         </h:form>

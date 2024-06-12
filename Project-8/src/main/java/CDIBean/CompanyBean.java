@@ -260,25 +260,25 @@ public class CompanyBean {
                     String.valueOf(prod.getIsimageinclude()), String.valueOf(prod.getIstextinclude()), companyID, String.valueOf(prod.getQuantity()));
         }
 
-        return "Admin/ProductDisplayAdmin.jsf";
+        return "ProductDisplayAdmin.jsf";
     }
 
     public String deleteProduct(Integer productID) {
         if (KeyGenrator.verifytoken(KeyGenrator.genratetoken(KeepRecord.getUsername()))) {
             rc.deleteProduct(productID);
         }
-        return "Admin/ProductDisplayAdmin.jsf";
+        return "ProductDisplayAdmin.jsf";
     }
 
     public String addProd() {
-        return "Admin/AddProduct.jsf";
+        return "AddProduct.jsf";
     }
 
     public String getproddata(ProductTB prod) {
         System.out.println(prod);
         this.prod = prod;
 
-        return "Admin/updateProdcut.jsf";
+        return "updateProdcut.jsf";
     }
 
     public String updateProddata() throws IOException {
@@ -288,7 +288,7 @@ public class CompanyBean {
 
             rc.updateProductdata(prod.getProductID().toString(), prod.getProductname(), pcatID, prod.getProductdescription(), String.valueOf(prod.getProductprice()), imageName, String.valueOf(prod.getIsimageinclude()), String.valueOf(prod.getIstextinclude()), companyID, String.valueOf(prod.getQuantity()));
         }
-        return "Admin/ProductDisplayAdmin.jsf";
+        return "ProductDisplayAdmin.jsf";
     }
 
 //    public String getProductByCat(Integer pCatId) {
