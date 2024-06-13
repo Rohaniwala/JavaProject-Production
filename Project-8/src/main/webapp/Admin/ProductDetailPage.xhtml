@@ -1,31 +1,20 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-
-        <meta charset="utf-8" />
-        <meta name="keywords" content="HTML5 Template" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
-
         <title>Facelet Title</title>
-
-
-<style> 
-    body {
-                margin: 0;
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+        <link rel="stylesheet" href="../css/Productdetails.css"></link>
+        <style>
+            body {
+                /*margin: 0;*/
                 font-family: Arial, sans-serif;
             }
 
             .sidebar {
-                margin-top: -30px;
+                margin-top: -50px;
                 height: 100%;
                 width: 250px;
                 background-color: #2a3042;
@@ -299,84 +288,10 @@
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
                 padding: 20px;
             }
-            
-            .main-content {
-    margin-top: 60px;
-    padding: 20px;
-}
-
-.product-list {
-    display: flex;
-    flex-wrap: wrap;
-    /*justify-content: space-evenly;*/
-}
-
-.product-item {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-}
-
-.product-card {
-    border: 1px solid #e3e6f0;
-    border-radius: 10px;
-    background-color: #fff;
-    transition: all 0.3s ease-in-out;
-    position: relative;
-    text-align: center;
-    width: 70%;
-    box-sizing: border-box;
-}
-
-.product-card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.product-image {
-    max-width: 100%;
-    border-bottom: 1px solid #e3e6f0;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-.product-info {
-    padding: 15px;
-}
-
-.product-title {
-    font-size: 18px;
-    margin: 10px 0;
-}
-
-.product-title a {
-    text-decoration: none;
-    color: #333;
-}
-
-.product-price {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 15px;
-    display: block;
-}
-
-.product-actions {
-    margin-top: 10px;
-}
-
-.product-actions .ui-button-danger,
-.product-actions .ui-button {
-    margin-right: 10px;
-    margin-bottom: 10px;
-}
-            
 
         </style>
-
-
     </h:head>
     <h:body>
-        
         <div class="sidebar">
             <div class="sidebar-header">
                 <img src="../images/products/logo.png" alt="alt" height="100px" width="250px"/>
@@ -431,64 +346,42 @@
                     </ul>
                 </li>
             </ul>
-        </div>     
+        </div>
 
-        <h2 style="text-align: center;" > #{CompanyBean.uname}</h2>
-<div class="col-lg-9 main-content">
-    <div class="featured-products">
         <div class="container">
-            <div class="row">
-                <div id="isotope" class="isotope">
-                    <div class="product-list row">
-                        <!-- Loop through your data and generate product items -->
-                        <c:forEach items="#{CompanyBean.cprod}" var="data">
-                            <div class="col-lg-4 col-md-6 product-item">
-                                <div class="product-card">
-                                    <h:form>
-                                        <h:commandLink action="#{CompanyBean.gotoProdDetil(data)}"><img src="../images/#{data.productimage}" alt="#{data.productname}" class="product-image" /></h:commandLink>
-                                    </h:form>
-                                    <div class="product-info">
-                                        <h4 class="product-title"><a href="single-product.html">#{data.productname}</a></h4>
-                                        <span class="product-price">$#{data.productprice}</span>
-                                        <div class="product-actions">
-                                            <h:form id="fordelup"> 
-                                                <p:commandButton value="Delete" action="#{CompanyBean.deleteProduct(data.productID)}" icon="fa fa-trash" styleClass="ui-button-danger" ajax="false" update="fordelup" />
-                                                <p:commandButton value="Update" action="#{CompanyBean.getproddata(data)}" icon="fa fa-edit"  />
-                                            </h:form>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                
+            <div class="card">
+                <div class="container-fliud">
+                    <div class="wrapper row">
+                        <div class="preview col-md-6">
+
+                            <div class="preview-pic tab-content">
+                                <div class="tab-pane active" id="pic-1"><img src="../images/#{CompanyBean.prod.productimage}" /></div>
                             </div>
-                        </c:forEach>
+
+                        </div>
+                        <div class="details col-md-6">
+                            <h3 class="product-title">#{CompanyBean.prod.productname}</h3>
+                            <div class="rating">
+                                <div class="stars">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </div>
+                                <span class="review-no">41 reviews</span>
+                            </div>
+                            <p class="product-description">#{CompanyBean.prod.productdescription}</p>
+                            <h4 class="price">current price: <span>#{CompanyBean.prod.productprice}</span></h4>
+                            <h4 class="price">Product Category: <span>#{CompanyBean.prod.pcatID.pcatname}</span></h4>
+                            <h4 class="price">Quantity : <span>#{CompanyBean.prod.quantity}</span></h4>
+                            <h4 class="price">Company Name : <span>#{CompanyBean.prod.companyID.companyname}</span></h4>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 
-
-<script src="js/main.js"></script>
-
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
-        <script src="simplebar.min.js"></script>
-        <script src="assets/libs/node-waves/waves.min.js"></script>
-
-        <!-- apexcharts -->
-        <script src="js/apexcharts.min.js"></script>
-
-        <!-- dashboard init -->
-        <script src="js/dashboard.init.js"></script>
-
-        <!-- App js -->
-        <script src="js/app.js"></script>
     </h:body>
-
-
-
-
 </html>

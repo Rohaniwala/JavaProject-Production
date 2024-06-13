@@ -333,4 +333,9 @@ public class CompanyBean {
     public void adminRegistration(){
         rc.adminRegistration(utb.getUsername(), utb.getUseremail(), utb.getPassword(), utb.getMobileno(), utb.getAddress());
     }
+    
+    public String gotoProdDetil(ProductTB prod){
+        this.prod=prod;
+        return "ProductDetailPage.jsf";
+    }
 }
