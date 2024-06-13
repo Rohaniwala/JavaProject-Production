@@ -8,6 +8,7 @@ import ClassPackage.KeyGenrator;
 import Entity.CompanyTB;
 import Entity.ProductCategoryTB;
 import Entity.ProductTB;
+import Entity.StagemasterTB;
 import Entity.UserTB;
 import RestClient.RestClient;
 import java.io.ByteArrayInputStream;
@@ -51,6 +52,11 @@ public class CompanyBean {
     Collection<CompanyTB> ccomp;
     GenericType<Collection<CompanyTB>> gccomp;
 
+    StagemasterTB st =new StagemasterTB();
+    Collection<StagemasterTB> cst;
+    GenericType<Collection<StagemasterTB>> gcst;
+
+    
     String pcatID;
     String companyID;
 
@@ -84,10 +90,32 @@ public class CompanyBean {
         ccomp = new ArrayList<>();
         gccomp = new GenericType<Collection<CompanyTB>>() {
         };
+        
+        cst=new ArrayList<>();
+        gcst=new GenericType<Collection<StagemasterTB>>(){};
 
 //        catserach=0;
 //        temp = 0;
     }
+
+    public StagemasterTB getSt() {
+        return st;
+    }
+
+    public void setSt(StagemasterTB st) {
+        this.st = st;
+    }
+
+    public Collection<StagemasterTB> getCst(String pID) {
+        rs=rc.getAllStagesByPid(Response.class, pID);
+        cst=rs.readEntity(gcst);
+        return cst;
+    }
+
+    public void setCst(Collection<StagemasterTB> cst) {
+        this.cst = cst;
+    }
+    
 
     public UserTB getUtb() {
         return utb;
@@ -338,4 +366,6 @@ public class CompanyBean {
         this.prod=prod;
         return "ProductDetailPage.jsf";
     }
+    
+    
 }
