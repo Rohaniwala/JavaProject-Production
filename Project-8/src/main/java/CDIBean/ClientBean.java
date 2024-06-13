@@ -389,19 +389,26 @@ public class ClientBean {
     }
     
   public String orderForm(CartTB carttb){
+    
       this.carttb=carttb;
-      return "OrderForm.jsf";
+      TempData.cartTB = carttb;
+      if(carttb.getProductID().getIsimageinclude()){
+        return "OrderForm_withImages.jsf";
+      }
+      else{
+        return "OrderForm_withText.jsf";
+      }
   }
   
-  public String placeOrder(CartTB carttb) throws IOException{
+  public String placeOrder() throws IOException{
       String imageName = "";
-      if(carttb.getProductID().getIsimageinclude()){
+      if(TempData.cartTB.getProductID().getIsimageinclude()){
           upload();
          imageName   = file.getFileName();
       }
     
       
-    rc.placeOrder(carttb.getCartID().toString(), imageName, textForOrder);     
+    rc.placeOrder(TempData.cartTB.getCartID().toString(), imageName, textForOrder);     
     return "DisplayOrder.jsf";
   }
    
