@@ -82,10 +82,12 @@ public class JakartaEE8Resource {
     }
     
     @POST
-    @Path("Client/placeOrder/{CartID}/{customizeImage}/{customizeText}")
-    public void placeOrder(@PathParam("CartID") Integer CartID,@PathParam("customizeImage") String customizeImage,@PathParam("customizeText") String customizeText){
-        sb.placeOrder(CartID, customizeImage, customizeText);
+    @Path("applyOrder/{CartID}/{customizeImage}/{customizeText}")
+    public void applyOrder(@PathParam("CartID") Integer CartID,@PathParam("customizeImage") String customizeImage,@PathParam("customizeText") String customizeText){
+        System.out.println("Hello resource");
+        sb.applyOrder(CartID, customizeImage, customizeText);
     }
+
     
     @DELETE
     @Path("cancelorder/{OrderID}")

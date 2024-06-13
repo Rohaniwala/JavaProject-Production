@@ -109,7 +109,7 @@
     <h:body>
 
         <div class="card">
-            <img src="../images/Product/#{ClientBean.carttb.productID.productimage}"  alt="House Image" class="house-image"/>
+            <img src="../images/#{ClientBean.carttb.productID.productimage}"  alt="House Image" class="house-image"/>
             <div class="card-content">
                 <h2>#{ClientBean.carttb.productID.productname}</h2>
                 <p class="price">#{ClientBean.carttb.productID.productprice}</p>
@@ -121,10 +121,10 @@
                 <h:form>
                     <div class="form-group">
                         <label for="name">Your Name</label>
-                        <p:inputText id="name" value="#{ClientBean.textForOrder}" styleClass="form-control" placeholder="Your Name"/>
+                        <h:inputText  value="#{ClientBean.textForOrder}" styleClass="form-control" />
                     </div>
                     <div class="form-group">
-                        <p:commandButton action="#{ClientBean.placeOrder()}" value="Order Now" styleClass="btn btn-primary"/>
+                        <p:commandButton action="#{ClientBean.applyOrder()}" value="Order Now" styleClass="btn btn-primary"/>
                     </div>
                 </h:form>
             </div>

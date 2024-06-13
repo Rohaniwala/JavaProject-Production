@@ -221,10 +221,11 @@ public class ClientSessionBean {
        em.merge(roleTB);
    }
    
-   public void placeOrder(Integer CartID, String customizeImage, String customizeText){
+   public void applyOrder(Integer CartID, String customizeImage, String customizeText){
        
+//       System.out.println("ejb");
         CartTB cartTB = em.find(CartTB.class, CartID);
-        UserTB userTB=em.find(UserTB.class, cartTB.getUserID());
+        UserTB userTB=em.find(UserTB.class, cartTB.getUserID().getUserID());
         
       
         OrderTB orderTB = new OrderTB();
@@ -263,6 +264,8 @@ public class ClientSessionBean {
         em.persist(orderDetailsTB);
         em.persist(orderTrackingTB);
 
+        em.remove(cartTB);
+        
    }
   
 }

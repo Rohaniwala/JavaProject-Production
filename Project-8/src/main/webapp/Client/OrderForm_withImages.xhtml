@@ -108,7 +108,7 @@
     </h:head>
     <h:body>
         <div class="card">
-            <img src="../images/Product/#{ClientBean.carttb.productID.productimage}"  alt="House Image" class="house-image"/>
+            <img src="../images/#{ClientBean.carttb.productID.productimage}"  alt="House Image" class="house-image"/>
             <div class="card-content">
                 <h2>#{ClientBean.carttb.productID.productname}</h2>
                 <p class="price">#{ClientBean.carttb.productID.productprice}</p>
@@ -118,13 +118,13 @@
                 <!--<p class="contact">(555) 555-4321</p>-->
              
 
-\                    <h:form enctype="multipart/form-data">
+                   <h:form enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="file">Upload Image</label>
                             <p:fileUpload id="file"  value="#{ClientBean.file}"  mode="simple" styleClass="form-control-file" skinSimple="true"/>
                         </div>
                         <div class="form-group">
-                            <p:commandButton action="#{ClientBean.placeOrder()}" value="Order Now" styleClass="btn btn-primary"/>
+                            <h:commandButton action="#{ClientBean.applyOrder()}" value="Order Now" styleClass="btn btn-primary"/>
                         </div>
                     </h:form>
             </div>

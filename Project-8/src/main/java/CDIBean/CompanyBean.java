@@ -230,7 +230,7 @@ public class CompanyBean {
 
     public void upload() throws FileNotFoundException, IOException {
         if (file != null) {
-            String destinationdirctory = "/home/rohan/8TH_Sem_Project/Project-8/src/main/webapp/images/Product/";
+            String destinationdirctory = "/home/rohan/8TH_Sem_Project/Project-8/src/main/webapp/images/";
             File dirctory = new File(destinationdirctory);
             if (!dirctory.exists()) {
                 dirctory.mkdirs();

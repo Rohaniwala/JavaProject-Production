@@ -444,7 +444,7 @@
                         <c:forEach items="#{CompanyBean.cprod}" var="data">
                             <div class="col-lg-4 col-md-6 product-item">
                                 <div class="product-card">
-                                    <img src="../images/Product/#{data.productimage}" alt="#{data.productname}" class="product-image"/>
+                                    <img src="../images/#{data.productimage}" alt="#{data.productname}" class="product-image"/>
                                     <div class="product-info">
                                         <h4 class="product-title"><a href="single-product.html">#{data.productname}</a></h4>
                                         <span class="product-price">$#{data.productprice}</span>

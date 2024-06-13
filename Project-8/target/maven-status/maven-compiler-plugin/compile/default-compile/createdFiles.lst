@@ -14,12 +14,12 @@ com/mycompany/project/resources/JakartaEE8Resource.class
 ClassPackage/KeyGenrator.class
 CDIBean/CompanyBean.class
 Entity/StagemasterTB.class
-CDIBean/Config.class
-CDIBean/KeepRecord.class
 Entity/RelationTB.class
 Entity/UserTB.class
-CDIBean/ClientBean$1.class
+CDIBean/Config.class
+CDIBean/KeepRecord.class
 Entity/ImagemasterTB.class
+CDIBean/ClientBean$1.class
 CBean/ClientSessionBean.class
 RestClient/RestClient.class
 Entity/CartTB.class

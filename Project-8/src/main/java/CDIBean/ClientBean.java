@@ -4,6 +4,7 @@
  */
 package CDIBean;
 
+import CBean.ClientSessionBean;
 import ClassPackage.KeyGenrator;
 import Entity.CartTB;
 import Entity.CompanyTB;
@@ -37,6 +38,9 @@ import org.primefaces.model.file.UploadedFile;
 @Named(value = "ClientBean")
 @RequestScoped
 public class ClientBean {
+    
+    ClientSessionBean cb = new ClientSessionBean();
+    
 
     RestClient rc;
 
@@ -400,15 +404,21 @@ public class ClientBean {
       }
   }
   
-  public String placeOrder() throws IOException{
-      String imageName = "";
+  public String applyOrder() throws IOException{
+      
+      String imageName = "none";
       if(TempData.cartTB.getProductID().getIsimageinclude()){
           upload();
          imageName   = file.getFileName();
       }
     
-      
-    rc.placeOrder(TempData.cartTB.getCartID().toString(), imageName, textForOrder);     
+         System.out.println(TempData.cartTB.getCartID());
+                  System.out.println(imageName);
+         System.out.println(textForOrder);
+
+    rc.applyOrder(TempData.cartTB.getCartID().toString(), imageName, textForOrder);     
+//cb.applyOrder(TempData.cartTB.getCartID(), imageName, textForOrder);
+   
     return "DisplayOrder.jsf";
   }
    

@@ -18,7 +18,7 @@ import javax.ws.rs.client.WebTarget;
  *        client.close();
  * </pre>
  *
- * @author ravindrasinh
+ * @author rohan
  */
 public class RestClient {
 
@@ -35,10 +35,6 @@ public class RestClient {
         WebTarget resource = webTarget;
         resource = resource.path("admin/DisplayCompany");
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
-    }
-
-    public void placeOrder(String CartID, String customizeImage, String customizeText) throws ClientErrorException {
-        webTarget.path(java.text.MessageFormat.format("Client/placeOrder/{0}/{1}/{2}", new Object[]{CartID, customizeImage, customizeText})).request().post(null);
     }
 
     public <T> T countofOrder(Class<T> responseType) throws ClientErrorException {
@@ -137,6 +133,11 @@ public class RestClient {
         WebTarget resource = webTarget;
         resource = resource.path("admin/totalRevenu");
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+    public void applyOrder(String CartID, String customizeImage, String customizeText) throws ClientErrorException {
+        System.out.println("Hello rest");
+        webTarget.path(java.text.MessageFormat.format("applyOrder/{0}/{1}/{2}", new Object[]{CartID, customizeImage, customizeText})).request().post(null);
     }
 
     public <T> T displayUserCart(Class<T> responseType, String UserID) throws ClientErrorException {
