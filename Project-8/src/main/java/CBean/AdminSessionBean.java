@@ -11,6 +11,7 @@ import Entity.ProductCategoryTB;
 import Entity.ProductTB;
 import Entity.RelationTB;
 import Entity.RoleTB;
+import Entity.StagemasterTB;
 import Entity.UserTB;
 import java.util.Collection;
 import javax.ejb.Stateless;
@@ -87,6 +88,7 @@ public class AdminSessionBean {
     }
 
     public void addProductdata(String pname, Integer pcatID, String Prodescription, float productprice, String productimage, boolean isimageinclude, boolean istextinclude, Integer companyID, Integer quantity) {
+    
         CompanyTB ct = em.find(CompanyTB.class, companyID);
         ProductCategoryTB pct = em.find(ProductCategoryTB.class, pcatID);
 
@@ -110,7 +112,15 @@ public class AdminSessionBean {
         ct.setProductTBCollection(cpt);
         pct.setProductTBCollection(cptt);
 
+        StagemasterTB stagemasterTB = new StagemasterTB();
+        
+        stagemasterTB.setProductID(pTB);
+        stagemasterTB.setStagedescription("Product orderd");
+        stagemasterTB.setStagename("Ordered");
+        
+        
         em.persist(pTB);
+        em.persist(stagemasterTB);
         em.merge(ct);
         em.merge(pct);
     }

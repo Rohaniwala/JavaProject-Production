@@ -7,6 +7,8 @@ package CDIBean;
 import ClassPackage.KeyGenrator;
 import Entity.CartTB;
 import Entity.CompanyTB;
+import Entity.OrderDetailsTB;
+import Entity.OrderTB;
 import Entity.ProductCategoryTB;
 import Entity.ProductTB;
 import Entity.UserTB;
@@ -60,6 +62,7 @@ public class ClientBean {
 
     String pcatID;
     String companyID;
+    String textForOrder;
 
     Integer catserach;
     static Integer temp = 0;
@@ -96,6 +99,14 @@ public class ClientBean {
 
 //        catserach=0;
 //        temp = 0;
+    }
+
+    public String getTextForOrder() {
+        return textForOrder;
+    }
+
+    public void setTextForOrder(String textForOrder) {
+        this.textForOrder = textForOrder;
     }
 
     public UserTB getUtb() {
@@ -380,6 +391,18 @@ public class ClientBean {
   public String orderForm(CartTB carttb){
       this.carttb=carttb;
       return "OrderForm.jsf";
+  }
+  
+  public String placeOrder(CartTB carttb) throws IOException{
+      String imageName = "";
+      if(carttb.getProductID().getIsimageinclude()){
+          upload();
+         imageName   = file.getFileName();
+      }
+    
+      
+    rc.placeOrder(carttb.getCartID().toString(), imageName, textForOrder);     
+    return "DisplayOrder.jsf";
   }
    
 }

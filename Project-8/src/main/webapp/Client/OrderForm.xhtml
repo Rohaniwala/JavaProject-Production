@@ -121,17 +121,17 @@
                 <c:if test="#{ClientBean.carttb.productID.istextinclude}">
                 <div class="form-group">
                     <label for="name">Your Name</label>
-                    <p:inputText id="name" styleClass="form-control" placeholder="Your Name"/>
+                    <p:inputText id="name" value="#{ClientBean.textForOrder}" styleClass="form-control" placeholder="Your Name"/>
                 </div>
                 </c:if>
                 <c:if test="#{ClientBean.carttb.productID.isimageinclude}">
                 <div class="form-group">
                     <label for="file">Upload Image</label>
-                    <p:fileUpload id="file"  mode="simple" styleClass="form-control-file"/>
+                    <p:fileUpload id="file"  value="#{ClientBean.file}"  mode="simple" styleClass="form-control-file"/>
                 </div>
                      </c:if>
                 <div class="form-group">
-                    <p:commandButton value="Order Now" styleClass="btn btn-primary"/>
+                    <p:commandButton action="#{ClientBean.placeOrder(ClientBean.carttb)}" value="Order Now" styleClass="btn btn-primary"/>
                 </div>
                 
             </h:form>

@@ -10,5 +10,5 @@ package CDIBean;
  * @author ravindrasinh
  */
 public class TempData {
-    public static int Loginuid;
+    public static Integer Loginuid;
 }

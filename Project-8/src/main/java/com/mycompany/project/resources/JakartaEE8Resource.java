@@ -82,11 +82,9 @@ public class JakartaEE8Resource {
     }
     
     @POST
-    @Path("placeOrder/{userID}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Transactional
-    public void placeOrder(@PathParam("userID") Integer userID) {
-        sb.placeOrder(userID);
+    @Path("Client/placeOrder/{CartID}/{customizeImage}/{customizeText}")
+    public void placeOrder(@PathParam("CartID") Integer CartID,@PathParam("customizeImage") String customizeImage,@PathParam("customizeText") String customizeText){
+        sb.placeOrder(CartID, customizeImage, customizeText);
     }
     
     @DELETE

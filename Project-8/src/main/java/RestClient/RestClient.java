@@ -37,8 +37,8 @@ public class RestClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
-    public void placeOrder(Object requestEntity, String userID) throws ClientErrorException {
-        webTarget.path(java.text.MessageFormat.format("placeOrder/{0}", new Object[]{userID})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    public void placeOrder(String CartID, String customizeImage, String customizeText) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("Client/placeOrder/{0}/{1}/{2}", new Object[]{CartID, customizeImage, customizeText})).request().post(null);
     }
 
     public <T> T countofOrder(Class<T> responseType) throws ClientErrorException {
@@ -109,7 +109,7 @@ public class RestClient {
         webTarget.path(java.text.MessageFormat.format("updateCart/{0}/{1}", new Object[]{CartID, Quantity})).request().post(null);
     }
 
-    public void deleteProduct(Integer productID) throws ClientErrorException {
+    public void deleteProduct(String productID) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("admin/deleteProduct/{0}", new Object[]{productID})).request().delete();
     }
 

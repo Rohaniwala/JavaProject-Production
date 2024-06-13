@@ -112,51 +112,51 @@ public class ClientSessionBean {
      }
      
      //Order insert
-     public void placeOrder(Integer UserID){
-        UserTB userTB=em.find(UserTB.class, UserID);
-        Collection<CartTB> cartTBs=em.createNamedQuery("CartTB.findByUserID").setParameter("userID", userTB).getResultList();
-         OrderTB orderTB=new OrderTB();
-         orderTB.setUserID(userTB);
-         orderTB.setOrderStatus("Ordered");
-         
-         orderTB.setOrderdate(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()));
-         
-         cartTBs.forEach(c -> {
-         OrderDetailsTB orderDetailsTB=new OrderDetailsTB();
-         orderDetailsTB.setProductID(c.getProductID());
-         orderDetailsTB.setOrderID(orderTB);
-         orderDetailsTB.setCustomizeImage("ABC.JPG");
-         orderDetailsTB.setCustomizetext("xyz");
-         orderDetailsTB.setOrderdate(orderTB.getOrderdate());
-         orderDetailsTB.setQuantity(c.getQuantity());
-
-         Collection<StagemasterTB> stagemasterTBs=em.createNamedQuery("StagemasterTB.findByProductID").setParameter("productID", c.getProductID()).getResultList();
-             s=new StagemasterTB();
-         stagemasterTBs.forEach(st -> {
-             if(st.getStagename().equals("Ordered")){
-                 s=st;
-             }
-         });
-         
-          OrderTrackingTB orderTrackingTB=new OrderTrackingTB();
-         orderTrackingTB.setOrderdetailsID(orderDetailsTB);
-         orderTrackingTB.setStageID(s);
-         orderTrackingTB.setPlace("mdc");
-         orderTrackingTB.setStartingDate(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()));
-
-//         orderTrackingTB.setStartingDate(LocalDateTime.now().format("dd/mm/yyyy hh:mm:ss").toString());
-         orderTrackingTB.setEndingDate(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()));
-         orderTrackingTB.setDescription("cdh");
-         
-         em.persist(orderDetailsTB);
-         em.persist(orderTrackingTB);
-         
-         em.remove(c);
-     });
-          em.persist(orderTB);
-          
-          
-     }
+//     public void placeOrder(Integer UserID){
+//        UserTB userTB=em.find(UserTB.class, UserID);
+//        Collection<CartTB> cartTBs=em.createNamedQuery("CartTB.findByUserID").setParameter("userID", userTB).getResultList();
+//         OrderTB orderTB=new OrderTB();
+//         orderTB.setUserID(userTB);
+//         orderTB.setOrderStatus("Ordered");
+//         
+//         orderTB.setOrderdate(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()));
+//         
+//         cartTBs.forEach(c -> {
+//         OrderDetailsTB orderDetailsTB=new OrderDetailsTB();
+//         orderDetailsTB.setProductID(c.getProductID());
+//         orderDetailsTB.setOrderID(orderTB);
+//         orderDetailsTB.setCustomizeImage("ABC.JPG");
+//         orderDetailsTB.setCustomizetext("xyz");
+//         orderDetailsTB.setOrderdate(orderTB.getOrderdate());
+//         orderDetailsTB.setQuantity(c.getQuantity());
+//
+//         Collection<StagemasterTB> stagemasterTBs=em.createNamedQuery("StagemasterTB.findByProductID").setParameter("productID", c.getProductID()).getResultList();
+//             s=new StagemasterTB();
+//         stagemasterTBs.forEach(st -> {
+//             if(st.getStagename().equals("Ordered")){
+//                 s=st;
+//             }
+//         });
+//         
+//          OrderTrackingTB orderTrackingTB=new OrderTrackingTB();
+//         orderTrackingTB.setOrderdetailsID(orderDetailsTB);
+//         orderTrackingTB.setStageID(s);
+//         orderTrackingTB.setPlace("mdc");
+//         orderTrackingTB.setStartingDate(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()));
+//
+////         orderTrackingTB.setStartingDate(LocalDateTime.now().format("dd/mm/yyyy hh:mm:ss").toString());
+//         orderTrackingTB.setEndingDate(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()));
+//         orderTrackingTB.setDescription("cdh");
+//         
+//         em.persist(orderDetailsTB);
+//         em.persist(orderTrackingTB);
+//         
+//         em.remove(c);
+//     });
+//          em.persist(orderTB);
+//          
+//          
+//     }
      
      public void cancelorder(Integer OrderID){
          OrderTB ordertb=em.find(OrderTB.class, OrderID);
@@ -219,6 +219,50 @@ public class ClientSessionBean {
        
        em.persist(userTB);
        em.merge(roleTB);
+   }
+   
+   public void placeOrder(Integer CartID, String customizeImage, String customizeText){
+       
+        CartTB cartTB = em.find(CartTB.class, CartID);
+        UserTB userTB=em.find(UserTB.class, cartTB.getUserID());
+        
+      
+        OrderTB orderTB = new OrderTB();
+        OrderDetailsTB orderDetailsTB = new OrderDetailsTB();
+        OrderTrackingTB orderTrackingTB=new OrderTrackingTB();
+
+        orderTB.setUserID(userTB);
+        orderTB.setOrderStatus("Ordered");
+        orderTB.setOrderdate(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()));
+       
+//       OrderDetailsTB orderDetailsTB=new OrderDetailsTB();
+         
+        orderDetailsTB.setProductID(cartTB.getProductID());
+        orderDetailsTB.setOrderID(orderTB);
+        orderDetailsTB.setCustomizeImage(customizeImage);
+        orderDetailsTB.setCustomizetext(customizeText);
+        orderDetailsTB.setOrderdate(orderTB.getOrderdate());
+        orderDetailsTB.setQuantity(cartTB.getQuantity());
+        
+        Collection<StagemasterTB> stagemasterTBs=em.createNamedQuery("StagemasterTB.findByProductID").setParameter("productID", cartTB.getProductID()).getResultList();
+            s=new StagemasterTB();
+        stagemasterTBs.forEach(st -> {
+            if(st.getStagename().equals("Ordered")){
+                s=st;
+            }
+        });
+        
+        orderTrackingTB.setOrderdetailsID(orderDetailsTB);
+        orderTrackingTB.setStageID(s);
+        orderTrackingTB.setPlace("mdc");
+        orderTrackingTB.setStartingDate(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()));
+        orderTrackingTB.setEndingDate(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()));
+        orderTrackingTB.setDescription("cdh");
+        
+        em.persist(orderTB);        
+        em.persist(orderDetailsTB);
+        em.persist(orderTrackingTB);
+
    }
   
 }

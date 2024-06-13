@@ -265,7 +265,7 @@ public class CompanyBean {
 
     public String deleteProduct(Integer productID) {
         if (KeyGenrator.verifytoken(KeyGenrator.genratetoken(KeepRecord.getUsername()))) {
-            rc.deleteProduct(productID);
+            rc.deleteProduct(productID.toString());
         }
         return "ProductDisplayAdmin.jsf";
     }
