@@ -117,6 +117,7 @@ public class AdminSessionBean {
         stagemasterTB.setProductID(pTB);
         stagemasterTB.setStagedescription("Product orderd");
         stagemasterTB.setStagename("Ordered");
+        stagemasterTB.setPriority(0);
         
         
         em.persist(pTB);
@@ -235,11 +236,14 @@ public class AdminSessionBean {
     }
     
     public Collection<StagemasterTB> getAllStagesByPid(Integer pID){
+        System.out.println("hello ejb" + pID);
         ProductTB productTB = em.find(ProductTB.class, pID);
         return em.createNamedQuery("StagemasterTB.findByProductID").setParameter("productID", productTB).getResultList();
     }
     
-    public void addStageInProduct(Integer pid, String stagename,String stagedescription ){
+    
+    
+    public void addStageInProduct(Integer pid, String stagename,String stagedescription,Integer Priority){
 
         ProductTB productTB = em.find(ProductTB.class, pid);
         Collection<StagemasterTB> stagemasterTBs = productTB.getStagemasterTBCollection();
@@ -249,6 +253,7 @@ public class AdminSessionBean {
         stagemasterTB.setStagename(stagename);
         stagemasterTB.setProductID(productTB);
         stagemasterTB.setStagedescription(stagedescription);
+        stagemasterTB.setPriority(Priority);
         
         stagemasterTBs.add(stagemasterTB);
         productTB.setStagemasterTBCollection(stagemasterTBs);

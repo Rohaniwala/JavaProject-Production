@@ -31,8 +31,8 @@ public class RestClient {
         webTarget = client.target(BASE_URI).path("rest");
     }
 
-    public void addStageInProduct(String pid, String stagename, String stagedescription) throws ClientErrorException {
-        webTarget.path(java.text.MessageFormat.format("admin/addStageInProduct/{0}/{1}/{2}", new Object[]{pid, stagename, stagedescription})).request().post(null);
+    public void addStageInProduct(String pid, String stagename, String stagedescription,String Priority) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("admin/addStageInProduct/{0}/{1}/{2}/{3}", new Object[]{pid, stagename, stagedescription,Priority})).request().post(null);
     }
 
     public <T> T DisplayCompany(Class<T> responseType) throws ClientErrorException {
@@ -140,6 +140,8 @@ public class RestClient {
     }
 
     public <T> T getAllStagesByPid(Class<T> responseType, String pid) throws ClientErrorException {
+                System.out.println("hello client");
+
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("admin/getAllStagesByPid/{0}", new Object[]{pid}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);

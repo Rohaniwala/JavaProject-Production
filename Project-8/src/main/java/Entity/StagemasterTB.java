@@ -32,9 +32,11 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "StagemasterTB.findAll", query = "SELECT s FROM StagemasterTB s"),
     @NamedQuery(name = "StagemasterTB.findByStageID", query = "SELECT s FROM StagemasterTB s WHERE s.stageID = :stageID"),
-    @NamedQuery(name = "StagemasterTB.findByProductID", query = "SELECT s FROM StagemasterTB s WHERE s.productID = :productID"),
+    @NamedQuery(name = "StagemasterTB.findByProductID", query = "SELECT s FROM StagemasterTB s WHERE s.productID = :productID ORDER BY s.priority"),
     @NamedQuery(name = "StagemasterTB.findByStagename", query = "SELECT s FROM StagemasterTB s WHERE s.stagename = :stagename"),
-    @NamedQuery(name = "StagemasterTB.findByStagedescription", query = "SELECT s FROM StagemasterTB s WHERE s.stagedescription = :stagedescription")})
+    @NamedQuery(name = "StagemasterTB.findByStagedescription", query = "SELECT s FROM StagemasterTB s WHERE s.stagedescription = :stagedescription"),
+    @NamedQuery(name = "StagemasterTB.findByPriority", query = "SELECT s FROM StagemasterTB s WHERE s.priority = :priority")})
+
 public class StagemasterTB implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,6 +55,10 @@ public class StagemasterTB implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "Stagedescription")
     private String stagedescription;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "Priority")
+    private int priority;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "stageID")
     private Collection<OrderTrackingTB> orderTrackingTBCollection;
     @JoinColumn(name = "ProductID", referencedColumnName = "productID")
@@ -66,10 +72,11 @@ public class StagemasterTB implements Serializable {
         this.stageID = stageID;
     }
 
-    public StagemasterTB(Integer stageID, String stagename, String stagedescription) {
+    public StagemasterTB(Integer stageID, String stagename, String stagedescription, int priority) {
         this.stageID = stageID;
         this.stagename = stagename;
         this.stagedescription = stagedescription;
+        this.priority = priority;
     }
 
     public Integer getStageID() {
@@ -94,6 +101,14 @@ public class StagemasterTB implements Serializable {
 
     public void setStagedescription(String stagedescription) {
         this.stagedescription = stagedescription;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
     @JsonbTransient
@@ -138,5 +153,5 @@ public class StagemasterTB implements Serializable {
     public String toString() {
         return "Entity.StagemasterTB[ stageID=" + stageID + " ]";
     }
-    
+
 }

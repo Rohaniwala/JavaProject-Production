@@ -1,6 +1,7 @@
 package CDIBean;
 
 import Entity.CartTB;
+import Entity.ProductTB;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,5 +15,7 @@ import Entity.CartTB;
 public class TempData {
     public static Integer Loginuid = null;
     public static CartTB cartTB = null;
+        public static ProductTB prodtb = null;
+
     
 }

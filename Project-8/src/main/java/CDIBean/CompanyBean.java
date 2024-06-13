@@ -106,8 +106,11 @@ public class CompanyBean {
         this.st = st;
     }
 
-    public Collection<StagemasterTB> getCst(String pID) {
-        rs=rc.getAllStagesByPid(Response.class, pID);
+    public Collection<StagemasterTB> getCst() {
+//                System.out.println("hello cdi" + pID);
+
+//                TempData.prodtb=prod;
+        rs=rc.getAllStagesByPid(Response.class, TempData.prodtb.getProductID().toString());
         cst=rs.readEntity(gcst);
         return cst;
     }
@@ -363,9 +366,15 @@ public class CompanyBean {
     }
     
     public String gotoProdDetil(ProductTB prod){
+        TempData.prodtb=prod;
         this.prod=prod;
         return "ProductDetailPage.jsf";
     }
     
-    
+    public String addStageInProduct(){
+//        System.out.println("" + pid);
+         this.prod=TempData.prodtb;
+        rc.addStageInProduct(TempData.prodtb.getProductID().toString(), st.getStagename(), st.getStagedescription(), String.valueOf(st.getPriority()));
+        return "ProductDetailPage.jsf";
+    }
 }

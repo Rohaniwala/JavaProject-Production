@@ -244,13 +244,15 @@ public class JakartaEE8Resource {
     @Path("admin/getAllStagesByPid/{pid}")
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<StagemasterTB> getAllStagesByPid(@PathParam("pid") Integer pid){
+                System.out.println("hello rest" );
+
         return ab.getAllStagesByPid(pid);
     }
     
     @POST
-    @Path("admin/addStageInProduct/{pid}/{stagename}/{stagedescription}")
-    public void addStageInProduct (@PathParam("pid") Integer pid,@PathParam("stagename") String stagename,@PathParam("stagedescription") String stagedescription){
-        ab.addStageInProduct(pid, stagename, stagedescription);
+    @Path("admin/addStageInProduct/{pid}/{stagename}/{stagedescription}/{Priority}")
+    public void addStageInProduct (@PathParam("pid") Integer pid,@PathParam("stagename") String stagename,@PathParam("stagedescription") String stagedescription,@PathParam("Priority") Integer Priority){
+        ab.addStageInProduct(pid, stagename, stagedescription,Priority);
     }
     
     

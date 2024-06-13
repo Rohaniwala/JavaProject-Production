@@ -395,21 +395,34 @@
                                 <table width="100%">
                                     <thead>
                                         <tr>
+                                            <th>Priority</th>
                                             <th>Stage Name</th> 
                                             <th>Stage Description</th>
                                             <th>Delete Stage</th>
-                                            <!--<th>Action</th>-->
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <ui:repeat value="#{CompanyBean.getCst(CompanyBean.prod.productID)}" var="stage">
+                                        <tr>
+                                            <h:form>
+                                                <td><h:inputText value="#{CompanyBean.st.priority}"></h:inputText></td>
+                                                <td><h:inputText value="#{CompanyBean.st.stagename}"></h:inputText></td>
+                                                <td><h:inputText value="#{CompanyBean.st.stagedescription}"></h:inputText></td>
+                                                <td>
+
+                                                    <h:commandButton value="Add"  styleClass="btn btn-primary"  action="#{CompanyBean.addStageInProduct()}" />
+
+                                                </td>
+                                            </h:form>
+                                        </tr>
+                                        <ui:repeat value="#{CompanyBean.getCst()}" var="stage">
                                             <tr>
+                                                <td>#{stage.priority}</td>
                                                 <td>#{stage.stagename}</td>
                                                 <td>#{stage.stagedescription}</td>
-                                                <!--<td></td>-->
+
                                                 <td>
-                                                    <h:form>
-                                                        <h:commandButton value="Delete"  styleClass="btn btn-danger" />
+                                                    <h:form id="stdel">
+                                                        <p:commandButton value="Delete" style="border-radius: 50px; background-color: red" ajax="false" update="stdel" />
                                                     </h:form>
                                                 </td>
                                             </tr>

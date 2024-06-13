@@ -20,6 +20,7 @@ CDIBean/Config.class
 CDIBean/KeepRecord.class
 Entity/ImagemasterTB.class
 CDIBean/ClientBean$1.class
+CDIBean/CompanyBean$4.class
 CBean/ClientSessionBean.class
 RestClient/RestClient.class
 Entity/CartTB.class
