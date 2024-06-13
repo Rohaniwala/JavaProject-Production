@@ -233,4 +233,28 @@ public class AdminSessionBean {
       
       return em.createNamedQuery("ProductTB.findByProductCID", ProductTB.class).setParameter("companyID",relationTB.getCompanyID()).getResultList();
     }
+    
+    public Collection<StagemasterTB> getAllStagesByPid(Integer pID){
+        ProductTB productTB = em.find(ProductTB.class, pID);
+        return em.createNamedQuery("StagemasterTB.findByProductID").setParameter("productID", productTB).getResultList();
+    }
+    
+    public void addStageInProduct(Integer pid, String stagename,String stagedescription ){
+
+        ProductTB productTB = em.find(ProductTB.class, pid);
+        Collection<StagemasterTB> stagemasterTBs = productTB.getStagemasterTBCollection();
+        
+        StagemasterTB stagemasterTB = new StagemasterTB();
+   
+        stagemasterTB.setStagename(stagename);
+        stagemasterTB.setProductID(productTB);
+        stagemasterTB.setStagedescription(stagedescription);
+        
+        stagemasterTBs.add(stagemasterTB);
+        productTB.setStagemasterTBCollection(stagemasterTBs);
+        
+        
+        em.persist(stagemasterTB);
+        em.merge(productTB);
+    }
 }

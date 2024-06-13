@@ -9,6 +9,7 @@ import Entity.OrderTB;
 import Entity.OrderTrackingTB;
 import Entity.ProductCategoryTB;
 import Entity.ProductTB;
+import Entity.StagemasterTB;
 import Entity.UserTB;
 import java.util.Collection;
 import javax.ejb.EJB;
@@ -238,4 +239,19 @@ public class JakartaEE8Resource {
     public Collection<ProductTB> getProductByCid(){
         return ab.getProductByCid();
     }
+    
+    @GET
+    @Path("admin/getAllStagesByPid/{pid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<StagemasterTB> getAllStagesByPid(@PathParam("pid") Integer pid){
+        return ab.getAllStagesByPid(pid);
+    }
+    
+    @POST
+    @Path("admin/addStageInProduct/{pid}/{stagename}/{stagedescription}")
+    public void addStageInProduct (@PathParam("pid") Integer pid,@PathParam("stagename") String stagename,@PathParam("stagedescription") String stagedescription){
+        ab.addStageInProduct(pid, stagename, stagedescription);
+    }
+    
+    
 }

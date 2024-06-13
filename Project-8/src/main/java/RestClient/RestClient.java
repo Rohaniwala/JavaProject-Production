@@ -18,7 +18,7 @@ import javax.ws.rs.client.WebTarget;
  *        client.close();
  * </pre>
  *
- * @author rohan
+ * @author ravindrasinh
  */
 public class RestClient {
 
@@ -29,6 +29,10 @@ public class RestClient {
     public RestClient() {
         client = javax.ws.rs.client.ClientBuilder.newClient();
         webTarget = client.target(BASE_URI).path("rest");
+    }
+
+    public void addStageInProduct(String pid, String stagename, String stagedescription) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("admin/addStageInProduct/{0}/{1}/{2}", new Object[]{pid, stagename, stagedescription})).request().post(null);
     }
 
     public <T> T DisplayCompany(Class<T> responseType) throws ClientErrorException {
@@ -135,8 +139,13 @@ public class RestClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    public <T> T getAllStagesByPid(Class<T> responseType, String pid) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("admin/getAllStagesByPid/{0}", new Object[]{pid}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
     public void applyOrder(String CartID, String customizeImage, String customizeText) throws ClientErrorException {
-        System.out.println("Hello rest");
         webTarget.path(java.text.MessageFormat.format("applyOrder/{0}/{1}/{2}", new Object[]{CartID, customizeImage, customizeText})).request().post(null);
     }
 
