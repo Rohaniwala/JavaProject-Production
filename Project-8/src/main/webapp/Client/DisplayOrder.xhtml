@@ -1,11 +1,55 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
+        <link rel="stylesheet" href="../css/Cartcss.css"></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
-        Hello from Facelets
+
+        <div class="shopping-cart">
+            <!-- Title -->
+            <div class="title">
+                Your Orders
+            </div>
+
+            <!-- Use ui:repeat to loop over products -->
+            <ui:repeat value="#{ClientBean.cod}" var="order">
+                <div class="item">
+
+
+                    <div class="image">
+                        <img src="../images/#{order.productID.productimage}" height="70px" width="100px" class="img-responsive" alt="hiii"/>
+                    </div>
+
+                    <div class="description">
+                        <span>#{order.productID.productname}</span>
+
+                    </div>
+
+                    <div class="description">
+                        <span>#{order.orderdate}</span>
+
+                    </div>
+
+                    <div class="description">
+                        <span>#{order.orderID.orderStatus}</span>
+
+                    </div>
+
+                </div>
+
+            </ui:repeat>
+
+        </div>
+
+        <script src="js/main.js"></script>
     </h:body>
 </html>

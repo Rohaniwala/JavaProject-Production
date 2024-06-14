@@ -259,6 +259,7 @@ public class ClientSessionBean {
     }
 
     public Collection<OrderDetailsTB> getAllOrderOfUser(Integer uid) {
-        return em.createNamedQuery("OrderDetailsTB.findByUserID").setParameter("userID", uid).getResultList();
+        UserTB userTB=em.find(UserTB.class, uid);
+        return em.createNamedQuery("OrderDetailsTB.findByUserID").setParameter("userID", userTB).getResultList();
     }
 }

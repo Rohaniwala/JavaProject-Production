@@ -450,5 +450,9 @@ public class ClientBean {
 
     return "DisplayOrder.jsf";
   }
+  
+  public String displayMyOrders(){
+      return "DisplayOrder.jsf";
+  }
    
 }
