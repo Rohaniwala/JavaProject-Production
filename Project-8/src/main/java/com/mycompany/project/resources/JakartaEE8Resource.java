@@ -255,5 +255,10 @@ public class JakartaEE8Resource {
         ab.addStageInProduct(pid, stagename, stagedescription,Priority);
     }
     
+    @DELETE
+    @Path("admin/deleteStage/{Stageid}")
+    public void deleteStage(@PathParam("Stageid") Integer Stageid){
+        ab.deleteStage(Stageid);
+    }
     
 }

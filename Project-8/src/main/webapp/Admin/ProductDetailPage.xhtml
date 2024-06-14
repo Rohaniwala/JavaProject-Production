@@ -422,7 +422,7 @@
 
                                                 <td>
                                                     <h:form id="stdel">
-                                                        <p:commandButton value="Delete" style="border-radius: 50px; background-color: red" ajax="false" update="stdel" />
+                                                        <p:commandButton value="Delete" action="#{CompanyBean.deleteStage(stage.stageID)}" style="border-radius: 50px; background-color: red" ajax="false" update="stdel" />
                                                     </h:form>
                                                 </td>
                                             </tr>

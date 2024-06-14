@@ -262,4 +262,11 @@ public class AdminSessionBean {
         em.persist(stagemasterTB);
         em.merge(productTB);
     }
+    
+    public void deleteStage(Integer Stageid){
+            
+        StagemasterTB stb = em.find(StagemasterTB.class, Stageid);
+        if(!"Ordered".equals(stb.getStagename()))
+        em.remove(stb);
+    }
 }

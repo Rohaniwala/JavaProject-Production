@@ -377,4 +377,11 @@ public class CompanyBean {
         rc.addStageInProduct(TempData.prodtb.getProductID().toString(), st.getStagename(), st.getStagedescription(), String.valueOf(st.getPriority()));
         return "ProductDetailPage.jsf";
     }
+    
+    public String deleteStage(Integer Stageid){
+        this.prod=TempData.prodtb;
+       
+        rc.deleteStage(Stageid.toString());
+        return "ProductDetailPage.jsf";
+    }
 }
