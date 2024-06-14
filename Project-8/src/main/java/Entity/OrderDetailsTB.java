@@ -33,6 +33,9 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "OrderDetailsTB.findAll", query = "SELECT o FROM OrderDetailsTB o"),
     @NamedQuery(name = "OrderDetailsTB.findByOdetailsID", query = "SELECT o FROM OrderDetailsTB o WHERE o.odetailsID = :odetailsID"),
+//    @NamedQuery(name = "OrderDetailsTB.findByUserID", query = "SELECT o FROM OrderDetailsTB o WHERE o.odetailsID = :odetailsID"),
+    @NamedQuery(name = "OrderDetailsTB.findByUserID",
+            query = "SELECT od FROM OrderDetailsTB od WHERE od.orderID IN (SELECT o.orderID FROM OrderTB o WHERE o.userID = :userID)"),
     @NamedQuery(name = "OrderDetailsTB.findByOrderID", query = "SELECT o FROM OrderDetailsTB o WHERE o.orderID = :orderID"),
     @NamedQuery(name = "OrderDetailsTB.findByCustomizeImage", query = "SELECT o FROM OrderDetailsTB o WHERE o.customizeImage = :customizeImage"),
     @NamedQuery(name = "OrderDetailsTB.findByCustomizetext", query = "SELECT o FROM OrderDetailsTB o WHERE o.customizetext = :customizetext"),
@@ -133,7 +136,7 @@ public class OrderDetailsTB implements Serializable {
     public Collection<OrderTrackingTB> getOrderTrackingTBCollection() {
         return orderTrackingTBCollection;
     }
-    
+
     @JsonbTransient
     public void setOrderTrackingTBCollection(Collection<OrderTrackingTB> orderTrackingTBCollection) {
         this.orderTrackingTBCollection = orderTrackingTBCollection;
@@ -179,5 +182,5 @@ public class OrderDetailsTB implements Serializable {
     public String toString() {
         return "Entity.OrderDetailsTB[ odetailsID=" + odetailsID + " ]";
     }
-    
+
 }

@@ -50,6 +50,11 @@ public class ClientBean {
     
     CartTB carttb=new CartTB();
     
+    OrderDetailsTB orderDetailsTB = new OrderDetailsTB();
+    
+    Collection<OrderDetailsTB> cod;
+    GenericType<Collection<OrderDetailsTB>> gcod;
+    
     Collection<ProductTB> cprod;
     GenericType<Collection<ProductTB>> gprod;
     
@@ -97,6 +102,8 @@ public class ClientBean {
         ccart=new ArrayList<>();
         gcart=new GenericType<Collection<CartTB>>(){};
         
+        cod = new ArrayList<>();
+        gcod = new GenericType<Collection<OrderDetailsTB>>(){};
 
 //        ccomp = new ArrayList<>();
 //        gccomp = new GenericType<Collection<CompanyTB>>() {};
@@ -271,6 +278,28 @@ public class ClientBean {
         this.getimage = getimage;
     }
 
+    public Collection<OrderDetailsTB> getCod() {
+        rs = rc.getAllOrderOfUser(Response.class,TempData.Loginuid.toString());
+        cprodcat = rs.readEntity(gprodcat);
+        return cod;
+    }
+
+    public void setCod(Collection<OrderDetailsTB> cod) {
+        this.cod = cod;
+    }
+
+    public OrderDetailsTB getOrderDetailsTB() {
+        return orderDetailsTB;
+    }
+
+    public void setOrderDetailsTB(OrderDetailsTB orderDetailsTB) {
+        this.orderDetailsTB = orderDetailsTB;
+    }
+    
+    
+    
+    
+
     public void upload() throws FileNotFoundException, IOException {
         if (file != null) {
             String destinationdirctory = "/home/rohan/8TH_Sem_Project/Project-8/src/main/webapp/images/Product/";
@@ -418,7 +447,7 @@ public class ClientBean {
 
     rc.applyOrder(TempData.cartTB.getCartID().toString(), imageName, textForOrder);     
 //cb.applyOrder(TempData.cartTB.getCartID(), imageName, textForOrder);
-   
+
     return "DisplayOrder.jsf";
   }
    

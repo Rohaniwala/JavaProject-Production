@@ -55,6 +55,12 @@ public class RestClient {
         webTarget.path(java.text.MessageFormat.format("admin/updateCompany/{0}/{1}/{2}/{3}/{4}", new Object[]{CompanyID, cname, cdescription, cno, cemail})).request().post(null);
     }
 
+    public <T> T getAllOrderOfUser(Class<T> responseType, String userID) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getAllOrderOfUser/{0}", new Object[]{userID}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
     public <T> T displayProductCat(Class<T> responseType) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("admin/displayProductCat");
@@ -65,12 +71,6 @@ public class RestClient {
         webTarget.path(java.text.MessageFormat.format("deleteCart/{0}", new Object[]{CartID})).request().delete();
     }
 
-    public <T> T orderByUserId(Class<T> responseType, String UserID) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("orderByUserId/{0}", new Object[]{UserID}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
-    }
-
     public <T> T getProductByCat(Class<T> responseType, String catId) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("getProductByCat/{0}", new Object[]{catId}));
@@ -79,12 +79,6 @@ public class RestClient {
 
     public void addProdCat(String Pcatname, String Pcatdescription) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("admin/addProdCat/{0}/{1}", new Object[]{Pcatname, Pcatdescription})).request().post(null);
-    }
-
-    public <T> T orderDetailsByOrderID(Class<T> responseType, String OrderID) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("orderDetailsByOrderID/{0}", new Object[]{OrderID}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
     public <T> T displayProduct(Class<T> responseType) throws ClientErrorException {
@@ -133,6 +127,10 @@ public class RestClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    public void deleteStage(String Stageid) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("admin/deleteStage/{0}", new Object[]{Stageid})).request().delete();
+    }
+
     public <T> T totalRevenu(Class<T> responseType) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("admin/totalRevenu");
@@ -140,8 +138,6 @@ public class RestClient {
     }
 
     public <T> T getAllStagesByPid(Class<T> responseType, String pid) throws ClientErrorException {
-        System.out.println("hello client");
-
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("admin/getAllStagesByPid/{0}", new Object[]{pid}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
@@ -195,12 +191,8 @@ public class RestClient {
         webTarget.path(java.text.MessageFormat.format("admin/adminRegistration/{0}/{1}/{2}/{3}/{4}", new Object[]{Cname, Cemail, Password, CMobileno, Cdescription})).request().post(null);
     }
 
-    public void deleteStage(String Stageid) throws ClientErrorException {
-        webTarget.path(java.text.MessageFormat.format("admin/deleteStage/{0}", new Object[]{Stageid})).request().delete();
-    }
-
     public void close() {
         client.close();
     }
-
+    
 }

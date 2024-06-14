@@ -96,18 +96,25 @@ public class JakartaEE8Resource {
         sb.cancelorder(OrderID);
     }
     
-    @GET
-    @Path("orderByUserId/{UserID}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Collection<OrderTB> orderByUserId(@PathParam("UserID") Integer UserID) {
-        return sb.orderByUserId(UserID);
-    }
+//    @GET
+//    @Path("orderByUserId/{UserID}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Collection<OrderTB> orderByUserId(@PathParam("UserID") Integer UserID) {
+//        return sb.orderByUserId(UserID);
+//    }
+    
+//    @GET
+//    @Path("orderDetailsByOrderID/{OrderID}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Collection<OrderDetailsTB> orderDetailsByOrderID(@PathParam("OrderID") Integer OrderID) {
+//        return sb.orderDetailsByOrderID(OrderID);
+//    }
     
     @GET
-    @Path("orderDetailsByOrderID/{OrderID}")
+    @Path("getAllOrderOfUser/{userID}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Collection<OrderDetailsTB> orderDetailsByOrderID(@PathParam("OrderID") Integer OrderID) {
-        return sb.orderDetailsByOrderID(OrderID);
+    public Collection<OrderDetailsTB> getAllOrderOfUser(@PathParam("userID") Integer userID) {
+        return sb.getAllOrderOfUser(userID);
     }
     
     @GET
