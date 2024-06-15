@@ -18,7 +18,7 @@ import javax.ws.rs.client.WebTarget;
  *        client.close();
  * </pre>
  *
- * @author ravindrasinh
+ * @author rohan
  */
 public class RestClient {
 
@@ -129,6 +129,12 @@ public class RestClient {
 
     public void deleteStage(String Stageid) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("admin/deleteStage/{0}", new Object[]{Stageid})).request().delete();
+    }
+
+    public <T> T getStageByODId(Class<T> responseType, String odId) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getStageByODId/{0}", new Object[]{odId}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
     public <T> T totalRevenu(Class<T> responseType) throws ClientErrorException {

@@ -268,4 +268,12 @@ public class JakartaEE8Resource {
         ab.deleteStage(Stageid);
     }
     
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("getStageByODId/{odId}")
+    public Collection<StagemasterTB> getStageByODId(@PathParam("odId") Integer odId)
+    {
+        return sb.getStageByODId(odId);
+    }
+    
 }

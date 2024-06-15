@@ -12,6 +12,7 @@ import Entity.OrderDetailsTB;
 import Entity.OrderTB;
 import Entity.ProductCategoryTB;
 import Entity.ProductTB;
+import Entity.StagemasterTB;
 import Entity.UserTB;
 import RestClient.RestClient;
 import java.io.ByteArrayInputStream;
@@ -64,6 +65,10 @@ public class ClientBean {
     ProductCategoryTB prodcat = new ProductCategoryTB();
     Collection<ProductCategoryTB> cprodcat;
     GenericType<Collection<ProductCategoryTB>> gprodcat;
+    
+    StagemasterTB st =new StagemasterTB();
+    Collection<StagemasterTB> cst;
+    GenericType<Collection<StagemasterTB>> gcst;
 
 //    CompanyTB comp = new CompanyTB();
 //    Collection<CompanyTB> ccomp;
@@ -104,6 +109,9 @@ public class ClientBean {
         
         cod = new ArrayList<>();
         gcod = new GenericType<Collection<OrderDetailsTB>>(){};
+        
+         cst=new ArrayList<>();
+        gcst=new GenericType<Collection<StagemasterTB>>(){};
 
 //        ccomp = new ArrayList<>();
 //        gccomp = new GenericType<Collection<CompanyTB>>() {};
@@ -244,6 +252,27 @@ public class ClientBean {
         this.companyID = companyID;
     }
 
+    public StagemasterTB getSt() {
+        return st;
+    }
+
+    public void setSt(StagemasterTB st) {
+        this.st = st;
+    }
+
+    public Collection<StagemasterTB> getCst() {
+        System.out.println(TempData.orderDetailsTB.getOdetailsID());
+        rs = rc.getStageByODId(Response.class, TempData.orderDetailsTB.getOdetailsID().toString());
+        cst = rs.readEntity(gcst);
+        return cst;
+    }
+
+    public void setCst(Collection<StagemasterTB> cst) {
+        this.cst = cst;
+    }
+    
+    
+
 //    public CompanyTB getComp() {
 //        return comp;
 //    }
@@ -280,7 +309,7 @@ public class ClientBean {
 
     public Collection<OrderDetailsTB> getCod() {
         rs = rc.getAllOrderOfUser(Response.class,TempData.Loginuid.toString());
-        cprodcat = rs.readEntity(gprodcat);
+        cod = rs.readEntity(gcod);
         return cod;
     }
 
@@ -454,5 +483,13 @@ public class ClientBean {
   public String displayMyOrders(){
       return "DisplayOrder.jsf";
   }
+  
+  public String getdetails(OrderDetailsTB orderDetailsTB){
+      this.orderDetailsTB=orderDetailsTB;
+      TempData.orderDetailsTB = orderDetailsTB;
+      return "OrderDetails.jsf";
+  }
+  
+  
    
 }

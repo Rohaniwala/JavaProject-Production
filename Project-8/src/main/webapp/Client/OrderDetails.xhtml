@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Order Details</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+        <link rel="stylesheet" href="../css/orderdetails.css"/>
+
+       
+
+    </h:head>
+    <h:body>
+        <div class="container-fluid my-5 d-sm-flex justify-content-center">
+            <div class="card px-2">
+                <div class="card-header bg-white">
+                    <div class="row justify-content-between">
+                        <div class="col">
+                            <p class="text-muted">Order ID <span class="font-weight-bold text-dark">#{ClientBean.orderDetailsTB.orderID.orderID}</span></p> 
+                            <p class="text-muted">Placed On <span class="font-weight-bold text-dark">#{ClientBean.orderDetailsTB.orderdate}</span></p>
+                        </div>
+                        <div class="flex-col my-auto">
+                            <h6 class="ml-auto mr-3">
+                                <a href="#">View Details</a>
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="media flex-column flex-sm-row">
+                        <div class="media-body">
+                            <h5 class="bold">#{ClientBean.orderDetailsTB.productID.productname}</h5>
+                            <p class="text-muted">Qt: #{ClientBean.orderDetailsTB.quantity} Pair</p>
+                            <h4 class="mt-3 mb-4 bold">&#x20B9; #{ClientBean.orderDetailsTB.productID.productprice} <span class="small text-muted">via </span></h4>
+                            <p class="text-muted">Tracking Status on: <span class="Today">11:30pm, Today</span></p>
+                            <button type="button" class="btn btn-outline-primary d-flex">Reached Hub, Delhi</button>
+                        </div>
+                        <img class="align-self-center img-fluid" src="../images/#{ClientBean.orderDetailsTB.productID.productimage}" width="180" height="180"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <ul id="progressbar" class="horizontal">
+                            <ui:repeat value="#{ClientBean.cst}" var="stage" varStatus="status">
+                                <li class="step0 active" id="step#{status.index + 1}">#{stage.stagename}</li>
+                            </ui:repeat>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card-footer bg-white px-sm-3 pt-sm-4 px-0">
+                    <div class="row text-center">
+                        <div class="col my-auto border-line"><h5>Track</h5></div>
+                        <div class="col my-auto border-line"><h5>Cancel</h5></div>
+                        <div class="col my-auto border-line"><h5>Pre-pay</h5></div>
+                        <div class="col my-auto mx-0 px-0"><img class="img-fluid cursor-pointer" src="https://img.icons8.com/ios/50/000000/menu-2.png" width="30" height="30"/></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </h:body>
+</html>

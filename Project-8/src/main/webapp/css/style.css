@@ -106,7 +106,7 @@ a:focus{
 }
 
 header {
-    height: 140px;
+    height: 100px;
     background: #fff;
     padding: 56px 0;
     position: relative;
@@ -135,7 +135,7 @@ header {
 
 .navbar-brand > img {
     display: block;
-    height: 31px;
+    /*height: 31px;*/
     transition: .4s;
 }
 
@@ -161,7 +161,7 @@ header {
 }
 
 .navbar-nav {
-    margin: -15px 0px 0px;
+    margin: -25px 0px 0px;
 }
 
 .nav > li > a {
@@ -4888,7 +4888,7 @@ label.css-label {
     .container {
         width: 90%;
         max-width: 500px;
-        padding: 0 15px;
+        padding: -15px;
     }
 
     .tb_left {

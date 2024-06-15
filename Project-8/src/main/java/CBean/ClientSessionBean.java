@@ -16,6 +16,7 @@ import Entity.StagemasterTB;
 import Entity.UserTB;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collector;
 import javax.ejb.Stateless;
@@ -166,7 +167,6 @@ public class ClientSessionBean {
 //        OrderTB orderTB = em.find(OrderTB.class, OrderID);
 //        return em.createNamedQuery("OrderDetailsTB.findByOrderID").setParameter("orderID", orderTB).getResultList();
 //    }
-
     public Collection<OrderTrackingTB> orderTrackingByOrderdetailsID(Integer OrderdetailsID) {
         OrderDetailsTB orderDetailsTB = em.find(OrderDetailsTB.class, OrderdetailsID);
         return em.createNamedQuery("OrderTrackingTB.findByOrderdetailsID").setParameter("orderdetailsID", orderDetailsTB).getResultList();
@@ -259,7 +259,22 @@ public class ClientSessionBean {
     }
 
     public Collection<OrderDetailsTB> getAllOrderOfUser(Integer uid) {
-        UserTB userTB=em.find(UserTB.class, uid);
-        return em.createNamedQuery("OrderDetailsTB.findByUserID").setParameter("userID", userTB).getResultList();
+        UserTB userTB = em.find(UserTB.class, uid);
+        Collection<OrderTB> orderTBs = em.createNamedQuery("OrderTB.findByUserID").setParameter("userID", userTB).getResultList();
+        Collection<OrderDetailsTB> orderDetailsTBs = new ArrayList<>();
+
+        for (OrderTB orderTB : orderTBs) {
+            orderDetailsTBs.addAll(orderTB.getOrderDetailsTBCollection());
+        }
+
+        return orderDetailsTBs;
     }
+    
+    public Collection<StagemasterTB> getStageByODId(Integer odid)
+    {
+        OrderDetailsTB orderDetailsTB = em.find(OrderDetailsTB.class, odid);
+        Collection<StagemasterTB> stagemasterTBs = em.createQuery("SELECT sm FROM StagemasterTB sm JOIN OrderDetailsTB od ON sm.productID = od.productID WHERE od.orderID = :orderID").setParameter("orderID",orderDetailsTB.getOrderID()).getResultList();
+        return stagemasterTBs;
+    }
+    
 }
