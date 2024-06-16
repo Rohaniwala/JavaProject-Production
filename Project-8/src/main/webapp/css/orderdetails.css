@@ -1,8 +1,8 @@
-body {
+/*body {
     letter-spacing: 0.8px;
     background: linear-gradient(0deg , #fff , 50% , #74a0ff);
     background-repeat: no-repeat;    
-}
+}*/
 
 .container-fluid {
     margin-top: 80px !important;
@@ -20,7 +20,7 @@ p {
 
 a{
     text-decoration: none !important;
-    color: #651FFF !important;
+    /*color: #651FFF*/ 
 }
 
 .bold{
@@ -155,8 +155,10 @@ a{
 
 .card {
     background-color: #fff ;
-    box-shadow: 2px 4px 15px 0px rgb(0, 108, 170);
+    box-shadow: 4px 8px 20px 2px rgb(0, 108, 170);
     z-index: 0;
+    width: 700px;
+    height: 400px;
 }
 
 small{

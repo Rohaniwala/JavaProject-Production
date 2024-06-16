@@ -277,12 +277,6 @@ public class ClientSessionBean {
         return stagemasterTBs;
     }
     
-    public Collection<OrderTrackingTB> getTrackByOrderDetailID(Integer odID){
-        
-       OrderDetailsTB orderDetailsTB = em.find(OrderDetailsTB.class, odID);
-       Collection<OrderTrackingTB> orderTrackingTBs = em.createNamedQuery("OrderTrackingTB.findByOrderdetailsID",OrderTrackingTB.class).setParameter("orderdetailsID", orderDetailsTB).getResultList();      
-       
-       return orderTrackingTBs;
-    }
+    
     
 }

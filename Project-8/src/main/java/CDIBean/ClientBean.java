@@ -40,7 +40,7 @@ import org.primefaces.model.file.UploadedFile;
 @RequestScoped
 public class ClientBean {
     
-    ClientSessionBean cb = new ClientSessionBean();
+//    ClientSessionBean cb = new ClientSessionBean();
     
 
     RestClient rc;

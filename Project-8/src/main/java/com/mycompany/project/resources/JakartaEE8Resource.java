@@ -277,7 +277,7 @@ public class JakartaEE8Resource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getTrackByOrderDetailID/{odId}")
     public Collection<OrderTrackingTB> getTrackByOrderDetailID(@PathParam("odId") Integer odId) {
-        return sb.getTrackByOrderDetailID(odId);
+        return ab.getTrackByOrderDetailID(odId);
     }
 
     @POST
@@ -290,5 +290,11 @@ public class JakartaEE8Resource {
     @Path("admin/addWorkInTrack/{ordertrackID}/{endingDate}")
     public void addEndDateInTrack(@PathParam("ordertrackID") String ordertrackID, @PathParam("endingDate") String endingDate) {
         ab.addEndDateInTrack(ordertrackID, endingDate);
+    }
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("getAllOrderOfCompny")
+    public Collection<OrderDetailsTB> getAllOrderOfCompny() {
+        return ab.getAllOrderOfCompny();
     }
 }

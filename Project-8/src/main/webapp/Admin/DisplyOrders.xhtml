@@ -1,18 +1,25 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+         <link rel="stylesheet" href="../css/Cartcss.css"></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+        <!--<link rel="stylesheet" href="../css/Cartcss.css"></link>-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+
         <style>
-            body {
+             body {
                 margin: 0;
                 font-family: Arial, sans-serif;
             }
 
             .sidebar {
-                margin-top: -60px;
+                margin-top: -80px;
                 height: 100%;
                 width: 250px;
                 background-color: #2a3042;
@@ -287,13 +294,12 @@
                 padding: 20px;
             }
 
-
         </style>
     </h:head>
     <h:body>
-        <div class="sidebar">
+     <div class="sidebar">
             <div class="sidebar-header">
-                <img src="./images/products/logo.png" alt="alt" height="100px" width="250px"/>
+                <img src="../images/products/logo.png" alt="alt" height="100px" width="250px"/>
             </div>
             <ul class="menu">
                 <li class="menu-item">
@@ -305,7 +311,7 @@
                     <!--                <ul class="submenu">-->
                     <ul class="menu">
                         <li class="menu-item">
-                            <a href="Admin/ProductDisplayAdmin.jsf"><i class="fas fa-box"></i> Products</a>
+                            <a href="ProductDisplayAdmin.jsf"><i class="fas fa-box"></i> Products</a>
                         </li>
                     </ul>
                     <ul class="menu">
@@ -315,7 +321,7 @@
                     </ul>
                     <ul class="menu">
                         <li class="menu-item">
-                            <a href="Admin/DisplyOrders.jsf"><i class="fas fa-list"></i> Orders</a>
+                            <a href="#"><i class="fas fa-list"></i> Orders</a>
                         </li>
                     </ul>
                     <ul class="menu">
@@ -340,112 +346,57 @@
                     </ul>
                     <ul class="menu">
                         <li class="menu-item">
-                            <a href="Admin/AddProduct.jsf"><i class="fas fa-plus-circle"></i> Add Product</a>
+                            <a href="AddProduct.jsf"><i class="fas fa-plus-circle"></i> Add Product</a>
                         </li>
                     </ul>
                 </li>
             </ul>
         </div>
-        <div class="top-navbar">
-            <div class="menu-toggle">
-                <i class="fas fa-bars"></i>
+        
+        
+        
+        
+        <div class="shopping-cart">
+            <!-- Title -->
+            <div class="title">
+                Your Orders
             </div>
-<!--            <div class="search-bar">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search..." />
-            </div>-->
-            <div class="menu-items">
-                <div class="mega-menu">
-                    Mega Menu <i class="fas fa-caret-down"></i>
-                </div>
-                <div class="icon-items">
-                    <i class="fas fa-flag-usa"></i>
-                    <i class="fas fa-th"></i>
-                    <i class="fas fa-expand"></i>
-                    <i class="fas fa-bell">
-                        <span class="badge">3</span>
-                    </i>
-                    <div class="profile">
-                        <img src="profile.jpg" alt="Profile Image"/>
-                        <span>Jkhkjhn</span> <i class="fas fa-caret-down"></i>
-                    </div>
-                    <i class="fas fa-cog"></i>
-                </div>
-            </div>
-        </div>
-        <div class="main-content">
-            <h1>Dashboard</h1>
-            <div class="dashboard-cards">
-                <div class="card welcome-card">
-                    <h2>Welcome Back !</h2>
-                    <p>Fashoin Dashboard</p>
-                    <div class="profile-info">
-                        <img src="./images/products/male-call-center-agent-vector.jpg" alt="Profile Image"/>
-                        <div>
-                            <h3>#{CompanyBean.uname}</h3>       
-                        </div>
-                    </div>
-                    <button class="btn">View Profile</button>
-                </div>
-                <div class="card" >
-                    <h2 style="display: flex">Orders <img src="./images/products/order.png" height="50px" width="50px" style="margin-left: 180px; "/></h2>
-                    <p>#{CompanyBean.countofOrder()}</p>
 
-                </div>
-                <div class="card">
-                    <h2 style="display: flex">Revenue <img src="./images/products/cash.png" height="50px" width="50px" style="margin-left: 180px; "/></h2>
-                    <p>₹ #{CompanyBean.totalRevenu()}</p>
-                </div>
-                <div class="card">
-                    <h2 style="display: flex">Average Price <img src="./images/products/revenue.png" height="50px" width="50px" style="margin-left: 180px; "/></h2>
-                    <p>₹ #{CompanyBean.averegePprice()}</p>
-                </div>
-                
-            </div>
-            
-            
-            <div class="charts">
-                <div class="chart">
-                    <h2>Email Sent</h2>
-                    <div class="chart-container">
-                        <!-- Chart will be here -->
-                    </div>
-                </div>
-                <div class="chart">
-                    <h2>Social Source</h2>
-                    <div class="chart-container">
-                        <!-- Chart will be here -->
-                    </div>
-                </div>
-            </div>
-            <div class="activities">
-                <div class="activity">
-                    <h2>Activity</h2>
-                    <p>22 Nov - Responded to need “Volunteer Activities”</p>
-                    <p>17 Nov - Everyone realizes why a new common language would be desirable... <a href="#">Read more</a></p>
-                </div>
-                <div class="activity">
-                    <h2>Top Cities Selling Product</h2>
-                    <p>1,456 - San Francisco</p>
-                </div>
-            </div>
-        </div>
+            <!-- Use ui:repeat to loop over products -->
+            <ui:repeat value="#{CompanyBean.cod}" var="order">
+                <div class="item">
 
+
+                    <div class="image">
+                        <img src="../images/#{order.productID.productimage}" height="70px" width="100px" class="img-responsive" alt="hiii"/>
+                    </div>
+
+                    <div class="description">
+                        <span>#{order.productID.productname}</span>
+
+                    </div>
+
+                    <div class="description">
+                        <span>#{order.orderdate}</span>
+
+                    </div>
+
+                    <div class="description">
+                        <span>#{order.orderID.orderStatus}</span>
+
+                    </div>
+                    
+                    <div class="order-button" style="margin-top: 5px; margin-right: 5px;">
+                        <h:form>
+                            <h:commandButton  action="#{CompanyBean.getdetails(order)}" class="btn btn-primary" style="margin-top: 5px;" value="Order Details"></h:commandButton>
+                        </h:form>
+                    </div>
+                </div>
+
+            </ui:repeat>
+
+        </div>
 
         <script src="js/main.js"></script>
-
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
-        <script src="simplebar.min.js"></script>
-        <script src="assets/libs/node-waves/waves.min.js"></script>
-
-        <!-- apexcharts -->
-        <script src="js/apexcharts.min.js"></script>
-
-        <!-- dashboard init -->
-        <script src="js/dashboard.init.js"></script>
-
-        <!-- App js -->
-        <script src="js/app.js"></script>
     </h:body>
 </html>

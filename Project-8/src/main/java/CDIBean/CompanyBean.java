@@ -6,6 +6,8 @@ package CDIBean;
 
 import ClassPackage.KeyGenrator;
 import Entity.CompanyTB;
+import Entity.OrderDetailsTB;
+import Entity.OrderTrackingTB;
 import Entity.ProductCategoryTB;
 import Entity.ProductTB;
 import Entity.StagemasterTB;
@@ -39,6 +41,11 @@ public class CompanyBean {
     RestClient rc;
 
     UserTB utb = new UserTB();
+    
+     OrderDetailsTB orderDetailsTB = new OrderDetailsTB();
+    
+    Collection<OrderDetailsTB> cod;
+    GenericType<Collection<OrderDetailsTB>> gcod;
 
     ProductTB prod = new ProductTB();
     Collection<ProductTB> cprod;
@@ -55,6 +62,13 @@ public class CompanyBean {
     StagemasterTB st =new StagemasterTB();
     Collection<StagemasterTB> cst;
     GenericType<Collection<StagemasterTB>> gcst;
+    
+     OrderTrackingTB orderTrackingTB = new OrderTrackingTB();
+     
+    
+    Collection<OrderTrackingTB> cotbs;
+    GenericType<Collection<OrderTrackingTB>> gcotbs;
+
 
     
     String pcatID;
@@ -94,9 +108,37 @@ public class CompanyBean {
         cst=new ArrayList<>();
         gcst=new GenericType<Collection<StagemasterTB>>(){};
 
+        cod = new ArrayList<>();
+        gcod = new GenericType<Collection<OrderDetailsTB>>(){};
+        
+          cotbs = new ArrayList<>();
+        gcotbs = new GenericType<Collection<OrderTrackingTB>>(){};
 //        catserach=0;
 //        temp = 0;
     }
+
+    public OrderTrackingTB getOrderTrackingTB() {
+        return orderTrackingTB;
+    }
+
+    public void setOrderTrackingTB(OrderTrackingTB orderTrackingTB) {
+        this.orderTrackingTB = orderTrackingTB;
+    }
+
+    public Collection<OrderTrackingTB> getCotbs(Integer odid) {
+        System.out.println(odid);
+        rs=rc.getTrackByOrderDetailID(Response.class, TempData.orderDetailsTB.getOdetailsID().toString());
+        cotbs=rs.readEntity(gcotbs);
+        return cotbs;
+    }
+
+    public void setCotbs(Collection<OrderTrackingTB> cotbs) {
+        this.cotbs = cotbs;
+    }
+
+   
+    
+    
 
     public StagemasterTB getSt() {
         return st;
@@ -159,6 +201,26 @@ public class CompanyBean {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public OrderDetailsTB getOrderDetailsTB() {
+        return orderDetailsTB;
+    }
+
+    public void setOrderDetailsTB(OrderDetailsTB orderDetailsTB) {
+        this.orderDetailsTB = orderDetailsTB;
+    }
+
+    public Collection<OrderDetailsTB> getCod() {
+        rs=rc.getAllOrderOfCompny(Response.class);
+        cod=rs.readEntity(gcod);
+        return cod;
+    }
+
+    public void setCod(Collection<OrderDetailsTB> cod) {
+        this.cod = cod;
+    }
+    
+    
 
     public Collection<ProductTB> getCprod() {
         System.out.println(catserach);
@@ -276,7 +338,7 @@ public class CompanyBean {
                 out.write(buffer, 0, byteread);
             }
 
-//            getimage=filename;
+//            getimage=filename; 
         }
     }
 
@@ -384,4 +446,13 @@ public class CompanyBean {
         rc.deleteStage(Stageid.toString());
         return "ProductDetailPage.jsf";
     }
+    
+      public String getdetails(OrderDetailsTB orderDetailsTB){
+      this.orderDetailsTB=orderDetailsTB;
+      TempData.orderDetailsTB = orderDetailsTB;
+      return "OrderDetails.jsf";
+  }
+  
+      
+    
 }

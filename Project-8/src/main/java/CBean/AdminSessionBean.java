@@ -301,4 +301,29 @@ public class AdminSessionBean {
 
         em.merge(orderTrackingTB);
     }
+    public Collection<OrderDetailsTB> getAllOrderOfCompny() {
+        UserTB utb = em.find(UserTB.class, TempData.Loginuid);
+
+        // Get the relation of the user to the company
+        RelationTB relationTB = em.createNamedQuery("RelationTB.findByUid", RelationTB.class)
+                .setParameter("userID", utb)
+                .getSingleResult();
+
+        // Use subquery to get all orders associated with the company's products
+        Collection<OrderDetailsTB> orderDetails = em.createQuery(
+                "SELECT od FROM OrderDetailsTB od WHERE od.productID.productID IN ("
+                + "SELECT p.productID FROM ProductTB p WHERE p.companyID = :companyID)", OrderDetailsTB.class)
+                .setParameter("companyID", relationTB.getCompanyID())
+                .getResultList();
+
+        return orderDetails;
+
+    }
+    public Collection<OrderTrackingTB> getTrackByOrderDetailID(Integer odID){
+        
+       OrderDetailsTB orderDetailsTB = em.find(OrderDetailsTB.class, odID);
+       Collection<OrderTrackingTB> orderTrackingTBs = em.createNamedQuery("OrderTrackingTB.findByOrderdetailsID",OrderTrackingTB.class).setParameter("orderdetailsID", orderDetailsTB).getResultList();      
+       
+       return orderTrackingTBs;
+    }
 }
