@@ -25,6 +25,7 @@ CDIBean/CompanyBean$4.class
 CBean/ClientSessionBean.class
 RestClient/RestClient.class
 Entity/CartTB.class
+CDIBean/ClientBean$5.class
 CBean/AdminSessionBean.class
 Entity/BillingTB.class
 Entity/ProductTB.class
