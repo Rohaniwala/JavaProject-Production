@@ -30,100 +30,97 @@ import javax.ws.rs.core.Response;
  */
 @Path("rest")
 public class JakartaEE8Resource {
-    
+
     @EJB
     ClientSessionBean sb;
     @EJB
     AdminSessionBean ab;
-    
+
     @GET
     @Path("displayProduct")
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<ProductTB> displayProduct() {
         return sb.displayProduct();
     }
-    
+
     @GET
     @Path("getProductByCat/{catId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<ProductTB> getProductByCat(@PathParam("catId") Integer catId) {
         return sb.getProductByCat(catId);
     }
-    
+
     @GET
     @Path("getProductByname/{pName}")
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<ProductTB> getProductByname(@PathParam("pName") String pName) {
         return sb.getProductByName(pName);
     }
-    
+
     @POST
     @Path("addToCart/{UserID}/{ProductID}/{Quantity}")
     public void addToCart(@PathParam("UserID") Integer UserID, @PathParam("ProductID") Integer ProductID, @PathParam("Quantity") Integer Quantity) {
         sb.addToCart(UserID, ProductID, Quantity);
     }
-    
+
     @POST
     @Path("updateCart/{CartID}/{Quantity}")
-    public void updateCart(@PathParam("CartID") Integer CartID,@PathParam("Quantity") Integer Quantity) {
+    public void updateCart(@PathParam("CartID") Integer CartID, @PathParam("Quantity") Integer Quantity) {
         sb.updateCart(CartID, Quantity);
     }
-    
+
     @DELETE
     @Path("deleteCart/{CartID}")
     public void deleteCart(@PathParam("CartID") Integer CartID) {
         sb.deleteCart(CartID);
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("displayUserCart/{UserID}")
     public Collection<CartTB> displayUserCart(@PathParam("UserID") Integer UserID) {
         return sb.displayUserCart(UserID);
     }
-    
+
     @POST
     @Path("applyOrder/{CartID}/{customizeImage}/{customizeText}")
-    public void applyOrder(@PathParam("CartID") Integer CartID,@PathParam("customizeImage") String customizeImage,@PathParam("customizeText") String customizeText){
+    public void applyOrder(@PathParam("CartID") Integer CartID, @PathParam("customizeImage") String customizeImage, @PathParam("customizeText") String customizeText) {
         System.out.println("Hello resource");
         sb.applyOrder(CartID, customizeImage, customizeText);
     }
 
-    
     @DELETE
     @Path("cancelorder/{OrderID}")
     public void cancelorder(@PathParam("OrderID") Integer OrderID) {
         sb.cancelorder(OrderID);
     }
-    
+
 //    @GET
 //    @Path("orderByUserId/{UserID}")
 //    @Produces(MediaType.APPLICATION_JSON)
 //    public Collection<OrderTB> orderByUserId(@PathParam("UserID") Integer UserID) {
 //        return sb.orderByUserId(UserID);
 //    }
-    
 //    @GET
 //    @Path("orderDetailsByOrderID/{OrderID}")
 //    @Produces(MediaType.APPLICATION_JSON)
 //    public Collection<OrderDetailsTB> orderDetailsByOrderID(@PathParam("OrderID") Integer OrderID) {
 //        return sb.orderDetailsByOrderID(OrderID);
 //    }
-    
     @GET
     @Path("getAllOrderOfUser/{userID}")
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<OrderDetailsTB> getAllOrderOfUser(@PathParam("userID") Integer userID) {
         return sb.getAllOrderOfUser(userID);
     }
-    
+
     @GET
     @Path("orderTrackingByOrderdetailsID/{OrderdetailsID}")
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<OrderTrackingTB> orderTrackingByOrderdetailsID(@PathParam("OrderdetailsID") Integer OrderdetailsID) {
         return sb.orderTrackingByOrderdetailsID(OrderdetailsID);
     }
-    
+
     @POST
     @Path("genrateBill/{OrderID}")
     public void genrateBill(@PathParam("OrderID") Integer OrderID) {
@@ -136,144 +133,162 @@ public class JakartaEE8Resource {
     public void addProdCat(@PathParam("Pcatname") String Pcatname, @PathParam("Pcatdescription") String Pcatdescription) {
         ab.addProdCat(Pcatname, Pcatdescription);
     }
-    
+
     @DELETE
     @Path("admin/deleteproduct/{PcatID}")
     public void deleteproductcat(@PathParam("PcatID") Integer PcatID) {
         ab.deleteproductcat(PcatID);
     }
-    
+
     @POST
     @Path("admin/updateCat/{PcatID}/{Pcatname}/{Pcatdescription}")
     public void updateCat(@PathParam("PcatID") Integer PcatID, @PathParam("Pcatname") String Pcatname, @PathParam("Pcatdescription") String Pcatdescription) {
         ab.updateCat(PcatID, Pcatname, Pcatdescription);
     }
-    
+
     @GET
     @Path("admin/displayProductCat")
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<ProductCategoryTB> displayProductCat() {
         return ab.displayProductCat();
     }
-    
+
     @GET
     @Path("admin/displayCompanyByComID/{CompanyID}")
     @Produces(MediaType.APPLICATION_JSON)
     public CompanyTB displayCompanyByComID(@PathParam("CompanyID") Integer CompanyID) {
         return ab.displayCompanyByComID(CompanyID);
     }
-    
+
     @POST
     @Path("admin/addCompany/{cname}/{cdescription}/{cno}/{cemail}")
     public void addCompany(@PathParam("cname") String cname, @PathParam("cdescription") String cdescription, @PathParam("cno") String cno, @PathParam("cemail") String cemail) {
         ab.addCompany(cname, cdescription, cno, cemail);
     }
-    
+
     @POST
     @Path("admin/updateCompany/{CompanyID}/{cname}/{cdescription}/{cno}/{cemail}")
     public void updateCompany(@PathParam("CompanyID") Integer CompanyID, @PathParam("cname") String cname, @PathParam("cdescription") String cdescription, @PathParam("cno") String cno, @PathParam("cemail") String cemail) {
         ab.updateCompany(CompanyID, cname, cdescription, cno, cemail);
     }
-    
+
     @DELETE
     @Path("admin/deleteCompnay/{CompanyID}")
     public void deleteCompnay(@PathParam("CompanyID") Integer CompanyID) {
         ab.deleteCompnay(CompanyID);
     }
-    
+
     @POST
     @Path("admin/addProductdata/{pname}/{pcatID}/{Prodescription}/{productprice}/{productimage}/{isimageinclude}/{istextinclude}/{companyID}/{quantity}")
     public void addProductdata(@PathParam("pname") String pname, @PathParam("pcatID") Integer pcatID, @PathParam("Prodescription") String Prodescription, @PathParam("productprice") float productprice, @PathParam("productimage") String productimage, @PathParam("isimageinclude") boolean isimageinclude, @PathParam("istextinclude") boolean istextinclude, @PathParam("companyID") Integer companyID, @PathParam("quantity") Integer quantity) {
         ab.addProductdata(pname, pcatID, Prodescription, productprice, productimage, isimageinclude, istextinclude, companyID, quantity);
     }
-    
+
     @GET
     @Path("admin/DisplayCompany")
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<CompanyTB> DisplayCompany() {
         return ab.DisplayCompany();
     }
-    
+
     @DELETE
     @Path("admin/deleteProduct/{productID}")
     public void deleteProduct(@PathParam("productID") Integer productID) {
         ab.deleteProduct(productID);
     }
-    
+
     @POST
 //    @Produces(MediaType.APPLICATION_JSON)
     @Path("admin/updateProductdata/{productID}/{pname}/{pcatID}/{Prodescription}/{productprice}/{productimage}/{isimageinclude}/{istextinclude}/{companyID}/{quantity}")
     public void updateProductdata(@PathParam("productID") Integer productID, @PathParam("pname") String pname, @PathParam("pcatID") Integer pcatID, @PathParam("Prodescription") String Prodescription, @PathParam("productprice") float productprice, @PathParam("productimage") String productimage, @PathParam("isimageinclude") boolean isimageinclude, @PathParam("istextinclude") boolean istextinclude, @PathParam("companyID") Integer companyID, @PathParam("quantity") Integer quantity) {
         ab.updateProductdata(productID, pname, pcatID, Prodescription, productprice, productimage, isimageinclude, istextinclude, companyID, quantity);
     }
-    
+
     @POST
     @Path("userRegistration/{Username}/{Useremail}/{Password}/{Gender}/{DOB}/{Address}/{Mobileno}")
-    public void userRegistration(@PathParam("Username") String Username, @PathParam("Useremail") String Useremail, @PathParam("Password") String Password,  @PathParam("Gender") String Gender, @PathParam("DOB") String DOB, @PathParam("Address") String Address, @PathParam("Mobileno") String Mobileno) {
+    public void userRegistration(@PathParam("Username") String Username, @PathParam("Useremail") String Useremail, @PathParam("Password") String Password, @PathParam("Gender") String Gender, @PathParam("DOB") String DOB, @PathParam("Address") String Address, @PathParam("Mobileno") String Mobileno) {
         sb.userRegistration(Username, Useremail, Password, Gender, DOB, Address, Mobileno);
     }
-    
+
     @GET
     @Path("admin/countofOrder")
     @Produces(MediaType.APPLICATION_JSON)
-    public long countofOrder(){
+    public long countofOrder() {
         return ab.countofOrder();
     }
+
     @GET
     @Path("admin/totalRevenu")
     @Produces(MediaType.APPLICATION_JSON)
-    public double totalRevenu(){
+    public double totalRevenu() {
         return ab.totalRevenu();
     }
-    
+
     @GET
     @Path("admin/AveregePprice")
     @Produces(MediaType.APPLICATION_JSON)
-    public double AveregePprice(){
+    public double AveregePprice() {
         return ab.AveregePprice();
     }
-    
+
     @POST
     @Path("admin/adminRegistration/{Cname}/{Cemail}/{Password}/{CMobileno}/{Cdescription}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void adminRegistration(@PathParam("Cname") String Cname, @PathParam("Cemail") String Cemail, @PathParam("Password") String Password, @PathParam("CMobileno") String CMobileno,@PathParam("Cdescription") String Cdescription) {
+    public void adminRegistration(@PathParam("Cname") String Cname, @PathParam("Cemail") String Cemail, @PathParam("Password") String Password, @PathParam("CMobileno") String CMobileno, @PathParam("Cdescription") String Cdescription) {
         ab.adminRegistration(Cname, Cemail, Password, CMobileno, Cdescription);
     }
-    
+
     @GET
     @Path("admin/getProductByCid")
     @Produces(MediaType.APPLICATION_JSON)
-    public Collection<ProductTB> getProductByCid(){
+    public Collection<ProductTB> getProductByCid() {
         return ab.getProductByCid();
     }
-    
+
     @GET
     @Path("admin/getAllStagesByPid/{pid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Collection<StagemasterTB> getAllStagesByPid(@PathParam("pid") Integer pid){
-                System.out.println("hello rest" );
+    public Collection<StagemasterTB> getAllStagesByPid(@PathParam("pid") Integer pid) {
+        System.out.println("hello rest");
 
         return ab.getAllStagesByPid(pid);
     }
-    
+
     @POST
     @Path("admin/addStageInProduct/{pid}/{stagename}/{stagedescription}/{Priority}")
-    public void addStageInProduct (@PathParam("pid") Integer pid,@PathParam("stagename") String stagename,@PathParam("stagedescription") String stagedescription,@PathParam("Priority") Integer Priority){
-        ab.addStageInProduct(pid, stagename, stagedescription,Priority);
+    public void addStageInProduct(@PathParam("pid") Integer pid, @PathParam("stagename") String stagename, @PathParam("stagedescription") String stagedescription, @PathParam("Priority") Integer Priority) {
+        ab.addStageInProduct(pid, stagename, stagedescription, Priority);
     }
-    
+
     @DELETE
     @Path("admin/deleteStage/{Stageid}")
-    public void deleteStage(@PathParam("Stageid") Integer Stageid){
+    public void deleteStage(@PathParam("Stageid") Integer Stageid) {
         ab.deleteStage(Stageid);
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getStageByODId/{odId}")
-    public Collection<StagemasterTB> getStageByODId(@PathParam("odId") Integer odId)
-    {
-        return sb.getStageByODId(odId);
+    public Collection<StagemasterTB> getStageByODId(@PathParam("odId") Integer odId) {
+        return sb.getStageByOrderDetailID(odId);
     }
-    
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("getTrackByOrderDetailID/{odId}")
+    public Collection<OrderTrackingTB> getTrackByOrderDetailID(@PathParam("odId") Integer odId) {
+        return sb.getTrackByOrderDetailID(odId);
+    }
+
+    @POST
+    @Path("admin/addWorkInTrack/{description}/{orderdetailsID}/{place}/{stageID}/{startingDate}")
+    public void addWorkInTrack(@PathParam("description") String description, @PathParam("orderdetailsID") String orderdetailsID, @PathParam("place") String place, @PathParam("stageID") String stageID, @PathParam("startingDate") String startingDate) {
+        ab.addWorkInTrack(description, orderdetailsID, place, stageID, startingDate);
+    }
+
+    @POST
+    @Path("admin/addWorkInTrack/{ordertrackID}/{endingDate}")
+    public void addEndDateInTrack(@PathParam("ordertrackID") String ordertrackID, @PathParam("endingDate") String endingDate) {
+        ab.addEndDateInTrack(ordertrackID, endingDate);
+    }
 }

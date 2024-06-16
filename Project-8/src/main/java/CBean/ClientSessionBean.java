@@ -270,11 +270,19 @@ public class ClientSessionBean {
         return orderDetailsTBs;
     }
     
-    public Collection<StagemasterTB> getStageByODId(Integer odid)
+    public Collection<StagemasterTB> getStageByOrderDetailID(Integer odid)
     {
         OrderDetailsTB orderDetailsTB = em.find(OrderDetailsTB.class, odid);
         Collection<StagemasterTB> stagemasterTBs = em.createQuery("SELECT sm FROM StagemasterTB sm JOIN OrderDetailsTB od ON sm.productID = od.productID WHERE od.orderID = :orderID").setParameter("orderID",orderDetailsTB.getOrderID()).getResultList();
         return stagemasterTBs;
+    }
+    
+    public Collection<OrderTrackingTB> getTrackByOrderDetailID(Integer odID){
+        
+       OrderDetailsTB orderDetailsTB = em.find(OrderDetailsTB.class, odID);
+       Collection<OrderTrackingTB> orderTrackingTBs = em.createNamedQuery("OrderTrackingTB.findByOrderdetailsID",OrderTrackingTB.class).setParameter("orderdetailsID", orderDetailsTB).getResultList();      
+       
+       return orderTrackingTBs;
     }
     
 }
