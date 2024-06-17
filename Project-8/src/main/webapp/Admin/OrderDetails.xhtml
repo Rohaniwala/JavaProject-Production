@@ -448,18 +448,18 @@
                 </div>
             </div>
         </div>
-        
-        
-        
+
+
+
         <!--Stage tracking data-->
-      
-            <div style="margin-left: 30%;" >
-<div style="width: 1040px; margin-top: -50px">
+
+        <div style="margin-left: 30%;"  >
+            <div style="width: 1040px;  margin-top: -50px;">
                 <div class="container-fluid my-5 d-sm-flex justify-content-center">
-                    <div class="card px-2">
+                    <div class="card px-2" style="height: max-content">
                         <div class="card-header bg-white">
                             <div class="row justify-content-between">
-                                
+
                                 <div class="flex-col my-auto">
                                     <h6 class="ml-auto mr-3">
                                         <h5>Order Tracking</h5>
@@ -467,7 +467,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body" >
+                        <div class="card-body">
                             <h:panelGroup>
                                 <table width="100%">
                                     <thead>
@@ -481,17 +481,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <h:form>
-                                                <td><h:inputText value="{CompanyBean.st.priority}"></h:inputText></td>
-                                                <td><h:inputText value="{CompanyBean.st.stagename}"></h:inputText></td>
-                                                <td><h:inputText value="{CompanyBean.st.stagedescription}"></h:inputText></td>
-                                                <td><h:inputText value="{CompanyBean.st.stagedescription}"></h:inputText></td>
-                                                <td>
 
-                                                    <h:commandButton value="Add" style="margin-top: 0px"  styleClass="btn btn-primary"  action="{CompanyBean.addStageInProduct()}" />
-
-                                                </td>
-                                            </h:form>
                                         </tr>
                                         <ui:repeat value="#{CompanyBean.getCotbs(7485)}" var="odtb">
                                             <tr>
@@ -500,12 +490,35 @@
                                                 <td>#{odtb.startingDate}</td>
                                                 <td>#{odtb.endingDate}</td>
 
-                                                <td>
-                                                    <h:form id="stdel">
-                                                        <p:commandButton value="Delete" action="{CompanyBean.deleteStage(stage.stageID)}" style="border-radius: 50px; background-color: red" ajax="false" update="stdel" />
-                                                    </h:form>
-                                                </td>
                                             </tr>
+                                        </ui:repeat>
+                                        <tr>
+                                            <td>#{!CompanyBean.isThereEnddate}</td>     
+                                            <td>#{!CompanyBean.isNotAddNewTrack}</td>
+                                            <td colspan="3">
+
+                                                <h:panelGroup rendered="#{!CompanyBean.isThereEnddate}">
+                                                    <h:form id="complitWork">
+                                                        <p:commandButton ajax="false" update="complitWork" value="work is complit" style="margin-top: 0px"  styleClass="btn btn-primary"  action="#{CompanyBean.complitWork()}" />
+                                                    </h:form>
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{!CompanyBean.isNotAddNewTrack}">
+                                                    <h:form id="startWork">
+                                                        <p:commandButton ajax="false" update="startWork" value="start next work" style="margin-top: 0px"  styleClass="btn btn-primary"  action="#{CompanyBean.addStartWork()}" />
+                                                    </h:form>
+                                                </h:panelGroup>
+                                            </td>
+                                        </tr>
+                                        <ui:repeat value="#{CompanyBean.getCst()}" var="stage">
+                                            <h:panelGroup rendered="#{stage.priority > CompanyBean.maxPriorityOfTracking}">
+                                                <tr>
+                                                    <td>#{stage.stagename}</td>
+                                                    <td>#{stage.stagedescription}</td>
+                                                    <td>#{stage.priority}</td>
+                                                    <td>#{CompanyBean.maxPriorityOfTracking}</td>
+                                                    <td></td>
+                                                </tr>
+                                            </h:panelGroup>
                                         </ui:repeat>
                                     </tbody>
                                 </table>
@@ -514,18 +527,18 @@
 
 
 
-                        <div class="card-footer bg-white ">
-                            <div class="row text-center" style="justify-content: right " >
-                                <h:form>
-                                    <div class="col my-auto"><h:commandButton value="Back" action="DisplayOrders.jsf" class="btn btn-primary"></h:commandButton></div>
-                                </h:form>
-
-                            </div>
-                        </div>
+                        <!--                        <div class="card-footer bg-white ">
+                                                    <div class="row text-center" style="justify-content: right " >
+                                                        <h:form>
+                                                            <div class="col my-auto"><h:commandButton value="Back" action="DisplayOrders.jsf" class="btn btn-primary"></h:commandButton></div>
+                                                        </h:form>
+                        
+                                                    </div>
+                                                </div>-->
                     </div>
                 </div>
             </div>
         </div>
-            
+
     </h:body>
 </html>

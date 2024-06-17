@@ -18,7 +18,7 @@ import javax.ws.rs.client.WebTarget;
  *        client.close();
  * </pre>
  *
- * @author rohan
+ * @author ravindrasinh
  */
 public class RestClient {
 
@@ -41,8 +41,8 @@ public class RestClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
-    public void addWorkInTrack(String description, String orderdetailsID, String place, String stageID, String startingDate) throws ClientErrorException {
-        webTarget.path(java.text.MessageFormat.format("admin/addWorkInTrack/{0}/{1}/{2}/{3}/{4}", new Object[]{description, orderdetailsID, place, stageID, startingDate})).request().post(null);
+    public void addWorkInTrack(String orderdetailsID, String place, String stageID) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("admin/addWorkInTrack/{0}/{1}/{2}", new Object[]{orderdetailsID, place, stageID})).request().post(null);
     }
 
     public <T> T countofOrder(Class<T> responseType) throws ClientErrorException {
@@ -117,8 +117,8 @@ public class RestClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
-    public void addEndDateInTrack(String ordertrackID, String endingDate) throws ClientErrorException {
-        webTarget.path(java.text.MessageFormat.format("admin/addWorkInTrack/{0}/{1}", new Object[]{ordertrackID, endingDate})).request().post(null);
+    public void addEndDateInTrack(String ordertrackID) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("admin/addEndDateInTrack/{0}", new Object[]{ordertrackID})).request().post(null);
     }
 
     public void genrateBill(String OrderID) throws ClientErrorException {

@@ -281,15 +281,15 @@ public class JakartaEE8Resource {
     }
 
     @POST
-    @Path("admin/addWorkInTrack/{description}/{orderdetailsID}/{place}/{stageID}/{startingDate}")
-    public void addWorkInTrack(@PathParam("description") String description, @PathParam("orderdetailsID") String orderdetailsID, @PathParam("place") String place, @PathParam("stageID") String stageID, @PathParam("startingDate") String startingDate) {
-        ab.addWorkInTrack(description, orderdetailsID, place, stageID, startingDate);
+    @Path("admin/addWorkInTrack/{orderdetailsID}/{place}/{stageID}")
+    public void addWorkInTrack(@PathParam("orderdetailsID") Integer orderdetailsID, @PathParam("place") String place, @PathParam("stageID") Integer stageID) {
+        ab.addWorkInTrack( orderdetailsID, place, stageID);
     }
 
     @POST
-    @Path("admin/addWorkInTrack/{ordertrackID}/{endingDate}")
-    public void addEndDateInTrack(@PathParam("ordertrackID") String ordertrackID, @PathParam("endingDate") String endingDate) {
-        ab.addEndDateInTrack(ordertrackID, endingDate);
+    @Path("admin/addEndDateInTrack/{ordertrackID}")
+    public void addEndDateInTrack(@PathParam("ordertrackID") Integer ordertrackID) {
+        ab.addEndDateInTrack(ordertrackID);
     }
     @GET
     @Produces(MediaType.APPLICATION_JSON)

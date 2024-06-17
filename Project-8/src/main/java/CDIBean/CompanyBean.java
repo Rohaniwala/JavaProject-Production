@@ -13,17 +13,16 @@ import Entity.ProductTB;
 import Entity.StagemasterTB;
 import Entity.UserTB;
 import RestClient.RestClient;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.core.GenericType;
@@ -41,9 +40,9 @@ public class CompanyBean {
     RestClient rc;
 
     UserTB utb = new UserTB();
-    
-     OrderDetailsTB orderDetailsTB = new OrderDetailsTB();
-    
+
+    OrderDetailsTB orderDetailsTB = new OrderDetailsTB();
+
     Collection<OrderDetailsTB> cod;
     GenericType<Collection<OrderDetailsTB>> gcod;
 
@@ -59,24 +58,27 @@ public class CompanyBean {
     Collection<CompanyTB> ccomp;
     GenericType<Collection<CompanyTB>> gccomp;
 
-    StagemasterTB st =new StagemasterTB();
+    StagemasterTB st = new StagemasterTB();
     Collection<StagemasterTB> cst;
     GenericType<Collection<StagemasterTB>> gcst;
-    
-     OrderTrackingTB orderTrackingTB = new OrderTrackingTB();
-     
-    
+
+    OrderTrackingTB orderTrackingTB = new OrderTrackingTB();
+
     Collection<OrderTrackingTB> cotbs;
     GenericType<Collection<OrderTrackingTB>> gcotbs;
 
-
-    
     String pcatID;
     String companyID;
 
     Integer catserach;
-//    static Integer temp = 0;
 
+    Integer maxPriorityOfTracking;
+    Integer stageForAdd;
+
+    boolean isThereEnddate;
+    boolean isNotAddNewTrack;
+
+//    static Integer temp = 0;
     Response rs;
 
     private UploadedFile file;
@@ -104,17 +106,56 @@ public class CompanyBean {
         ccomp = new ArrayList<>();
         gccomp = new GenericType<Collection<CompanyTB>>() {
         };
-        
-        cst=new ArrayList<>();
-        gcst=new GenericType<Collection<StagemasterTB>>(){};
+
+        cst = new ArrayList<>();
+        gcst = new GenericType<Collection<StagemasterTB>>() {
+        };
 
         cod = new ArrayList<>();
-        gcod = new GenericType<Collection<OrderDetailsTB>>(){};
-        
-          cotbs = new ArrayList<>();
-        gcotbs = new GenericType<Collection<OrderTrackingTB>>(){};
+        gcod = new GenericType<Collection<OrderDetailsTB>>() {
+        };
+
+        cotbs = new ArrayList<>();
+        gcotbs = new GenericType<Collection<OrderTrackingTB>>() {
+        };
+
+        maxPriorityOfTracking = 0;
+        isThereEnddate = false;
+        stageForAdd = 0;
 //        catserach=0;
 //        temp = 0;
+    }
+
+    public boolean isIsNotAddNewTrack() {
+        return isNotAddNewTrack;
+    }
+
+    public void setIsNotAddNewTrack(boolean isNotAddNewTrack) {
+        this.isNotAddNewTrack = isNotAddNewTrack;
+    }
+
+    public Integer getStageForAdd() {
+        return stageForAdd;
+    }
+
+    public void setStageForAdd(Integer stageForAdd) {
+        this.stageForAdd = stageForAdd;
+    }
+
+    public boolean isIsThereEnddate() {
+        return isThereEnddate;
+    }
+
+    public void setIsThereEnddate(boolean isThereEnddate) {
+        this.isThereEnddate = isThereEnddate;
+    }
+
+    public Integer getMaxPriorityOfTracking() {
+        return maxPriorityOfTracking;
+    }
+
+    public void setMaxPriorityOfTracking(Integer maxPriorityOfTracking) {
+        this.maxPriorityOfTracking = maxPriorityOfTracking;
     }
 
     public OrderTrackingTB getOrderTrackingTB() {
@@ -127,18 +168,15 @@ public class CompanyBean {
 
     public Collection<OrderTrackingTB> getCotbs(Integer odid) {
         System.out.println(odid);
-        rs=rc.getTrackByOrderDetailID(Response.class, TempData.orderDetailsTB.getOdetailsID().toString());
-        cotbs=rs.readEntity(gcotbs);
+        rs = rc.getTrackByOrderDetailID(Response.class, TempData.orderDetailsTB.getOdetailsID().toString());
+        cotbs = rs.readEntity(gcotbs);
+
         return cotbs;
     }
 
     public void setCotbs(Collection<OrderTrackingTB> cotbs) {
         this.cotbs = cotbs;
     }
-
-   
-    
-    
 
     public StagemasterTB getSt() {
         return st;
@@ -152,15 +190,14 @@ public class CompanyBean {
 //                System.out.println("hello cdi" + pID);
 
 //                TempData.prodtb=prod;
-        rs=rc.getAllStagesByPid(Response.class, TempData.prodtb.getProductID().toString());
-        cst=rs.readEntity(gcst);
+        rs = rc.getAllStagesByPid(Response.class, TempData.orderDetailsTB.getProductID().getProductID().toString());
+        cst = rs.readEntity(gcst);
         return cst;
     }
 
     public void setCst(Collection<StagemasterTB> cst) {
         this.cst = cst;
     }
-    
 
     public UserTB getUtb() {
         return utb;
@@ -211,16 +248,14 @@ public class CompanyBean {
     }
 
     public Collection<OrderDetailsTB> getCod() {
-        rs=rc.getAllOrderOfCompny(Response.class);
-        cod=rs.readEntity(gcod);
+        rs = rc.getAllOrderOfCompny(Response.class);
+        cod = rs.readEntity(gcod);
         return cod;
     }
 
     public void setCod(Collection<OrderDetailsTB> cod) {
         this.cod = cod;
     }
-    
-    
 
     public Collection<ProductTB> getCprod() {
         System.out.println(catserach);
@@ -395,16 +430,13 @@ public class CompanyBean {
 //            return "Display.jsf";
 //        }
 //    }
-
 //    public void userRegistration() {
 //        System.out.println(utb);
 //        rc.userRegistration(utb.getUsername(), utb.getUseremail(), utb.getPassword(), utb.getGender(), utb.getDob(), utb.getAddress(), utb.getMobileno());
 //    }
-
 //    public String getregisterpage() {
 //        return "UserRegistration.jsf";
 //    }
-
     public void addCompany() {
         rc.addCompany(comp.getCompanyname(), comp.getCompanydescription(), comp.getContactno(), comp.getCompanyemail());
         System.out.println("Company Added");
@@ -422,37 +454,198 @@ public class CompanyBean {
     public double averegePprice() {
         return rc.AveregePprice(double.class);
     }
-    
-    public void adminRegistration(){
+
+    public void adminRegistration() {
         rc.adminRegistration(utb.getUsername(), utb.getUseremail(), utb.getPassword(), utb.getMobileno(), utb.getAddress());
     }
-    
-    public String gotoProdDetil(ProductTB prod){
-        TempData.prodtb=prod;
-        this.prod=prod;
+
+    public String gotoProdDetil(ProductTB prod) {
+        TempData.prodtb = prod;
+        this.prod = prod;
         return "ProductDetailPage.jsf";
     }
-    
-    public String addStageInProduct(){
+
+    public String addStageInProduct() {
 //        System.out.println("" + pid);
-         this.prod=TempData.prodtb;
+        this.prod = TempData.prodtb;
         rc.addStageInProduct(TempData.prodtb.getProductID().toString(), st.getStagename(), st.getStagedescription(), String.valueOf(st.getPriority()));
         return "ProductDetailPage.jsf";
     }
-    
-    public String deleteStage(Integer Stageid){
-        this.prod=TempData.prodtb;
-       
+
+    public String deleteStage(Integer Stageid) {
+        this.prod = TempData.prodtb;
+
         rc.deleteStage(Stageid.toString());
         return "ProductDetailPage.jsf";
     }
-    
-      public String getdetails(OrderDetailsTB orderDetailsTB){
-      this.orderDetailsTB=orderDetailsTB;
-      TempData.orderDetailsTB = orderDetailsTB;
-      return "OrderDetails.jsf";
-  }
-  
-      
-    
+
+    public String getdetails(OrderDetailsTB orderDetailsTB) {
+        this.orderDetailsTB = orderDetailsTB;
+        TempData.orderDetailsTB = orderDetailsTB;
+
+        rs = rc.getTrackByOrderDetailID(Response.class, TempData.orderDetailsTB.getOdetailsID().toString());
+        Collection<OrderTrackingTB> ot = rs.readEntity(gcotbs);
+
+        rs = rc.getAllStagesByPid(Response.class, TempData.orderDetailsTB.getProductID().getProductID().toString());
+        Collection<StagemasterTB> sm = rs.readEntity(gcst);
+
+        ArrayList<StagemasterTB> newsm = new ArrayList<>();
+
+        isThereEnddate = true;
+
+        for (OrderTrackingTB tracking : ot) {
+            int priority = tracking.getStageID().getPriority();
+            if (priority > maxPriorityOfTracking) {
+                maxPriorityOfTracking = priority;
+                if ("work in progress".equals(tracking.getEndingDate())) {
+                    isThereEnddate = false;
+                    isNotAddNewTrack = true;
+                } else {
+                    isThereEnddate = true;
+                    isNotAddNewTrack = false;
+                }
+            }
+        }
+
+        return "OrderDetails.jsf";
+    }
+
+    public String addStartWork() {
+        System.out.println("helloooooooo start   work   ");
+        this.orderDetailsTB = TempData.orderDetailsTB;
+
+        rs = rc.getTrackByOrderDetailID(Response.class, TempData.orderDetailsTB.getOdetailsID().toString());
+        Collection<OrderTrackingTB> ot = rs.readEntity(gcotbs);
+
+        rs = rc.getAllStagesByPid(Response.class, TempData.orderDetailsTB.getProductID().getProductID().toString());
+        Collection<StagemasterTB> sm = rs.readEntity(gcst);
+
+        ArrayList<StagemasterTB> newsm = new ArrayList<>();
+
+        isThereEnddate = true;
+        isNotAddNewTrack = false;
+
+        for (OrderTrackingTB tracking : ot) {
+            int priority = tracking.getStageID().getPriority();
+            if (priority > maxPriorityOfTracking) {
+                maxPriorityOfTracking = priority;
+                if ("work in progress".equals(tracking.getEndingDate())) {
+                    isThereEnddate = false;
+                    isNotAddNewTrack = true;
+                } else {
+                    isThereEnddate = true;
+                    isNotAddNewTrack = false;
+                }
+            }
+        }
+
+        if (isThereEnddate) {
+            for (StagemasterTB stage : sm) {
+                if (maxPriorityOfTracking < stage.getPriority()) {
+                    newsm.add(stage);
+                }
+            }
+        }
+
+        stageForAdd = newsm.get(0).getStageID();
+        for (StagemasterTB stage : newsm) {
+            if (stageForAdd > stage.getStageID()) {
+                stageForAdd = stage.getStageID();
+            }
+        }
+
+        rc.addWorkInTrack(TempData.orderDetailsTB.getOdetailsID().toString(), "none", stageForAdd.toString());
+
+        rs = rc.getTrackByOrderDetailID(Response.class, TempData.orderDetailsTB.getOdetailsID().toString());
+        ot = rs.readEntity(gcotbs);
+
+        rs = rc.getAllStagesByPid(Response.class, TempData.orderDetailsTB.getProductID().getProductID().toString());
+        sm = rs.readEntity(gcst);
+
+        newsm = new ArrayList<>();
+
+        isThereEnddate = true;
+        isNotAddNewTrack = false;
+
+        for (OrderTrackingTB tracking : ot) {
+            int priority = tracking.getStageID().getPriority();
+            if (priority > maxPriorityOfTracking) {
+                maxPriorityOfTracking = priority;
+                if ("work in progress".equals(tracking.getEndingDate())) {
+                    isThereEnddate = false;
+                    isNotAddNewTrack = true;
+                } else {
+                    isThereEnddate = true;
+                    isNotAddNewTrack = false;
+                }
+            }
+        }
+
+        if (isThereEnddate) {
+            for (StagemasterTB stage : sm) {
+                if (maxPriorityOfTracking < stage.getPriority()) {
+                    newsm.add(stage);
+                }
+            }
+
+            stageForAdd = newsm.get(0).getStageID();
+            for (StagemasterTB stage : newsm) {
+                if (stageForAdd > stage.getStageID()) {
+                    stageForAdd = stage.getStageID();
+                }
+            }
+        }
+        System.out.println("helloooo loggg");
+        System.out.println(TempData.orderDetailsTB.getOdetailsID().toString());
+        System.out.println(stageForAdd.toString());
+        System.out.println(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()).toString());
+
+        return "OrderDetails.jsf";
+
+    }
+
+    public String complitWork() {
+        this.orderDetailsTB = TempData.orderDetailsTB;
+
+        rs = rc.getTrackByOrderDetailID(Response.class, TempData.orderDetailsTB.getOdetailsID().toString());
+        Collection<OrderTrackingTB> ot = rs.readEntity(gcotbs);
+
+        Integer otid = 0;
+
+        for (OrderTrackingTB tracking : ot) {
+            if ("work in progress".equals(tracking.getEndingDate())) {
+                otid = tracking.getOrdertrackID();
+            }
+        }
+
+        rc.addEndDateInTrack(otid.toString());
+
+        rs = rc.getTrackByOrderDetailID(Response.class, TempData.orderDetailsTB.getOdetailsID().toString());
+
+        ot = rs.readEntity(gcotbs);
+
+        rs = rc.getAllStagesByPid(Response.class, TempData.orderDetailsTB.getProductID().getProductID().toString());
+        Collection<StagemasterTB> sm = rs.readEntity(gcst);
+
+        ArrayList<StagemasterTB> newsm = new ArrayList<>();
+
+        isThereEnddate = true;
+
+        for (OrderTrackingTB tracking : ot) {
+            int priority = tracking.getStageID().getPriority();
+            if (priority > maxPriorityOfTracking) {
+                maxPriorityOfTracking = priority;
+                if ("work in progress".equals(tracking.getEndingDate())) {
+                    isThereEnddate = false;
+                    isNotAddNewTrack = true;
+                } else {
+                    isThereEnddate = true;
+                    isNotAddNewTrack = false;
+                }
+            }
+        }
+        return "OrderDetails.jsf";
+
+    }
+
 }

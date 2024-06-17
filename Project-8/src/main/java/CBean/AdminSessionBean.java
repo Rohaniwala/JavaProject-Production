@@ -8,6 +8,7 @@ import CDIBean.TempData;
 import Entity.CartTB;
 import Entity.CompanyTB;
 import Entity.OrderDetailsTB;
+import Entity.OrderTB;
 import Entity.OrderTrackingTB;
 import Entity.ProductCategoryTB;
 import Entity.ProductTB;
@@ -15,6 +16,8 @@ import Entity.RelationTB;
 import Entity.RoleTB;
 import Entity.StagemasterTB;
 import Entity.UserTB;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.management.relation.Relation;
@@ -269,38 +272,43 @@ public class AdminSessionBean {
         }
     }
 
-    public void addWorkInTrack(String description, String orderdetailsID, String place, String stageID, String startingDate) {
+    public void addWorkInTrack(Integer orderdetailsID, String place, Integer stageID) {
 
         OrderDetailsTB orderDetailsTB = em.find(OrderDetailsTB.class, orderdetailsID);
         Collection<OrderTrackingTB> orderTrackingTBsod = orderDetailsTB.getOrderTrackingTBCollection();
+
+        OrderTB orderTB = orderDetailsTB.getOrderID();
 
         StagemasterTB stagemasterTB = em.find(StagemasterTB.class, stageID);
         Collection<OrderTrackingTB> orderTrackingTBss = stagemasterTB.getOrderTrackingTBCollection();
 
         OrderTrackingTB orderTrackingTB = new OrderTrackingTB();
 
-        orderTrackingTB.setDescription(description);
+        orderTrackingTB.setDescription(stagemasterTB.getStagedescription());
         orderTrackingTB.setOrderdetailsID(orderDetailsTB);
         orderTrackingTB.setPlace(place);
         orderTrackingTB.setStageID(stagemasterTB);
-        orderTrackingTB.setStartingDate(startingDate);
+        orderTrackingTB.setStartingDate(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()).toString());
+        orderTrackingTB.setEndingDate("work in progress");
 
         orderTrackingTBsod.add(orderTrackingTB);
         orderTrackingTBss.add(orderTrackingTB);
 
+        orderTB.setOrderStatus(stagemasterTB.getStagename());
+
         em.persist(orderTrackingTB);
         em.merge(orderDetailsTB);
         em.merge(stagemasterTB);
+        em.merge(orderTB);
     }
 
-    public void addEndDateInTrack(String ordertrackID, String endingDate) {
+    public void addEndDateInTrack(Integer ordertrackID) {
 
         OrderTrackingTB orderTrackingTB = em.find(OrderTrackingTB.class, ordertrackID);
-
-        orderTrackingTB.setEndingDate(endingDate);
-
+        orderTrackingTB.setEndingDate(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()).toString());
         em.merge(orderTrackingTB);
     }
+
     public Collection<OrderDetailsTB> getAllOrderOfCompny() {
         UserTB utb = em.find(UserTB.class, TempData.Loginuid);
 
@@ -319,11 +327,12 @@ public class AdminSessionBean {
         return orderDetails;
 
     }
-    public Collection<OrderTrackingTB> getTrackByOrderDetailID(Integer odID){
-        
-       OrderDetailsTB orderDetailsTB = em.find(OrderDetailsTB.class, odID);
-       Collection<OrderTrackingTB> orderTrackingTBs = em.createNamedQuery("OrderTrackingTB.findByOrderdetailsID",OrderTrackingTB.class).setParameter("orderdetailsID", orderDetailsTB).getResultList();      
-       
-       return orderTrackingTBs;
+
+    public Collection<OrderTrackingTB> getTrackByOrderDetailID(Integer odID) {
+
+        OrderDetailsTB orderDetailsTB = em.find(OrderDetailsTB.class, odID);
+        Collection<OrderTrackingTB> orderTrackingTBs = em.createNamedQuery("OrderTrackingTB.findByOrderdetailsID", OrderTrackingTB.class).setParameter("orderdetailsID", orderDetailsTB).getResultList();
+
+        return orderTrackingTBs;
     }
 }
