@@ -35,12 +35,21 @@ Author: JTHEMES
 
 /* 1. GLOBAL STYLES */
 
-body {
+html, body {
     font-family: 'Raleway', sans-serif;
     font-size: 13px;
     color: #444;
-    background: #FFF url("../images/pattern/wood_pattern.png") 
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
+
+body {
+    background-color:#D5DADD;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
 
 h1,h2,h3,h4,h5,h6 {
     font-weight: 400;
@@ -106,12 +115,15 @@ a:focus{
 }
 
 header {
-    height: 100px;
+    /*height: 100px;*/
     background: #fff;
-    padding: 56px 0;
+    padding: 1.5rem 0;
     position: relative;
     z-index: 201;
     transition: .4s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .is-sticky header {
@@ -1222,6 +1234,8 @@ h5.heading2 span {
 footer {
     background: #1e1e1e;
     padding: 45px 0 35px;
+    position: absolute;
+    bottom: 0px;
 }
 
 .widget-footer h5 {
@@ -1350,12 +1364,15 @@ footer {
 /* 14. FOOTER / COPYRIGHT */
 
 .footer-bottom {
-    background: #131313;
+    background: white;
     padding: 25px 0;
+    bottom: 0;
+    position:fixed;
+    width: 100%
 }
 
 .footer-bottom p {
-    color: #bbb;
+    color: black;
     margin: 0;
 }
 

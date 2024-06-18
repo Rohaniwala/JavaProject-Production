@@ -8,15 +8,33 @@
         <title>Facelet Title</title>
         <link rel="stylesheet" href="../css/Cartcss.css"></link>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-        
+
+        <link rel="shortcut icon" href="https://jthemes.net/favicon.ico"/>
 
 
-       
+        <link href='http://fonts.googleapis.com/css?family=Raleway:400,200,100,300,500,600,700,800,900' rel='stylesheet' type='text/css' />
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,100,300,300italic,700,900' rel='stylesheet' type='text/css'/>
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'/>
+
+
+        <link rel="stylesheet" href="#{request.contextPath}/css/font-awesome/css/font-awesome.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/bootstrap.min_1.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/js/vendors/isotope/isotope.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/js/vendors/slick/slick.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/js/vendors/rs-plugin/css/settings.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/js/vendors/select/jquery.selectBoxIt.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/subscribe-better.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css"/>     
+        <link rel="stylesheet" href="#{request.contextPath}/plugin/owl-carousel/owl.carousel.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/plugin/owl-carousel/owl.theme.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/style.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/Product.css" />
+
     </h:head>
-    <h:body>
-<!--        <ui:insert name="header">
-            <ui:include src="./HeaderPage.xhtml"></ui:include>
-        </ui:insert>-->
+    <h:body class="bg-light">
+        <ui:insert name="header">
+            <ui:include src="../Client/HeaderPage.xhtml"></ui:include>
+        </ui:insert>
 
         <div class="shopping-cart">
             <!-- Title -->
@@ -26,7 +44,7 @@
 
             <!-- Use ui:repeat to loop over products -->
             <ui:repeat value="#{ClientBean.ccart}" var="cart">
-                <div class="item">
+                <div class="item" style="height: 100%">
 
 
                     <div class="image">
@@ -40,9 +58,9 @@
 
                     <div class="quantity">
                         <h:form id="forqty">
-                            <p:commandButton icon="fas fa-plus"  action="#{ClientBean.updateQutOfCart(cart.cartID, 1)}" ajax="false" update="forqty" />
+                            <p:commandButton icon="fas fa-plus" style="background-color: black; border: 2px solid black;box-shadow: 2px 2px #fff;"  action="#{ClientBean.updateQutOfCart(cart.cartID, 1)}" ajax="false" update="forqty" />
                             <input type="text" name="name" value="#{cart.quantity}"  />
-                            <p:commandButton icon="fas fa-minus"  action="#{ClientBean.updateQutOfCart(cart.cartID, -1)}" ajax="false" update="forqty" />
+                            <p:commandButton icon="fas fa-minus" style="background-color: black; border: 2px solid black;box-shadow: 2px 2px #fff;"  action="#{ClientBean.updateQutOfCart(cart.cartID, -1)}" ajax="false" update="forqty" />
                         </h:form>
                     </div>
 
@@ -50,7 +68,7 @@
 
                     <div class="order-button" style="margin-top: 18px; margin-right: 5px;">
                         <h:form>
-                            <p:commandButton value="Order" styleClass="order-button" action="#{ClientBean.orderForm(cart)}" />
+                            <p:commandButton value="Order" styleClass="order-button" style="background-color: black; border: 2px solid black;box-shadow: 2px 2px #fff; margin-right: 50px;" action="#{ClientBean.orderForm(cart)}" />
                         </h:form>
                     </div>
                 </div>
@@ -59,15 +77,35 @@
 
         </div>
 
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7 col-sm-7">
+                        <ul class="flinks">
+                            <li><a href="index.html">Site Map</a></li>
+                            <li><a href="index.html">Search Terms</a></li>
+                            <li><a href="index.html">Advanced Search</a></li>
+                            <li><a href="index.html">Orders and Returns</a></li>
+                            <li><a href="index.html">Customer Service</a></li>
+                        </ul>
+                        <br />
+                        <p>Copyright 2015 &middot; Designed and Developed by <a href="#" >jThemes Studio.</a> All rights reserved</p>
+                    </div>
+                    <div class="col-md-5 col-sm-5">
+                        <img src="images/basic/payment.png" class="pull-right img-responsive payment" alt=""/>
+                    </div>
+                </div>
+            </div>
+        </div>	
 
 
-        <script src="js/main.js"></script>
-        <script src="js/bootstrap.min.js"></script>        
+        <script src="#{request.contextPath}/js/main.js"></script>
+        <script src="#{request.contextPath}/js/bootstrap.min.js"></script>        
         <script src="plugin/owl-carousel/owl.carousel.min.js"></script>
-        <script src="js/bs-navbar.js"></script>
-        <script src="js/vendors/isotope/isotope.pkgd.js"></script>
-        <script src="js/vendors/slick/slick.min.js"></script>
-        <script src="js/vendors/tweets/tweecool.min.js"></script>
+        <script src="#{request.contextPath}/js/bs-navbar.js"></script>
+        <script src="#{request.contextPath}/js/vendors/isotope/isotope.pkgd.js"></script>
+        <script src="#{request.contextPath}/js/vendors/slick/slick.min.js"></script>
+        <script src="#{request.contextPath}/js/vendors/tweets/tweecool.min.js"></script>
         <script src="js/vendors/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
         <script src="js/vendors/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
         <script src="js/jquery.sticky.js"></script>

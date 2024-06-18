@@ -3,10 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <link rel="shortcut icon" href="https://jthemes.net/favicon.ico"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/style.css"/>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -15,40 +18,65 @@
                 padding: 0;
             }
 
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
             .card {
                 background: #fff;
                 border-radius: 8px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                max-width: 400px;
-                margin: 40px auto;
+                width: 100%;
+                margin: 20px auto;
                 overflow: hidden;
                 padding: 16px;
-                text-align: center;
+                text-align: left;
+                box-sizing: border-box;
+            }
+
+            .card-content-wrapper {
+                display: flex;
+                justify-content: space-between;
+                height: 550px;
             }
 
             .house-image {
-                width: 100%;
-                height: 50%;
+                width: 45%;
+                height: 100%;
+                border-radius: 10px;
+                /*max-height: 300px;*/
+                object-fit: cover;
             }
 
             .card-content {
+                width: 55%;
                 padding: 16px;
+                font-size: xx-large;
             }
 
-            .card-content h2 {
+            .h2 {
                 margin: 0 0 16px;
-                font-size: 24px;
-                color: #333;
+
+                color: red;
             }
 
-            .card-content .price {
-                font-size: 28px;
-                color: #e74c3c;
-                margin: 0 0 8px;
-            }
-
-            .card-content .address, .card-content .details, .card-content .realtor, .card-content .contact {
+            .info-row {
+                display: flex;
+                justify-content: space-between;
                 margin: 8px 0;
+            }
+
+            .info-label {
+                font-weight: bold;
+                color: #333;
+                width: 30%;
+            }
+
+            .info-value {
+                width: 70%;
+                text-align: right;
                 color: #555;
             }
 
@@ -67,12 +95,7 @@
                 background-clip: padding-box;
                 border: 1px solid #ced4da;
                 border-radius: .25rem;
-                transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-            }
-
-            .form-control-file {
-                display: block;
-                width: 100%;
+                transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
             }
 
             .btn {
@@ -107,29 +130,64 @@
         </style>
     </h:head>
     <h:body>
+        <ui:insert name="header">
+            <ui:include src="../Client/HeaderPage.xhtml"></ui:include>
+        </ui:insert>
 
-        <div class="card">
-            <img src="../images/#{ClientBean.carttb.productID.productimage}"  alt="House Image" class="house-image"/>
-            <div class="card-content">
-                <h2>#{ClientBean.carttb.productID.productname}</h2>
-                <p class="price">#{ClientBean.carttb.productID.productprice}</p>
-                <p class="address">#{ClientBean.carttb.productID.productdescription}</p>
-                <p class="details">#{ClientBean.carttb.quantity}</p>
-                <p class="realtor">#{ClientBean.carttb.productID.productprice * ClientBean.carttb.quantity}</p>
-                <!--<p class="contact">(555) 555-4321</p>-->
+        <div class="container">
+            <h1>Product Details</h1>
 
-                <h:form>
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <h:inputText  value="#{ClientBean.textForOrder}" styleClass="form-control" />
+            <div class="card">
+                <div class="card-content-wrapper">
+                    <img src="../images/#{ClientBean.carttb.productID.productimage}" alt="Product Image" class="house-image"/>
+                    <div class="card-content">
+                        <p style="font-size: 5rem; text-align: center; font-family: cursive; color:#004085; margin:5px; ">#{ClientBean.carttb.productID.productname}</p>
+                        <hr style="margin-top: 50px;"/>
+                        <div class="info-row">
+                            <div class="info-label">Price:</div>
+                            <div class="info-value">#{ClientBean.carttb.productID.productprice}</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">Description:</div>
+                            <div class="info-value">#{ClientBean.carttb.productID.productdescription}</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">Quantity:</div>
+                            <div class="info-value">#{ClientBean.carttb.quantity}</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">Total Price:</div>
+                            <div class="info-value">#{ClientBean.carttb.productID.productprice * ClientBean.carttb.quantity}</div>
+                        </div>
+
+                        <h:form>
+                            <div class="form-group">
+                                <!--<label for="name">Your Name</label>-->
+                                <h:inputText value="#{ClientBean.textForOrder}" styleClass="form-control">
+                                    <f:passThroughAttribute name="placeholder" value="What you want to customize? Write here...."/>
+                                </h:inputText>
+                            </div>
+                            <div class="form-group">
+                                <p:commandButton action="#{ClientBean.applyOrder()}" value="Order Now" style="background-color: black; border: 2px solid black;box-shadow: 2px 2px #fff; margin-right: 50px;" styleClass="btn btn-primary"/>
+                            </div>
+                        </h:form>
                     </div>
-                    <div class="form-group">
-                        <p:commandButton action="#{ClientBean.applyOrder()}" value="Order Now" styleClass="btn btn-primary"/>
-                    </div>
-                </h:form>
+                </div>
             </div>
         </div>
+
+        <script src="#{request.contextPath}/js/main.js"></script>
+        <script src="#{request.contextPath}/js/bootstrap.min.js"></script>        
+        <script src="plugin/owl-carousel/owl.carousel.min.js"></script>
+        <script src="#{request.contextPath}/js/bs-navbar.js"></script>
+        <script src="#{request.contextPath}/js/vendors/isotope/isotope.pkgd.js"></script>
+        <script src="#{request.contextPath}/js/vendors/slick/slick.min.js"></script>
+        <script src="#{request.contextPath}/js/vendors/tweets/tweecool.min.js"></script>
+        <script src="js/vendors/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+        <script src="js/vendors/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+        <script src="js/jquery.sticky.js"></script>
+        <script src="js/jquery.subscribe-better.js"></script>
+        <script src="../../../../../code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+        <script src="js/vendors/select/jquery.selectBoxIt.min.js"></script>
     </h:body>
 </html>
-
-

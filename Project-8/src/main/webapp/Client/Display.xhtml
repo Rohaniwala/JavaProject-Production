@@ -26,9 +26,12 @@
         <link href='http://fonts.googleapis.com/css?family=Lato:400,100,300,300italic,700,900' rel='stylesheet' type='text/css'/>
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'/>
 
+        <!--        <link rel="stylesheet" href="{request.contextPath}/css/bootstrap.min_1.css"/>
+                <link rel="stylesheet" href="{request.contextPath}/css/app.min.css"/>-->
+
 
         <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css"/>
-        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/bootstrap.min_1.css"/>
         <link rel="stylesheet" href="js/vendors/isotope/isotope.css"/>
         <link rel="stylesheet" href="js/vendors/slick/slick.css"/>
         <link rel="stylesheet" href="js/vendors/rs-plugin/css/settings.css"/>
@@ -42,16 +45,16 @@
         <title>Facelet Title</title>
 
         <style>
-            .product-list-list {
+/*            .product-list-list {
                 display: flex;
                 flex-wrap: wrap;
-                /*justify-content: space-evenly;*/
+                justify-content: space-evenly;
             }
 
             .product-item {
-                width: calc(33.33% - 20px); /* Set each product item to occupy one-third of the container width */
-                box-sizing: border-box; /* Include padding and border in the element's total width and height */
-                margin-bottom: 30px; /* Add bottom margin to create space between rows */
+                width: calc(33.33% - 20px);  Set each product item to occupy one-third of the container width 
+                box-sizing: border-box;  Include padding and border in the element's total width and height 
+                margin-bottom: 30px;  Add bottom margin to create space between rows 
             }
 
             .item-thumb {
@@ -64,15 +67,15 @@
 
             @media screen and (max-width: 991px) {
                 .product-item {
-                    width: calc(50% - 20px); /* Set each product item to occupy 50% of the container width on smaller screens */
+                    width: calc(50% - 20px);  Set each product item to occupy 50% of the container width on smaller screens 
                 }
             }
 
             @media screen and (max-width: 767px) {
                 .product-item {
-                    width: 100%; /* Set each product item to occupy 100% of the container width on smaller screens */
+                    width: 100%;  Set each product item to occupy 100% of the container width on smaller screens 
                 }
-            }
+            }*/
 
 
         </style>
@@ -102,26 +105,30 @@
 
         <!--data-->
 
-        <div class="featured-products" style="margin-top: 50px">
+        <div class="featured-products" style="margin-top: 50px;">
             <div class="container">
-                <div class="row">
+
+                <div class="row mb-5">
                     <div id="isotope" class="isotope">
-                        <div class="product-list-list">
+                        <div class="row">
                             <!-- Loop through your data and generate product items -->
                             <c:forEach items="#{ClientBean.cprod}" var="data">
-                                <div class="isotope-item clothing product-item">
-                                    <div class="item-thumb">
-                                        <img src="images/#{data.productimage}" class="img-responsive" alt=""/>
-                                        <div class="overlay-rmore fa fa-search quickview" data-toggle="modal" data-target="#myModal"></div>
-                                        <div class="product-overlay">
+                                <div class="col-3">
+                                    <div class="card mb-2">
+                                        <img src="images/#{data.productimage}" class="card-img-top img-fluid img-responsive" alt=""/>
+                                        <div class="item-thumb card-body">
+                                            <div class="overlay-rmore fa fa-search quickview" data-toggle="modal" data-target="#myModal"></div>
+                                            <div class="product-overlay">
+
+                                            </div>
+                                        </div>
+                                        <div class="product-info card-footer">
+                                            <h4 class="product-title"><a href="single-product.html">#{data.productname}</a></h4>
+                                            <span class="product-price">#{data.productprice}<em>- Pre order</em></span>
                                             <h:form>
-                                                <h:commandLink action="#{ClientBean.addToCart(data.productID)}" class="addcart fa fa-shopping-cart"></h:commandLink>
+                                                <h:commandLink action="#{ClientBean.addToCart(data.productID)}" class="addcart fa fa-shopping-cart fs-2"></h:commandLink>
                                             </h:form>
                                         </div>
-                                    </div>
-                                    <div class="product-info">
-                                        <h4 class="product-title"><a href="single-product.html">#{data.productname}</a></h4>
-                                        <span class="product-price">#{data.productprice}<em>- Pre order</em></span>
                                     </div>
                                 </div>
                             </c:forEach>
@@ -132,89 +139,13 @@
         </div>
 
         <!-- FOOTER -->
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 widget-footer col-sm-3">
-                        <h5>About Store</h5>
-                        <img src="images/basic/logo-lite.png" class="img-responsive space10" alt=""/>
-                        <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus</p>
-                        <div class="clearfix"></div>
-                        <ul class="f-social">
-                            <li><a href="https://www.facebook.com/" class="fa fa-facebook"></a></li>
-                            <li><a href="https://www.twitter.com/" class="fa fa-twitter"></a></li>
-                            <li><a href="https://feedburner.google.com/" class="fa fa-rss"></a></li>
-                            <li><a href="mailto:email@website.com" class="fa fa-envelope"></a></li>
-                            <li><a href="https://www.pinterest.com/" class="fa fa-pinterest"></a></li>
-                            <li><a href="https://www.instagram.com/" class="fa fa-instagram"></a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3 col-sm-3 widget-footer">
-                        <h5>Latest Tweets</h5>
-                        <div class="tweet-info">
-                            <div id="twitterfeed"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-3 widget-footer">
-                        <h5>Product tags</h5>
-                        <ul class="widget-tags">
-                            <li><a href="categories-grid.html">fashion</a></li>
-                            <li><a href="categories-grid.html">sports</a></li>
-                            <li><a href="categories-grid.html">business</a></li>
-                            <li><a href="categories-grid.html">news</a></li>
-                            <li><a href="categories-grid.html">night</a></li>
-                            <li><a href="categories-grid.html">freedom</a></li>
-                            <li><a href="categories-grid.html">design</a></li>
-                            <li><a href="categories-grid.html">miracle</a></li>
-                            <li><a href="categories-grid.html">gallery</a></li>
-                            <li><a href="categories-grid.html">collection</a></li>
-                            <li><a href="categories-grid.html">pen</a></li>
-                            <li><a href="categories-grid.html">pants</a></li>
-                            <li><a href="categories-grid.html">jeans</a></li>
-                            <li><a href="categories-grid.html">photos</a></li>
-                            <li><a href="categories-grid.html">oscar</a></li>
-                            <li><a href="categories-grid.html">smile</a></li>
-                            <li><a href="categories-grid.html">love</a></li>
-                            <li><a href="categories-grid.html">sunshine</a></li>
-                            <li><a href="categories-grid.html">luxury</a></li>
-                            <li><a href="categories-grid.html">forever</a></li>
-                            <li><a href="categories-grid.html">inlove</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3 col-sm-3 widget-footer">
-                        <h5>Newsletter</h5>
-                        <p>Sign up for our newsletter and promotions</p>
-                        <form class="newsletter">
-                            <input type="text" placeholder="Enter your email address here." />
-                            <button type="submit">Subscribe !</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </footer>
-
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-7 col-sm-7">
-                        <ul class="flinks">
-                            <li><a href="index.html">Site Map</a></li>
-                            <li><a href="index.html">Search Terms</a></li>
-                            <li><a href="index.html">Advanced Search</a></li>
-                            <li><a href="index.html">Orders and Returns</a></li>
-                            <li><a href="index.html">Customer Service</a></li>
-                        </ul>
-                        <br />
-                        <p>Copyright 2015 &middot; Designed and Developed by <a href="#" >jThemes Studio.</a> All rights reserved</p>
-                    </div>
-                    <div class="col-md-5 col-sm-5">
-                        <img src="images/basic/payment.png" class="pull-right img-responsive payment" alt=""/>
-                    </div>
-                </div>
-            </div>
-        </div>	
 
 
+        <div>
+            <ui:insert name="footer">
+                <ui:include src="FooterPage.xhtml"></ui:include>
+            </ui:insert>
+        </div>
 
 
 

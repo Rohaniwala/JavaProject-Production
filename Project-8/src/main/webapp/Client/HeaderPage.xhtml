@@ -23,7 +23,7 @@
 
 
         <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css"/>
-        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/bootstrap.min_1.css"/>
         <link rel="stylesheet" href="js/vendors/isotope/isotope.css"/>
         <link rel="stylesheet" href="js/vendors/slick/slick.css"/>
         <link rel="stylesheet" href="js/vendors/rs-plugin/css/settings.css"/>
@@ -38,18 +38,16 @@
     </h:head>
     <h:body>
        <header>
-            <nav class="navbar navbar-default">
+            <nav class="navbar navbar-expand-lg navbar-landing">
                 <div class="container">
                     <div class="row">
                         <div style="display: flex">
-                            <div class="navbar-header">
 
                                 <!-- Logo -->
-                                <a class="navbar-brand" href="index.html"><img src="./images/products/logo.png" style="background-color: #b46621; margin-top: -13px" width="100px" height="250px"  class="img-responsive" alt="hiii"/></a>
-                            </div>
+                                <a class="navbar-brand" href="index.html"><img src="#{request.contextPath}/images/products/logo.png" style="    background-color:#012931;" height="50"  class="img-responsive" alt="hiii"/></a>
 
                             <!-- Navmenu -->
-                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <div class="collapse navbar-collapse d-flex align-items-center" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav navbar-right">
                                     <li class="dropdown">
                                         <a href="index.html" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-expanded="false">Home</a>
@@ -84,14 +82,14 @@
                             <!-- Cart & Search -->
                             <div class="header-xtra pull-right">
                                 <div class="topcart">
-                                    <div style="margin-top: -80px;">
+                                    <div>
                                         <h:form>
                                             <h:commandLink action="#{ClientBean.gotoCart()}">
-                                                <img src="./images/products/basket.png" width="50px" height="50px" alt="alt"/>
+                                                <img src="#{request.contextPath}/images/products/basket.png" width="50px" height="50px" alt="alt"/>
                                             </h:commandLink>
 
                                             <h:commandLink action="#{ClientBean.displayMyOrders()}">
-                                                <img src="./images/products/shopping-bag.png" width="50px" height="50px" alt="alt" style="margin-left: 10px"/>
+                                                <img src="#{request.contextPath}/images/products/shopping-bag.png" width="50px" height="50px" alt="alt" style="margin-left: 10px"/>
                                             </h:commandLink>
                                         </h:form>
                                     </div>

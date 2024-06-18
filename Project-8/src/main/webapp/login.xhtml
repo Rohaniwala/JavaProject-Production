@@ -17,6 +17,8 @@
         <!-- CSS -->
         <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css"/>
         <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
+        <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/css/app.min.css"/>
         <link rel="stylesheet" href="css/bootstrap.css"/>
         <link rel="stylesheet" href="js/vendors/isotope/isotope.css"/>
         <link rel="stylesheet" href="js/vendors/slick/slick.css"/>
@@ -95,7 +97,7 @@
 
         <!--<div id="account-id">-->
         <div class="account-form" style="max-width:760px; margin: auto; margin-top: 200px; display: grid; place-items: center; background: none">
-            <div class="card" style="background-color:none ; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.9);">
+            <div class="card" style="background-color:#8396A8 ; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.9);">
                 <h1 style="text-align: center; margin-bottom: 30px; color: black">Login</h1>
                 <h:form class="form-login">
                     <ul class="form-list row">
@@ -112,12 +114,12 @@
                             <label style="color: black; font-size: 20px;" >Remember me</label>
                         </li>
                         <li class="col-md-6 col-sm-12 pwd text-right">
-                            <label style="color: black; font-size: 20px;" > <h:commandLink style="font-size: 20px;" value="Create new Account ?" action="UserRegistration.jsf"></h:commandLink> </label>
+                            <label style="color: black; font-size: 20px;" > <h:commandLink style="font-size: 20px;color:Black" value="Create new Account ?" action="UserRegistration.jsf"></h:commandLink> </label>
                         </li>
                     </ul>
                     <div class="buttons-set">
-                        <p:commandButton value="Login" action="#{loginBean.login()}" style="background-color: black; border: 2px solid black" class="btn-black" />&nbsp;
-                        <p:commandButton value="Reset" action="#{loginBean.logout()}" style="background-color: black; border: 2px solid black" styleClass="login-button" class="btn-black" />
+                        <p:commandButton value="Login" action="#{loginBean.login()}" style="background-color: black; border: 2px solid black;box-shadow: 2px 2px #fff;" class="btn-black" />&nbsp;
+                        <p:commandButton value="Reset" action="#{loginBean.logout()}" style="background-color: black; border: 2px solid black;box-shadow: 2px 2px #fff;" styleClass="login-button" class="btn-black" />
                     </div>
                 </h:form>
             </div>

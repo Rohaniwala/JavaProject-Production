@@ -8,13 +8,28 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
-         <link rel="stylesheet" href="../css/Cartcss.css"></link>
+        <link rel="stylesheet" href="../css/Cartcss.css"></link>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
         <!--<link rel="stylesheet" href="../css/Cartcss.css"></link>-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
-
+        <link rel="stylesheet" href="#{request.contextPath}/css/font-awesome/css/font-awesome.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/bootstrap.min_1.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/js/vendors/isotope/isotope.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/js/vendors/slick/slick.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/js/vendors/rs-plugin/css/settings.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/js/vendors/select/jquery.selectBoxIt.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/subscribe-better.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css"/>     
+        <link rel="stylesheet" href="#{request.contextPath}/plugin/owl-carousel/owl.carousel.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/plugin/owl-carousel/owl.theme.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/style.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/Product.css" />
     </h:head>
     <h:body>
+
+        <ui:insert name="header">
+            <ui:include src="../Client/HeaderPage.xhtml"></ui:include>
+        </ui:insert>
 
         <div class="shopping-cart">
             <!-- Title -->
@@ -45,10 +60,10 @@
                         <span>#{order.orderID.orderStatus}</span>
 
                     </div>
-                    
+
                     <div class="order-button" style="margin-top: 5px; margin-right: 5px;">
                         <h:form>
-                            <h:commandButton  action="#{ClientBean.getdetails(order)}" class="btn btn-primary" style="margin-top: 5px;" value="Order Details"></h:commandButton>
+                            <h:commandButton  action="#{ClientBean.getdetails(order)}" class="btn btn-primary" style="background-color: black; border: 2px solid black;box-shadow: 2px 2px #fff; margin-right: 50px;" value="Order Details"></h:commandButton>
                         </h:form>
                     </div>
                 </div>
