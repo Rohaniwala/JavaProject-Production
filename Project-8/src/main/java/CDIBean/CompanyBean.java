@@ -58,6 +58,10 @@ public class CompanyBean {
     Collection<CompanyTB> ccomp;
     GenericType<Collection<CompanyTB>> gccomp;
 
+    CompanyTB acomp = new CompanyTB();
+    Collection<CompanyTB> accomp;
+    GenericType<Collection<CompanyTB>> agccomp;
+
     StagemasterTB st = new StagemasterTB();
     Collection<StagemasterTB> cst;
     GenericType<Collection<StagemasterTB>> gcst;
@@ -119,11 +123,34 @@ public class CompanyBean {
         gcotbs = new GenericType<Collection<OrderTrackingTB>>() {
         };
 
+        accomp = new ArrayList<>();
+        agccomp = new GenericType<Collection<CompanyTB>>() {
+        };
+
         maxPriorityOfTracking = 0;
         isThereEnddate = false;
         stageForAdd = 0;
 //        catserach=0;
 //        temp = 0;
+    }
+
+    public CompanyTB getAcomp() {
+        return acomp;
+    }
+
+    public void setAcomp(CompanyTB acomp) {
+        this.acomp = acomp;
+    }
+
+    public Collection<CompanyTB> getAccomp() {
+        System.out.println(TempData.Loginuid);
+        rs = rc.getAdminProfile(Response.class, TempData.Loginuid.toString());
+        accomp = rs.readEntity(agccomp);
+        return accomp;
+    }
+
+    public void setAccomp(Collection<CompanyTB> accomp) {
+        this.accomp = accomp;
     }
 
     public boolean isIsNotAddNewTrack() {
@@ -646,6 +673,11 @@ public class CompanyBean {
         }
         return "OrderDetails.jsf";
 
+    }
+
+    public String getAdminProfile() {
+        this.uid = TempData.Loginuid;
+        return "AdminProfile.jsf";
     }
 
 }

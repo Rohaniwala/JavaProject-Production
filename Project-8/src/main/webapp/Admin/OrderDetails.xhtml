@@ -429,8 +429,12 @@
                                 </div>
 
 
-                                <img class="align-self-center img-fluid" src="../images/#{CompanyBean.orderDetailsTB.customizeImage}" width="180" height="180"/>
-                                <p class="text-muted"><span class="Today">#{CompanyBean.orderDetailsTB.customizetext}</span></p>
+                                <h:panelGroup rendered="#{CompanyBean.orderDetailsTB.customizeImage!= 'none'}">
+                                    <img class="align-self-center img-fluid" src="../images/#{CompanyBean.orderDetailsTB.customizeImage}" width="180" height="180"/>
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{CompanyBean.orderDetailsTB.customizetext!= 'null'}">
+                                    <p class="text-muted"><span class="Today">#{CompanyBean.orderDetailsTB.customizetext}</span></p>
+                                </h:panelGroup>
                             </div>
                         </div>
 

@@ -18,7 +18,7 @@ import javax.ws.rs.client.WebTarget;
  *        client.close();
  * </pre>
  *
- * @author ravindrasinh
+ * @author rohan
  */
 public class RestClient {
 
@@ -133,6 +133,10 @@ public class RestClient {
 
     public void cancelorder(String OrderID) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("cancelorder/{0}", new Object[]{OrderID})).request().delete();
+    }
+
+    public <T> T getAdminProfile(Class<T> responseType, String userid) throws ClientErrorException {
+        return webTarget.path(java.text.MessageFormat.format("admin/getAdminProfile/{0}", new Object[]{userid})).request().post(null, responseType);
     }
 
     public <T> T getProductByname(Class<T> responseType, String pName) throws ClientErrorException {

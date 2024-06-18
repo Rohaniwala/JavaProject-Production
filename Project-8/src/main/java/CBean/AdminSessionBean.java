@@ -335,4 +335,16 @@ public class AdminSessionBean {
 
         return orderTrackingTBs;
     }
+
+    public Collection<CompanyTB> getAdminProfile(Integer userid) {
+        return em.createQuery(
+                "SELECT c FROM CompanyTB c "
+                + "JOIN c.relationTBCollection r "
+                + "JOIN r.userID u "
+                + "WHERE u.userID = :userID",
+                CompanyTB.class
+        )
+                .setParameter("userID", userid)
+                .getResultList();
+    }
 }

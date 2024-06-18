@@ -283,7 +283,7 @@ public class JakartaEE8Resource {
     @POST
     @Path("admin/addWorkInTrack/{orderdetailsID}/{place}/{stageID}")
     public void addWorkInTrack(@PathParam("orderdetailsID") Integer orderdetailsID, @PathParam("place") String place, @PathParam("stageID") Integer stageID) {
-        ab.addWorkInTrack( orderdetailsID, place, stageID);
+        ab.addWorkInTrack(orderdetailsID, place, stageID);
     }
 
     @POST
@@ -291,10 +291,19 @@ public class JakartaEE8Resource {
     public void addEndDateInTrack(@PathParam("ordertrackID") Integer ordertrackID) {
         ab.addEndDateInTrack(ordertrackID);
     }
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getAllOrderOfCompny")
     public Collection<OrderDetailsTB> getAllOrderOfCompny() {
         return ab.getAllOrderOfCompny();
     }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("admin/getAdminProfile/{userid}")
+    public Collection<CompanyTB> getAdminProfile(@PathParam("userid") Integer userid) {
+        return ab.getAdminProfile(userid);
+    }
+
 }
