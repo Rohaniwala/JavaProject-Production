@@ -249,11 +249,14 @@ public class ClientSessionBean {
         orderTrackingTB.setStartingDate(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()));
         orderTrackingTB.setEndingDate(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()));
         orderTrackingTB.setDescription("cdh");
-
+        
+        Collection<OrderDetailsTB> orderDetailsTBs = new ArrayList<>();
+        orderDetailsTBs.add(orderDetailsTB);
+        orderTB.setOrderDetailsTBCollection(orderDetailsTBs);
+        
         em.persist(orderTB);
         em.persist(orderDetailsTB);
         em.persist(orderTrackingTB);
-
         em.remove(cartTB);
 
     }

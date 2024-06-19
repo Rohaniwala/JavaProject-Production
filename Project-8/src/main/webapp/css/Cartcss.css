@@ -23,7 +23,7 @@ body {
     width: 750px;
     /*height: auto;*/
     margin: 80px auto;
-    background: #FFFFFF;
+    /*background: #FFFFFF;*/
     box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
     border-radius: 6px;
 
@@ -168,9 +168,10 @@ input:focus {
 
 @media (max-width: 800px) {
     .shopping-cart {
-        width: 100%;
+        width: 500px;
         /*height: auto;*/
         overflow: hidden;
+        /*margin-left: 50px;*/
     }
     .item {
         height: auto;

@@ -167,6 +167,7 @@ public class RestClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    
     public void applyOrder(String CartID, String customizeImage, String customizeText) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("applyOrder/{0}/{1}/{2}", new Object[]{CartID, customizeImage, customizeText})).request().post(null);
     }

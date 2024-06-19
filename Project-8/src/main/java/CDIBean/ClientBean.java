@@ -10,6 +10,7 @@ import Entity.CartTB;
 import Entity.CompanyTB;
 import Entity.OrderDetailsTB;
 import Entity.OrderTB;
+import Entity.OrderTrackingTB;
 import Entity.ProductCategoryTB;
 import Entity.ProductTB;
 import Entity.StagemasterTB;
@@ -39,44 +40,45 @@ import org.primefaces.model.file.UploadedFile;
 @Named(value = "ClientBean")
 @RequestScoped
 public class ClientBean {
-    
-//    ClientSessionBean cb = new ClientSessionBean();
-    
 
+//    ClientSessionBean cb = new ClientSessionBean();
     RestClient rc;
 
     UserTB utb = new UserTB();
 
     ProductTB prod = new ProductTB();
-    
-    CartTB carttb=new CartTB();
-    
+
+    CartTB carttb = new CartTB();
+
     OrderDetailsTB orderDetailsTB = new OrderDetailsTB();
-    
+
     Collection<OrderDetailsTB> cod;
     GenericType<Collection<OrderDetailsTB>> gcod;
-    
+
     Collection<ProductTB> cprod;
     GenericType<Collection<ProductTB>> gprod;
-    
-     Collection<CartTB> ccart;
+
+    Collection<CartTB> ccart;
     GenericType<Collection<CartTB>> gcart;
 
     ProductCategoryTB prodcat = new ProductCategoryTB();
     Collection<ProductCategoryTB> cprodcat;
     GenericType<Collection<ProductCategoryTB>> gprodcat;
-    
-    StagemasterTB st =new StagemasterTB();
+
+    StagemasterTB st = new StagemasterTB();
     Collection<StagemasterTB> cst;
     GenericType<Collection<StagemasterTB>> gcst;
+
+    Collection<OrderTrackingTB> cotbs;
+    GenericType<Collection<OrderTrackingTB>> gcotbs;
 
 //    CompanyTB comp = new CompanyTB();
 //    Collection<CompanyTB> ccomp;
 //    GenericType<Collection<CompanyTB>> gccomp;
-
     String pcatID;
     String companyID;
     String textForOrder;
+    Integer maxPriorityOfTracking;
 
     Integer catserach;
     static Integer temp = 0;
@@ -102,22 +104,38 @@ public class ClientBean {
         };
 
         cprodcat = new ArrayList<>();
-        gprodcat = new GenericType<Collection<ProductCategoryTB>>() {};
-        
-        ccart=new ArrayList<>();
-        gcart=new GenericType<Collection<CartTB>>(){};
-        
-        cod = new ArrayList<>();
-        gcod = new GenericType<Collection<OrderDetailsTB>>(){};
-        
-         cst=new ArrayList<>();
-        gcst=new GenericType<Collection<StagemasterTB>>(){};
+        gprodcat = new GenericType<Collection<ProductCategoryTB>>() {
+        };
 
+        ccart = new ArrayList<>();
+        gcart = new GenericType<Collection<CartTB>>() {
+        };
+
+        cod = new ArrayList<>();
+        gcod = new GenericType<Collection<OrderDetailsTB>>() {
+        };
+
+        cst = new ArrayList<>();
+        gcst = new GenericType<Collection<StagemasterTB>>() {
+        };
+
+        cotbs = new ArrayList<>();
+        gcotbs = new GenericType<Collection<OrderTrackingTB>>() {
+        };
+        maxPriorityOfTracking = 0;
 //        ccomp = new ArrayList<>();
 //        gccomp = new GenericType<Collection<CompanyTB>>() {};
 
 //        catserach=0;
 //        temp = 0;
+    }
+
+    public Integer getMaxPriorityOfTracking() {
+        return maxPriorityOfTracking;
+    }
+
+    public void setMaxPriorityOfTracking(Integer maxPriorityOfTracking) {
+        this.maxPriorityOfTracking = maxPriorityOfTracking;
     }
 
     public String getTextForOrder() {
@@ -196,8 +214,8 @@ public class ClientBean {
     }
 
     public Collection<CartTB> getCcart() {
-        rs=rc.displayUserCart(Response.class, String.valueOf(TempData.Loginuid));
-        ccart=rs.readEntity(gcart);
+        rs = rc.displayUserCart(Response.class, String.valueOf(TempData.Loginuid));
+        ccart = rs.readEntity(gcart);
         return ccart;
     }
 
@@ -205,7 +223,6 @@ public class ClientBean {
         this.ccart = ccart;
     }
 
-    
     public void setCprod(Collection<ProductTB> cprod) {
         this.cprod = cprod;
     }
@@ -270,8 +287,18 @@ public class ClientBean {
     public void setCst(Collection<StagemasterTB> cst) {
         this.cst = cst;
     }
-    
-    
+
+    public Collection<OrderTrackingTB> getCotbs(Integer odid) {
+        System.out.println(odid);
+        rs = rc.getTrackByOrderDetailID(Response.class, TempData.orderDetailsTB.getOdetailsID().toString());
+        cotbs = rs.readEntity(gcotbs);
+
+        return cotbs;
+    }
+
+    public void setCotbs(Collection<OrderTrackingTB> cotbs) {
+        this.cotbs = cotbs;
+    }
 
 //    public CompanyTB getComp() {
 //        return comp;
@@ -290,7 +317,6 @@ public class ClientBean {
 //    public void setCcomp(Collection<CompanyTB> ccomp) {
 //        this.ccomp = ccomp;
 //    }
-
     public UploadedFile getFile() {
         return file;
     }
@@ -308,7 +334,7 @@ public class ClientBean {
     }
 
     public Collection<OrderDetailsTB> getCod() {
-        rs = rc.getAllOrderOfUser(Response.class,TempData.Loginuid.toString());
+        rs = rc.getAllOrderOfUser(Response.class, TempData.Loginuid.toString());
         cod = rs.readEntity(gcod);
         return cod;
     }
@@ -324,10 +350,6 @@ public class ClientBean {
     public void setOrderDetailsTB(OrderDetailsTB orderDetailsTB) {
         this.orderDetailsTB = orderDetailsTB;
     }
-    
-    
-    
-    
 
     public void upload() throws FileNotFoundException, IOException {
         if (file != null) {
@@ -363,18 +385,15 @@ public class ClientBean {
 //
 //        return "ProductDisplayAdmin.jsf";
 //    }
-
 //    public String deleteProduct(Integer productID) {
 //        if (KeyGenrator.verifytoken(KeyGenrator.genratetoken(KeepRecord.getUsername()))) {
 //            rc.deleteProduct(productID);
 //        }
 //        return "ProductDisplayAdmin.jsf";
 //    }
-
 //    public String addProd() {
 //        return "AddProduct.jsf";
 //    }
-
 //    public String getproddata(ProductTB prod) {
 //        System.out.println(prod);
 //        this.prod = prod;
@@ -391,7 +410,6 @@ public class ClientBean {
 //        }
 //        return "ProductDisplayAdmin.jsf";
 //    }
-
     public String getProductByCat(Integer pCatId) {
         catserach = pCatId;
         System.out.println("temp" + temp);
@@ -418,7 +436,6 @@ public class ClientBean {
 //        System.out.println("Company Added");
 //
 //    }
-
 //    public long countofOrder() {
 //        return rc.countofOrder(long.class);
 //    }
@@ -434,62 +451,68 @@ public class ClientBean {
 //    public void adminRegistration(){
 //        rc.adminRegistration(utb.getUsername(), utb.getUseremail(), utb.getPassword(), utb.getMobileno(), utb.getAddress());
 //    }
-    
-    
-    public String addToCart(Integer pid){
+    public String addToCart(Integer pid) {
         rc.addToCart(String.valueOf(TempData.Loginuid), pid.toString(), "1");
         return "Cart.jsf";
     }
-    
-    public String gotoCart(){
+
+    public String gotoCart() {
         return "Cart.jsf";
     }
-    
-    public String updateQutOfCart(Integer cId,Integer qut){
+
+    public String updateQutOfCart(Integer cId, Integer qut) {
         rc.updateCart(cId.toString(), qut.toString());
         return "Cart.jsf";
     }
-    
-  public String orderForm(CartTB carttb){
-    
-      this.carttb=carttb;
-      TempData.cartTB = carttb;
-      if(carttb.getProductID().getIsimageinclude()){
-        return "OrderForm_withImages.jsf";
-      }
-      else{
-        return "OrderForm_withText.jsf";
-      }
-  }
-  
-  public String applyOrder() throws IOException{
-      
-      String imageName = "none";
-      if(TempData.cartTB.getProductID().getIsimageinclude()){
-          upload();
-         imageName   = file.getFileName();
-      }
-    
-         System.out.println(TempData.cartTB.getCartID());
-                  System.out.println(imageName);
-         System.out.println(textForOrder);
 
-    rc.applyOrder(TempData.cartTB.getCartID().toString(), imageName, textForOrder);     
+    public String orderForm(CartTB carttb) {
+
+        this.carttb = carttb;
+        TempData.cartTB = carttb;
+        if (carttb.getProductID().getIsimageinclude()) {
+            return "OrderForm_withImages.jsf";
+        } else {
+            return "OrderForm_withText.jsf";
+        }
+    }
+
+    public String applyOrder() throws IOException {
+
+        String imageName = "none";
+        if (TempData.cartTB.getProductID().getIsimageinclude()) {
+            upload();
+            imageName = file.getFileName();
+        }
+
+        System.out.println(TempData.cartTB.getCartID());
+        System.out.println(imageName);
+        System.out.println(textForOrder);
+
+        rc.applyOrder(TempData.cartTB.getCartID().toString(), imageName, textForOrder);
 //cb.applyOrder(TempData.cartTB.getCartID(), imageName, textForOrder);
 
-    return "DisplayOrder.jsf";
-  }
-  
-  public String displayMyOrders(){
-      return "DisplayOrder.jsf";
-  }
-  
-  public String getdetails(OrderDetailsTB orderDetailsTB){
-      this.orderDetailsTB=orderDetailsTB;
-      TempData.orderDetailsTB = orderDetailsTB;
-      return "OrderDetails.jsf";
-  }
-  
-  
-   
+        return "DisplayOrder.jsf";
+    }
+
+    public String displayMyOrders() {
+        return "DisplayOrder.jsf";
+    }
+
+    public String getdetails(OrderDetailsTB orderDetailsTB) {
+        this.orderDetailsTB = orderDetailsTB;
+        TempData.orderDetailsTB = orderDetailsTB;
+        
+        rs = rc.getTrackByOrderDetailID(Response.class, TempData.orderDetailsTB.getOdetailsID().toString());
+        Collection<OrderTrackingTB> ot = rs.readEntity(gcotbs);
+
+        for (OrderTrackingTB tracking : ot) {
+            int priority = tracking.getStageID().getPriority();
+            if (priority > maxPriorityOfTracking) {
+                maxPriorityOfTracking = priority;
+            }
+        }
+
+        return "OrderDetails.jsf";
+    }
+
 }

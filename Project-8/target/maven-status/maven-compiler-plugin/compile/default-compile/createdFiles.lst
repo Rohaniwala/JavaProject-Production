@@ -16,6 +16,7 @@ com/mycompany/project/resources/JakartaEE8Resource.class
 ClassPackage/KeyGenrator.class
 CDIBean/CompanyBean.class
 Entity/StagemasterTB.class
+CDIBean/ClientBean$6.class
 Entity/RelationTB.class
 Entity/UserTB.class
 CDIBean/Config.class

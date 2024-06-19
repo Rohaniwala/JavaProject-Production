@@ -7,16 +7,18 @@
         <title>Facelet Title</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
-         <link rel="stylesheet" href="../css/Cartcss.css"></link>
+        <link rel="stylesheet" href="../css/Cartcss.css"></link>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
         <!--<link rel="stylesheet" href="../css/Cartcss.css"></link>-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 
         <style>
-             body {
+/*            body {
                 margin: 0;
                 font-family: Arial, sans-serif;
-            }
+                  width: 750px;
+                  
+            }*/
 
             .sidebar {
                 margin-top: -80px;
@@ -27,6 +29,7 @@
                 position: fixed;
                 overflow-y: auto;
                 z-index: 1;
+                /*margin-left: 100px;*/
             }
 
             .sidebar-header {
@@ -297,105 +300,107 @@
         </style>
     </h:head>
     <h:body>
-     <div class="sidebar">
-            <div class="sidebar-header">
-                <img src="../images/products/logo.png" alt="alt" height="100px" width="250px"/>
-            </div>
-            <ul class="menu">
-                <li class="menu-item">
-                    <a href="#"><i class="fas fa-home"></i> Dashboards</a>
-                </li>
+    
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <img src="../images/products/logo.png" alt="alt" height="100px" width="250px"/>
+                </div>
+                <ul class="menu">
+                    <li class="menu-item">
+                        <a href="#"><i class="fas fa-home"></i> Dashboards</a>
+                    </li>
 
-                <li class="menu-item">
-                    <!--                <a href="#"><i class="fas fa-shopping-cart"></i> Ecommerce</a>-->
-                    <!--                <ul class="submenu">-->
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="ProductDisplayAdmin.jsf"><i class="fas fa-box"></i> Products</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-info-circle"></i> Product Detail</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-list"></i> Orders</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-users"></i> Customers</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-shopping-basket"></i> Cart</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-credit-card"></i> Checkout</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-store"></i> Shops</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="AddProduct.jsf"><i class="fas fa-plus-circle"></i> Add Product</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        
-        
-        
-        
+                    <li class="menu-item">
+                        <!--                <a href="#"><i class="fas fa-shopping-cart"></i> Ecommerce</a>-->
+                        <!--                <ul class="submenu">-->
+                        <ul class="menu">
+                            <li class="menu-item">
+                                <a href="ProductDisplayAdmin.jsf"><i class="fas fa-box"></i> Products</a>
+                            </li>
+                        </ul>
+                        <ul class="menu">
+                            <li class="menu-item">
+                                <a href="#"><i class="fas fa-info-circle"></i> Product Detail</a>
+                            </li>
+                        </ul>
+                        <ul class="menu">
+                            <li class="menu-item">
+                                <a href="#"><i class="fas fa-list"></i> Orders</a>
+                            </li>
+                        </ul>
+                        <ul class="menu">
+                            <li class="menu-item">
+                                <a href="#"><i class="fas fa-users"></i> Customers</a>
+                            </li>
+                        </ul>
+                        <ul class="menu">
+                            <li class="menu-item">
+                                <a href="#"><i class="fas fa-shopping-basket"></i> Cart</a>
+                            </li>
+                        </ul>
+                        <ul class="menu">
+                            <li class="menu-item">
+                                <a href="#"><i class="fas fa-credit-card"></i> Checkout</a>
+                            </li>
+                        </ul>
+                        <ul class="menu">
+                            <li class="menu-item">
+                                <a href="#"><i class="fas fa-store"></i> Shops</a>
+                            </li>
+                        </ul>
+                        <ul class="menu">
+                            <li class="menu-item">
+                                <a href="AddProduct.jsf"><i class="fas fa-plus-circle"></i> Add Product</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+
+
+
         <div class="shopping-cart">
-            <!-- Title -->
-            <div class="title">
-                Your Orders
-            </div>
-
-            <!-- Use ui:repeat to loop over products -->
-            <ui:repeat value="#{CompanyBean.cod}" var="order">
-                <div class="item">
-
-
-                    <div class="image">
-                        <img src="../images/#{order.productID.productimage}" height="70px" width="100px" class="img-responsive" alt="hiii"/>
-                    </div>
-
-                    <div class="description">
-                        <span>#{order.productID.productname}</span>
-
-                    </div>
-
-                    <div class="description">
-                        <span>#{order.orderdate}</span>
-
-                    </div>
-
-                    <div class="description">
-                        <span>#{order.orderID.orderStatus}</span>
-
-                    </div>
-                    
-                    <div class="order-button" style="margin-top: 5px; margin-right: 5px;">
-                        <h:form>
-                            <h:commandButton  action="#{CompanyBean.getdetails(order)}" class="btn btn-primary" style="margin-top: 5px;" value="Order Details"></h:commandButton>
-                        </h:form>
-                    </div>
+                <!-- Title -->
+                <div class="title">
+                    Your Orders
                 </div>
 
-            </ui:repeat>
+                <!-- Use ui:repeat to loop over products -->
+                <ui:repeat value="#{CompanyBean.cod}" var="order">
+                    <div class="item">
 
-        </div>
+
+                        <div class="image">
+                            <img src="../images/#{order.productID.productimage}" height="70px" width="100px" class="img-responsive" alt="hiii"/>
+                        </div>
+
+                        <div class="description">
+                            <span>#{order.productID.productname}</span>
+
+                        </div>
+
+                        <div class="description">
+                            <span>#{order.orderdate}</span>
+
+                        </div>
+
+                        <div class="description">
+                            <span>#{order.orderID.orderStatus}</span>
+
+                        </div>
+
+                        <div class="order-button" style="margin-top: 5px; margin-right: 5px;">
+                            <h:form>
+                                <h:commandButton  action="#{CompanyBean.getdetails(order)}" class="btn btn-primary" style="margin-top: 5px;" value="Order Details"></h:commandButton>
+                            </h:form>
+                        </div>
+                    </div>
+
+                </ui:repeat>
+
+            </div>
+        
 
         <script src="js/main.js"></script>
     </h:body>
