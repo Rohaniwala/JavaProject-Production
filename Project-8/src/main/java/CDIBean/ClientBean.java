@@ -355,6 +355,7 @@ public class ClientBean {
     }
 
     public OrderDetailsTB getOrderDetailsTB() {
+        
         return orderDetailsTB;
     }
 

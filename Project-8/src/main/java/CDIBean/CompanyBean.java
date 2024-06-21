@@ -327,11 +327,11 @@ public class CompanyBean {
     }
 
     public Collection<OrderDetailsTB> getCod() {
-//        if (TempData.Loginuid != null) {
-//
-//            rs = rc.getAllOrderOfCompny(Response.class);
-//            cod = rs.readEntity(gcod);
-//        }
+        if (TempData.Loginuid != null) {
+
+            rs = rc.getAllOrderOfCompny(Response.class);
+            cod = rs.readEntity(gcod);
+        }
         return cod;
     }
 
