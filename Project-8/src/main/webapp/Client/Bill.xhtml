@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+       <link rel="stylesheet" href="../css/Cartcss.css"></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+        <link rel="shortcut icon" href="https://jthemes.net/favicon.ico"/>
+
+
+        <link href='http://fonts.googleapis.com/css?family=Raleway:400,200,100,300,500,600,700,800,900' rel='stylesheet' type='text/css' />
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,100,300,300italic,700,900' rel='stylesheet' type='text/css'/>
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'/>
+
+
+        <link rel="stylesheet" href="#{request.contextPath}/css/font-awesome/css/font-awesome.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/bootstrap.min_1.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/js/vendors/isotope/isotope.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/js/vendors/slick/slick.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/js/vendors/rs-plugin/css/settings.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/js/vendors/select/jquery.selectBoxIt.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/subscribe-better.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css"/>     
+        <link rel="stylesheet" href="#{request.contextPath}/plugin/owl-carousel/owl.carousel.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/plugin/owl-carousel/owl.theme.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/style.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/Product.css" />
+
+        <title>Generate Bill</title>
+        <style>
+            .bill-container {
+                
+                max-width: 800px;
+                margin: 50px auto;
+                background-color: rgba(255, 255, 255, 0.36);
+                padding: 3%;
+                border: 1px solid black;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+
+            th, td {
+                font-size: 1.5rem;
+                border: 2px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            h2, h3 {
+                color: #333;
+            }
+
+            .table-header {
+                color: black;
+            }
+
+            .footer {
+                margin-top: 20px;
+                font-size: 12px;
+                color: #666;
+            }
+        </style>
+    </head>
+    <body>
+        <ui:insert name="header">
+            <ui:include src="HeaderPage.xhtml"></ui:include>
+        </ui:insert>
+        <h:form>
+            <div class="bill-container">
+                <center>
+                    <img src="../images/products/logo.png" width="250px" height="80px" alt="alt" style="  margin-bottom: 20px;   background-color:#012931;"/>
+                </center>
+                <table>
+                    <tr>
+                        <th>Bill ID</th>
+                        <td>#{ClientBean.billingTB.billID}</td>
+                    </tr>
+                    <tr>
+                        <th>Bill Date</th>
+                        <td>#{ClientBean.billingTB.billDate}</td>
+                    </tr>
+                </table>
+
+                <h4>Customer Name: #{ClientBean.billingTB.orderID.userID.username}</h4>
+                <h3>Payment Information</h3>
+                <table>
+                    <thead>
+                        <tr class="table-header">
+                            <th>Detail</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ui:repeat value="#{ClientBean.billingTB.orderID.orderDetailsTBCollection}" var="detail">
+                            <tr>
+                                <td>#{detail.productID.productname}</td>   
+                                <td>#{detail.productID.productprice}</td>
+                              </tr>
+                        </ui:repeat>
+                        <tr>
+                            <td>-------------------------------------------------------------------------</td>
+                            <td>-------------------------</td>
+                        </tr>
+                        <tr>
+                            <th>Total Amount</th>
+                            <td>#{ClientBean.billingTB.totalPrice}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <div class="footer">
+                    This bill is a computer-generated document. No signature is required.
+                </div>
+            </div>
+
+        </h:form>
+    </body>
+</html>

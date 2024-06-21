@@ -9,13 +9,24 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
         <!--<link rel="stylesheet" href="../css/orderdetails.css"/>-->
-
+<link rel="stylesheet" href="#{request.contextPath}/css/font-awesome/css/font-awesome.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/bootstrap.min_1.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/js/vendors/isotope/isotope.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/js/vendors/slick/slick.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/js/vendors/rs-plugin/css/settings.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/js/vendors/select/jquery.selectBoxIt.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/subscribe-better.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/../../../../../ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css"/>     
+        <link rel="stylesheet" href="#{request.contextPath}/plugin/owl-carousel/owl.carousel.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/plugin/owl-carousel/owl.theme.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/style.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/Product.css" />
         <style>
             body {
                 color: #000;
                 overflow-x: hidden;
                 height: 100%;
-                background-color: #8c9eff;
+                background-color: #D5DADD;
                 background-repeat: no-repeat;
             }
 
@@ -111,7 +122,11 @@
         </style>
     </h:head>
     <h:body>
-
+        
+        
+<ui:insert name="header">
+            <ui:include src="../Client/HeaderPage.xhtml"></ui:include>
+        </ui:insert>
 
         <div class="container-fluid my-5 d-sm-flex justify-content-center">
             <div class="card px-2">
@@ -140,24 +155,24 @@
                         <img class="align-self-center img-fluid" src="../images/#{ClientBean.orderDetailsTB.productID.productimage}" width="180" height="180"/>
                     </div>
                 </div>
-                <div class="card-footer bg-white px-sm-3 pt-sm-4 px-0">
-                    <div class="row text-center" style="justify-content: space-evenly; align-items: center; " >
+                <div class="card-footer bg-white px-sm-3 pt-sm-4 px-0 ">
+                    <div class="row text-center d-flex" style="justify-content: space-evenly; align-items: center; " >
                         <h:form>
-                            <div class="col my-auto "><h:commandButton value="Track" class="btn btn-primary"></h:commandButton></div>
-                        </h:form>
-                        <h:form>
-                            <div class="col my-auto"><h:commandButton value="Back" action="DisplayOrder.jsf" class="btn btn-primary"></h:commandButton></div>
+                            <div class="col my-auto g-3 d-flex align-items-center justify-content-evenly">
+                                <h:commandButton value="BILL" class="btn btn-primary" action="#{ClientBean.getBill()}"></h:commandButton>
+                      
+                            <h:commandButton value="BACK" action="DisplayOrder.jsf" class="btn btn-primary"></h:commandButton></div>
                         </h:form>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="container px-1 px-md-4 py-5 mx-auto" style="margin-top: -150px">
+        <div class="container px-1 px-md-4 py-5 mx-auto" style="margin-top: -220px">
             <div class="card">
                 <div class="row d-flex justify-content-between px-3 top">
                     <div class="d-flex">
-                        <h5>ORDER <span class="text-primary font-weight-bold">#Y34XDHR</span></h5>
+                        <h5>ORDER <span class="text-primary font-weight-bold">#{ClientBean.orderDetailsTB.orderID.orderID}</span></h5>
                     </div>
                     <div class="d-flex flex-column text-sm-right">
                         <p class="mb-0">Expected Arrival <span>01/12/19</span></p>

@@ -173,6 +173,7 @@ public class ClientSessionBean {
     }
 
     public void genrateBill(Integer OrderID) {
+
         OrderTB orderTB = em.find(OrderTB.class, OrderID);
         BillingTB billtb = new BillingTB();
         billtb.setOrderID(orderTB);
@@ -249,14 +250,32 @@ public class ClientSessionBean {
         orderTrackingTB.setStartingDate(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()));
         orderTrackingTB.setEndingDate(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()));
         orderTrackingTB.setDescription("cdh");
-        
+
         Collection<OrderDetailsTB> orderDetailsTBs = new ArrayList<>();
         orderDetailsTBs.add(orderDetailsTB);
         orderTB.setOrderDetailsTBCollection(orderDetailsTBs);
-        
+
+        BillingTB billtb = new BillingTB();
+        billtb.setOrderID(orderTB);
+        billtb.setBillDate(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()));
+        billtb.setDeliveryDate(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()));
+
+        Totalprice = 0.0f;
+        orderDetailsTBs.forEach(o -> {
+            float productPrice = o.getProductID().getProductprice();
+            int quantity = o.getQuantity();
+            Totalprice += (quantity * productPrice);
+        });
+        billtb.setTotalPrice(Totalprice);
+
+        Collection<BillingTB> billingTBs = new ArrayList<>();
+        billingTBs.add(billtb);
+        orderTB.setBillingTBCollection(billingTBs);
+
         em.persist(orderTB);
         em.persist(orderDetailsTB);
         em.persist(orderTrackingTB);
+        em.persist(billtb);
         em.remove(cartTB);
 
     }
@@ -272,14 +291,18 @@ public class ClientSessionBean {
 
         return orderDetailsTBs;
     }
-    
-    public Collection<StagemasterTB> getStageByOrderDetailID(Integer odid)
-    {
+
+    public Collection<StagemasterTB> getStageByOrderDetailID(Integer odid) {
         OrderDetailsTB orderDetailsTB = em.find(OrderDetailsTB.class, odid);
-        Collection<StagemasterTB> stagemasterTBs = em.createQuery("SELECT sm FROM StagemasterTB sm JOIN OrderDetailsTB od ON sm.productID = od.productID WHERE od.orderID = :orderID").setParameter("orderID",orderDetailsTB.getOrderID()).getResultList();
+        Collection<StagemasterTB> stagemasterTBs = em.createQuery("SELECT sm FROM StagemasterTB sm JOIN OrderDetailsTB od ON sm.productID = od.productID WHERE od.orderID = :orderID").setParameter("orderID", orderDetailsTB.getOrderID()).getResultList();
         return stagemasterTBs;
     }
-    
-    
-    
+
+    public BillingTB getBillByodId(Integer odID) {
+        OrderDetailsTB orderDetailsTB = em.find(OrderDetailsTB.class, odID);
+        
+        BillingTB billingTB = em.createNamedQuery("BillingTB.findByOrderID", BillingTB.class).setParameter("orderID", orderDetailsTB.getOrderID()).getSingleResult();
+        return billingTB;
+    }
+
 }

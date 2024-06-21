@@ -59,6 +59,10 @@ public class RestClient {
         webTarget.path(java.text.MessageFormat.format("admin/updateCompany/{0}/{1}/{2}/{3}/{4}", new Object[]{CompanyID, cname, cdescription, cno, cemail})).request().post(null);
     }
 
+    public <T> T getBillByodId(Class<T> responseType, String odId) throws ClientErrorException {
+        return webTarget.path(java.text.MessageFormat.format("getBillByodId/{0}", new Object[]{odId})).request().post(null, responseType);
+    }
+
     public <T> T getAllOrderOfUser(Class<T> responseType, String userID) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("getAllOrderOfUser/{0}", new Object[]{userID}));
@@ -167,7 +171,6 @@ public class RestClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
-    
     public void applyOrder(String CartID, String customizeImage, String customizeText) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("applyOrder/{0}/{1}/{2}", new Object[]{CartID, customizeImage, customizeText})).request().post(null);
     }

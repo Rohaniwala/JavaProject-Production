@@ -29,6 +29,7 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "BillingTB.findAll", query = "SELECT b FROM BillingTB b"),
     @NamedQuery(name = "BillingTB.findByBillID", query = "SELECT b FROM BillingTB b WHERE b.billID = :billID"),
+    @NamedQuery(name = "BillingTB.findByOrderID", query = "SELECT b FROM BillingTB b WHERE b.orderID = :orderID"),
     @NamedQuery(name = "BillingTB.findByBillDate", query = "SELECT b FROM BillingTB b WHERE b.billDate = :billDate"),
     @NamedQuery(name = "BillingTB.findByDeliveryDate", query = "SELECT b FROM BillingTB b WHERE b.deliveryDate = :deliveryDate"),
     @NamedQuery(name = "BillingTB.findByTotalPrice", query = "SELECT b FROM BillingTB b WHERE b.totalPrice = :totalPrice")})
@@ -136,5 +137,5 @@ public class BillingTB implements Serializable {
     public String toString() {
         return "Entity.BillingTB[ billID=" + billID + " ]";
     }
-    
+
 }

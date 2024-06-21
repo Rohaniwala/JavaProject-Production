@@ -6,6 +6,7 @@ package CDIBean;
 
 import CBean.ClientSessionBean;
 import ClassPackage.KeyGenrator;
+import Entity.BillingTB;
 import Entity.CartTB;
 import Entity.CompanyTB;
 import Entity.OrderDetailsTB;
@@ -72,6 +73,8 @@ public class ClientBean {
     Collection<OrderTrackingTB> cotbs;
     GenericType<Collection<OrderTrackingTB>> gcotbs;
 
+    BillingTB billingTB = new BillingTB();
+
 //    CompanyTB comp = new CompanyTB();
 //    Collection<CompanyTB> ccomp;
 //    GenericType<Collection<CompanyTB>> gccomp;
@@ -128,6 +131,14 @@ public class ClientBean {
 
 //        catserach=0;
 //        temp = 0;
+    }
+
+    public BillingTB getBillingTB() {
+        return billingTB;
+    }
+
+    public void setBillingTB(BillingTB billingTB) {
+        this.billingTB = billingTB;
     }
 
     public Integer getMaxPriorityOfTracking() {
@@ -501,7 +512,7 @@ public class ClientBean {
     public String getdetails(OrderDetailsTB orderDetailsTB) {
         this.orderDetailsTB = orderDetailsTB;
         TempData.orderDetailsTB = orderDetailsTB;
-        
+
         rs = rc.getTrackByOrderDetailID(Response.class, TempData.orderDetailsTB.getOdetailsID().toString());
         Collection<OrderTrackingTB> ot = rs.readEntity(gcotbs);
 
@@ -515,4 +526,12 @@ public class ClientBean {
         return "OrderDetails.jsf";
     }
 
+    public String getBill() {
+        this.billingTB = rc.getBillByodId(BillingTB.class, TempData.orderDetailsTB.getOdetailsID().toString());
+        System.out.println("bill"+this.billingTB.getOrderID().getOrderDetailsTBCollection());
+        Collection<OrderDetailsTB> orderDetailsTBs = new ArrayList<>();
+        orderDetailsTBs.add(TempData.orderDetailsTB);
+        this.billingTB.getOrderID().setOrderDetailsTBCollection(orderDetailsTBs);
+        return "Bill.jsf";
+    }
 }

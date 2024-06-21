@@ -159,19 +159,30 @@ public class AdminSessionBean {
     }
 
     public long countofOrder() {
-        TypedQuery<Long> query = em.createQuery("SELECT count(o) FROM OrderTB o", Long.class);
-        return query.getSingleResult();
-
+        try {
+            TypedQuery<Long> query = em.createQuery("SELECT count(o) FROM OrderTB o", Long.class);
+            return query.getSingleResult();
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     public double totalRevenu() {
-        TypedQuery<Double> trevenu = em.createQuery("SELECT SUM(b.totalPrice) FROM BillingTB b", Double.class);
-        return trevenu.getSingleResult();
+        try {
+            TypedQuery<Double> trevenu = em.createQuery("SELECT SUM(b.totalPrice) FROM BillingTB b", Double.class);
+            return trevenu.getSingleResult();
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     public double AveregePprice() {
-        TypedQuery<Double> avgprice = em.createQuery("SELECT AVG(p.productprice) FROM ProductTB p", Double.class);
-        return avgprice.getSingleResult();
+        try {
+            TypedQuery<Double> avgprice = em.createQuery("SELECT AVG(p.productprice) FROM ProductTB p", Double.class);
+            return avgprice.getSingleResult();
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     public void adminRegistration(String Cname, String Cemail, String Password, String CMobileno, String Cdescription) {

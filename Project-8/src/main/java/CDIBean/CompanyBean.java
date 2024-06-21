@@ -91,6 +91,10 @@ public class CompanyBean {
     private String uname;
     private int uid;
     private String role;
+    
+        
+    
+    ds
 
     /**
      * Creates a new instance of CDIBean

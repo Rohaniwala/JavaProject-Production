@@ -2,6 +2,7 @@ package com.mycompany.project.resources;
 
 import CBean.AdminSessionBean;
 import CBean.ClientSessionBean;
+import Entity.BillingTB;
 import Entity.CartTB;
 import Entity.CompanyTB;
 import Entity.OrderDetailsTB;
@@ -304,6 +305,13 @@ public class JakartaEE8Resource {
     @Path("admin/getAdminProfile/{userid}")
     public Collection<CompanyTB> getAdminProfile(@PathParam("userid") Integer userid) {
         return ab.getAdminProfile(userid);
+    }
+    
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("getBillByodId/{odId}")
+    public BillingTB getBillByodId(@PathParam("odId") Integer odId) {
+        return sb.getBillByodId(odId);
     }
 
 }
