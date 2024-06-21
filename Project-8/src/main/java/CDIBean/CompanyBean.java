@@ -27,6 +27,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
@@ -170,6 +171,13 @@ public class CompanyBean {
         return pCountList;
     }
 
+    public String getJavaScriptNames() {
+        return String.join(",", pNameList.stream().map(name -> "\"" + name + "\"").toArray(String[]::new));
+    }
+
+    public String getJavaScriptCounts() {
+        return pCountList.stream().map(String::valueOf).collect(Collectors.joining(","));
+    }
     public Integer getIthCount(Integer i) {
         return pCountList.get(i);
     }
