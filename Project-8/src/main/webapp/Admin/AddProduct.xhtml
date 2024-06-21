@@ -348,7 +348,7 @@
                 </li>
             </ul>
         </div>
-        <h:form enctype="multipart/form-data">
+        <h:form enctype="multipart/form-data" id="prodadd">
             <div class="container">
                 <p:panel header="Add Product">
                     <div class="form-group">
@@ -406,7 +406,7 @@
                         <p:inputText id="productQuantity" value="#{CompanyBean.prod.quantity}" class="form-control"/>
                     </div>
                     <!-- Add more fields here as needed -->
-                    <p:commandButton value="Add Product" action="#{CompanyBean.addproductdata()}" class="btn btn-primary" />
+                    <p:commandButton value="Add Product" ajax="true" update="productPrice" action="#{CompanyBean.addproductdata()}" class="btn btn-primary" />
                 </p:panel>
             </div>
         </h:form>

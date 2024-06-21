@@ -176,10 +176,12 @@ public class UserTB implements Serializable {
         this.mobileno = mobileno;
     }
 
+    @JsonbTransient
     public Collection<RelationTB> getRelationTBCollection() {
         return relationTBCollection;
     }
 
+    @JsonbTransient
     public void setRelationTBCollection(Collection<RelationTB> relationTBCollection) {
         this.relationTBCollection = relationTBCollection;
     }
@@ -236,5 +238,5 @@ public class UserTB implements Serializable {
     public String toString() {
         return "Entity.UserTB[ userID=" + userID + " ]";
     }
-    
+
 }

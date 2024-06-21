@@ -124,19 +124,19 @@
                             <c:forEach items="#{ClientBean.cprod}" var="data">
                                 <div class="col-3">
                                     <div class="card mb-2">
-                                        <img src="images/#{data.productimage}" class="card-img-top img-fluid img-responsive" alt=""/>
+                                        <img src="images/#{data.productimage}" height="310" alt=""/>
                                         <div class="item-thumb card-body">
                                             <div class="overlay-rmore fa fa-search quickview" data-toggle="modal" data-target="#myModal"></div>
                                             <div class="product-overlay">
-                                               
+
                                             </div>
                                         </div>
                                         <div class="product-info card-footer">
                                             <h4 class="product-title"><a href="single-product.html">#{data.productname}</a></h4>
                                             <span class="product-price">#{data.productprice}<em>- Pre order</em></span>
-                                             <h:form>
-                                                    <h:commandLink action="#{ClientBean.addToCart(data.productID)}" class="addcart fa fa-shopping-cart fs-2"></h:commandLink>
-                                                </h:form>
+                                            <h:form>
+                                                <h:commandLink action="#{ClientBean.addToCart(data.productID)}" class="addcart fa fa-shopping-cart fs-2"></h:commandLink>
+                                            </h:form>
                                         </div>
                                     </div>
                                 </div>

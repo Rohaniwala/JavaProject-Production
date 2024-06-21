@@ -4,6 +4,7 @@
  */
 package CBean;
 
+import CDIBean.KeepRecord;
 import CDIBean.TempData;
 import Entity.CartTB;
 import Entity.CompanyTB;
@@ -131,8 +132,20 @@ public class AdminSessionBean {
     }
 
     public Collection<CompanyTB> DisplayCompany() {
+
         return em.createNamedQuery("CompanyTB.findAll").getResultList();
     }
+//    public Collection<CompanyTB> DisplayCompany() {
+//        UserTB utb = em.find(UserTB.class, KeepRecord.uid);
+//
+//        // Get the relation of the user to the company
+//        RelationTB relationTB = em.createNamedQuery("RelationTB.findByUid", RelationTB.class)
+//                .setParameter("userID", utb)
+//                .getSingleResult();
+//
+//        
+//        return em.createNamedQuery("CompanyTB.findByCompanyID").setParameter("companyID", relationTB.getCompanyID()).getResultList();
+//    }
 
     public void deleteProduct(Integer productID) {
         ProductTB ptb = em.find(ProductTB.class, productID);
@@ -245,6 +258,7 @@ public class AdminSessionBean {
     public Collection<ProductTB> getProductByCid() {
 
         UserTB utb = em.find(UserTB.class, TempData.Loginuid);
+
         RelationTB relationTB = em.createNamedQuery("RelationTB.findByUid", RelationTB.class).setParameter("userID", utb).getSingleResult();
 
         return em.createNamedQuery("ProductTB.findByProductCID", ProductTB.class).setParameter("companyID", relationTB.getCompanyID()).getResultList();
@@ -321,7 +335,7 @@ public class AdminSessionBean {
     }
 
     public Collection<OrderDetailsTB> getAllOrderOfCompny() {
-        UserTB utb = em.find(UserTB.class, TempData.Loginuid);
+        UserTB utb = em.find(UserTB.class, KeepRecord.uid);
 
         // Get the relation of the user to the company
         RelationTB relationTB = em.createNamedQuery("RelationTB.findByUid", RelationTB.class)

@@ -167,5 +167,9 @@ public class CompanyTB implements Serializable {
     public String toString() {
         return "Entity.CompanyTB[ companyID=" + companyID + " ]";
     }
+
+//    public int getId() {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
     
 }

@@ -433,9 +433,10 @@ public class ClientBean {
         }
     }
 
-    public void userRegistration() {
+    public String userRegistration() {
         System.out.println(utb);
         rc.userRegistration(utb.getUsername(), utb.getUseremail(), utb.getPassword(), utb.getGender(), utb.getDob(), utb.getAddress(), utb.getMobileno());
+        return "login.jsf";
     }
 
     public String getregisterpage() {

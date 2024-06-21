@@ -10,6 +10,7 @@ import Entity.OrderDetailsTB;
 import Entity.OrderTrackingTB;
 import Entity.ProductCategoryTB;
 import Entity.ProductTB;
+import Entity.RelationTB;
 import Entity.StagemasterTB;
 import Entity.UserTB;
 import RestClient.RestClient;
@@ -23,8 +24,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 import org.primefaces.model.file.UploadedFile;
@@ -36,7 +42,8 @@ import org.primefaces.model.file.UploadedFile;
 @Named(value = "CompanyBean")
 @RequestScoped
 public class CompanyBean {
-
+@PersistenceContext(unitName = "my_persistence_unit")
+    EntityManager em;
     RestClient rc;
 
     UserTB utb = new UserTB();
@@ -91,10 +98,9 @@ public class CompanyBean {
     private String uname;
     private int uid;
     private String role;
-    
-        
-    
-    ds
+
+    ArrayList<String> pNameList = new ArrayList<>();
+    ArrayList<Integer> pCountList = new ArrayList<>();
 
     /**
      * Creates a new instance of CDIBean
@@ -134,8 +140,46 @@ public class CompanyBean {
         maxPriorityOfTracking = 0;
         isThereEnddate = false;
         stageForAdd = 0;
+
+        Collection<OrderDetailsTB> detailsTBs = getCod();
+        Map<String, Integer> productCountMap = new HashMap<>();
+
+        for (OrderDetailsTB orderDetailsTB : detailsTBs) {
+            String productName = orderDetailsTB.getProductID().getProductname(); // Assuming getProductName() method exists
+            productCountMap.put(productName, productCountMap.getOrDefault(productName, 0) + 1);
+        }
+
+        // Lists to store product names and their counts
+        pNameList = new ArrayList<>(productCountMap.keySet());
+        pCountList = new ArrayList<>(productCountMap.values());
+
 //        catserach=0;
 //        temp = 0;
+    }
+
+    public ArrayList<String> getpNameList() {
+        return pNameList;
+    }
+
+    public void setpNameList(ArrayList<String> pNameList) {
+        this.pNameList = pNameList;
+    }
+
+    public ArrayList<Integer> getpCountList(Integer i) {
+        System.out.println(pCountList);
+        return pCountList;
+    }
+
+    public Integer getIthCount(Integer i) {
+        return pCountList.get(i);
+    }
+
+    public String getIthName(Integer i) {
+        return pNameList.get(i);
+    }
+
+    public void setpCountList(ArrayList<Integer> pCountList) {
+        this.pCountList = pCountList;
     }
 
     public CompanyTB getAcomp() {
@@ -221,7 +265,11 @@ public class CompanyBean {
 //                System.out.println("hello cdi" + pID);
 
 //                TempData.prodtb=prod;
-        rs = rc.getAllStagesByPid(Response.class, TempData.orderDetailsTB.getProductID().getProductID().toString());
+        System.out.println("gdhdf");
+        System.out.println(TempData.prodtb.getProductID());
+
+        rs = rc.getAllStagesByPid(Response.class, TempData.prodtb.getProductID().toString());
+
         cst = rs.readEntity(gcst);
         return cst;
     }
@@ -279,8 +327,11 @@ public class CompanyBean {
     }
 
     public Collection<OrderDetailsTB> getCod() {
-        rs = rc.getAllOrderOfCompny(Response.class);
-        cod = rs.readEntity(gcod);
+//        if (TempData.Loginuid != null) {
+//
+//            rs = rc.getAllOrderOfCompny(Response.class);
+//            cod = rs.readEntity(gcod);
+//        }
         return cod;
     }
 
@@ -292,6 +343,7 @@ public class CompanyBean {
         System.out.println(catserach);
         System.out.println(catserach == null || catserach == 0);
         cprod = new ArrayList<>();
+        
         if (catserach == null || catserach == 0) {
             rs = rc.getProductByCid(Response.class);
             cprod = rs.readEntity(gprod);
@@ -364,6 +416,21 @@ public class CompanyBean {
     public Collection<CompanyTB> getCcomp() {
         rs = rc.DisplayCompany(Response.class);
         ccomp = rs.readEntity(gccomp);
+
+        UserTB utb = em.find(UserTB.class, KeepRecord.uid);
+
+        // Get the relation of the user to the company
+        RelationTB relationTB = em.createNamedQuery("RelationTB.findByUid", RelationTB.class)
+                .setParameter("userID", utb)
+                .getSingleResult();
+//
+        Iterator<CompanyTB> iterator = ccomp.iterator();
+        while (iterator.hasNext()) {
+            CompanyTB company = iterator.next();
+            if (company.getCompanyID() != relationTB.getCompanyID().getCompanyID()) {
+                iterator.remove();
+            }
+        }
         return ccomp;
     }
 
@@ -389,7 +456,7 @@ public class CompanyBean {
 
     public void upload() throws FileNotFoundException, IOException {
         if (file != null) {
-            String destinationdirctory = "/home/rohan/8TH_Sem_Project/Project-8/src/main/webapp/images/";
+            String destinationdirctory = "/home/rohan/8th_Sem_Project/JavaProject-Production/Project-8/src/main/webapp/images/";
             File dirctory = new File(destinationdirctory);
             if (!dirctory.exists()) {
                 dirctory.mkdirs();
@@ -436,7 +503,7 @@ public class CompanyBean {
     public String getproddata(ProductTB prod) {
         System.out.println(prod);
         this.prod = prod;
-
+        TempData.prodtb = prod;
         return "updateProdcut.jsf";
     }
 
@@ -475,6 +542,7 @@ public class CompanyBean {
     }
 
     public long countofOrder() {
+
         return rc.countofOrder(long.class);
     }
 
@@ -486,8 +554,10 @@ public class CompanyBean {
         return rc.AveregePprice(double.class);
     }
 
-    public void adminRegistration() {
+    public String adminRegistration() {
         rc.adminRegistration(utb.getUsername(), utb.getUseremail(), utb.getPassword(), utb.getMobileno(), utb.getAddress());
+
+        return "login.jsf";
     }
 
     public String gotoProdDetil(ProductTB prod) {
@@ -513,7 +583,10 @@ public class CompanyBean {
     public String getdetails(OrderDetailsTB orderDetailsTB) {
         this.orderDetailsTB = orderDetailsTB;
         TempData.orderDetailsTB = orderDetailsTB;
+        TempData.prodtb = orderDetailsTB.getProductID();
 
+        System.out.println("hello lodu");
+        System.out.println(orderDetailsTB.getOrderID().getUserID().getUsername());
         rs = rc.getTrackByOrderDetailID(Response.class, TempData.orderDetailsTB.getOdetailsID().toString());
         Collection<OrderTrackingTB> ot = rs.readEntity(gcotbs);
 
