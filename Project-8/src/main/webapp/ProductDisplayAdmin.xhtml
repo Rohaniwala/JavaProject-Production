@@ -382,11 +382,11 @@
         
         <div class="sidebar">
             <div class="sidebar-header">
-                <img src="../images/products/logo.png" alt="alt" height="100px" width="250px"/>
+                <img src="./images/products/logo.png" alt="alt" height="100px" width="250px"/>
             </div>
             <ul class="menu">
                 <li class="menu-item">
-                    <a href="#"><i class="fas fa-home"></i> Dashboards</a>
+                    <a href="AdminDashBoard.jsf"><i class="fas fa-home"></i> Dashboards</a>
                 </li>
 
                 <li class="menu-item">
@@ -397,36 +397,13 @@
                             <a href="ProductDisplayAdmin.jsf"><i class="fas fa-box"></i> Products</a>
                         </li>
                     </ul>
+                    
                     <ul class="menu">
                         <li class="menu-item">
-                            <a href="#"><i class="fas fa-info-circle"></i> Product Detail</a>
+                            <a href="DisplyOrders.jsf"><i class="fas fa-list"></i> Orders</a>
                         </li>
                     </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-list"></i> Orders</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-users"></i> Customers</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-shopping-basket"></i> Cart</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-credit-card"></i> Checkout</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-store"></i> Shops</a>
-                        </li>
-                    </ul>
+                    
                     <ul class="menu">
                         <li class="menu-item">
                             <a href="AddProduct.jsf"><i class="fas fa-plus-circle"></i> Add Product</a>
@@ -434,7 +411,7 @@
                     </ul>
                 </li>
             </ul>
-        </div>     
+        </div> 
         
       
 
@@ -452,7 +429,7 @@
                             <div class="col-lg-4 col-md-6 product-item">
                                 <div class="product-card">
                                     <h:form>
-                                        <h:commandLink action="#{CompanyBean.gotoProdDetil(data)}"><img src="../images/#{data.productimage}" alt="#{data.productname}" class="product-image" /></h:commandLink>
+                                        <h:commandLink action="#{CompanyBean.gotoProdDetil(data)}"><img src="./images/#{data.productimage}" alt="#{data.productname}" class="product-image" /></h:commandLink>
                                     </h:form>
                                     <div class="product-info">
                                         <h4 class="product-title"><a href="single-product.html">#{data.productname}</a></h4>

@@ -88,7 +88,7 @@
                 display: block;
                 width: 100%;
                 padding: .375rem .75rem;
-                font-size: 1rem;
+                font-size: 1.5rem;
                 line-height: 1.5;
                 color: #495057;
                 background-color: #fff;
@@ -131,7 +131,7 @@
     </h:head>
     <h:body>
         <ui:insert name="header">
-            <ui:include src="../Client/HeaderPage.xhtml"></ui:include>
+            <ui:include src="./HeaderPage.xhtml"></ui:include>
         </ui:insert>
 
         <div class="container">
@@ -139,7 +139,7 @@
 
             <div class="card">
                 <div class="card-content-wrapper">
-                    <img src="../images/#{ClientBean.carttb.productID.productimage}" alt="Product Image" class="house-image"/>
+                    <img src="./images/#{ClientBean.carttb.productID.productimage}" alt="Product Image" class="house-image"/>
                     <div class="card-content">
                         <p style="font-size: 5rem; text-align: center; font-family: cursive; color:#004085; margin:5px; ">#{ClientBean.carttb.productID.productname}</p>
                         <hr style="margin-top: 50px;"/>
@@ -163,7 +163,7 @@
                         <h:form>
                             <div class="form-group">
                                 <!--<label for="name">Your Name</label>-->
-                                <h:inputText value="#{ClientBean.textForOrder}" styleClass="form-control">
+                                <h:inputText value="#{ClientBean.textForOrder}" styleClass="form-control" style="font-size: 25px;">
                                     <f:passThroughAttribute name="placeholder" value="What you want to customize? Write here...."/>
                                 </h:inputText>
                             </div>

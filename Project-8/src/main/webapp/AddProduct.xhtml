@@ -1,14 +1,13 @@
-<!--<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Add Company</title>
-         Include Bootstrap CSS 
+        <title>Add Product</title>
+        <!-- Include Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
-                  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
         <style>
             body {
                 margin: 0;
@@ -291,107 +290,102 @@
                 padding: 20px;
             }
 
-
         </style>
     </h:head>
     <h:body>
         <div class="sidebar">
             <div class="sidebar-header">
-                 <img src="images/products/logo.png" alt="alt" height="100px" width="250px"/>
+                <img src="./images/products/logo.png" alt="alt" height="100px" width="250px"/>
             </div>
             <ul class="menu">
                 <li class="menu-item">
-                    <a href="#"><i class="fas fa-home"></i> Dashboards</a>
+                    <a href="AdminDashBoard.jsf"><i class="fas fa-home"></i> Dashboards</a>
                 </li>
 
                 <li class="menu-item">
-                                    <a href="#"><i class="fas fa-shopping-cart"></i> Ecommerce</a>
-                                    <ul class="submenu">
+                    <!--                <a href="#"><i class="fas fa-shopping-cart"></i> Ecommerce</a>-->
+                    <!--                <ul class="submenu">-->
                     <ul class="menu">
                         <li class="menu-item">
-                            <a href="#"><i class="fas fa-box"></i> Products</a>
+                            <a href="ProductDisplayAdmin.jsf"><i class="fas fa-box"></i> Products</a>
                         </li>
                     </ul>
+                    
                     <ul class="menu">
                         <li class="menu-item">
-                            <a href="#"><i class="fas fa-info-circle"></i> Product Detail</a>
+                            <a href="DisplyOrders.jsf"><i class="fas fa-list"></i> Orders</a>
                         </li>
                     </ul>
+                    
                     <ul class="menu">
                         <li class="menu-item">
-                            <a href="#"><i class="fas fa-list"></i> Orders</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-users"></i> Customers</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-shopping-basket"></i> Cart</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-credit-card"></i> Checkout</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-store"></i> Shops</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-plus-circle"></i> Add Product</a>
+                            <a href="AddProduct.jsf"><i class="fas fa-plus-circle"></i> Add Product</a>
                         </li>
                     </ul>
                 </li>
             </ul>
         </div>
-
-        <h:form>
-            <div class="container" >
-                <p:panel header="Add Company">
+        <h:form enctype="multipart/form-data" id="prodadd">
+            <div class="container">
+                <p:panel header="Add Product">
                     <div class="form-group">
-                        <h:outputLabel for="companyName" value="Company Name:"/>
-                        <p:inputText id="companyName" value="#{CompanyBean.comp.companyname}" class="form-control"/>
+                        <h:outputLabel for="productName" value="Product Name:"/>
+                        <p:inputText id="productName" value="#{CompanyBean.prod.productname}" class="form-control"/>
                     </div>
 
                     <div class="form-group">
-                        <h:outputLabel for="companyDescription" value="Company Description:"/>
-                        <p:inputTextarea id="companyDescription" value="#{cDIBean.comp.companydescription}" rows="4" cols="30" class="form-control"/>
+                        <h:outputLabel for="productCategory" value="Product Category:"/>
+                        <p:selectOneMenu id="productCategory" value="#{CompanyBean.pcatID}" class="form-control">
+                            <f:selectItems value="#{CompanyBean.cprodcat}" var="data" itemValue="#{data.pcatID}" itemLabel="#{data.pcatname}" />
+                        </p:selectOneMenu>
                     </div>
 
                     <div class="form-group">
-                        <h:outputLabel for="contactNo" value="Contact No:"/>
-                        <p:inputText id="contactNo" value="#{cDIBean.comp.contactno}" class="form-control"/>
+                        <h:outputLabel for="productDescription" value="Product Description:"/>
+                        <p:inputTextarea id="productDescription" value="#{CompanyBean.prod.productdescription}" rows="4" cols="30" class="form-control"/>
                     </div>
 
                     <div class="form-group">
-                        <h:outputLabel for="companyEmail" value="Company Email:"/>
-                        <p:inputText id="companyEmail" value="#{cDIBean.comp.companyemail}" class="form-control"/>
+                        <h:outputLabel for="productPrice" value="Product Price:"/>
+                        <p:inputText id="productPrice" value="#{CompanyBean.prod.productprice}" class="form-control"/>
                     </div>
 
-                    <p:commandButton value="Add Company" action="#{cDIBean.addCompany()}" class="btn btn-primary" />
+                    <div class="form-group">
+                        <h:outputLabel for="productImage" value="Product Image:"/><br/>
+                        <p:fileUpload id="productImage" value="#{CompanyBean.file}" mode="simple" skinSimple="true" />
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Is Image Uploaded:"/>
+                        <p:selectOneRadio id="isImageUploaded" value="#{CompanyBean.prod.isimageinclude}" class="form-control">
+                            <f:selectItem itemLabel="Yes" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" />
+                        </p:selectOneRadio>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Is Text Included:"/>
+                        <p:selectOneRadio id="isTextIncluded" value="#{CompanyBean.prod.istextinclude}" class="form-control">
+                            <f:selectItem itemLabel="Yes" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" />
+                        </p:selectOneRadio>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="productCompany" value="Product Company"/>
+                        <p:selectOneMenu id="productCompany" value="#{CompanyBean.companyID}" class="form-control">
+                            <f:selectItems value="#{CompanyBean.ccomp}" var="c" itemValue="#{c.companyID}" itemLabel="#{c.companyname}" />
+                        </p:selectOneMenu>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="productQuantity" value="Quantity:"/>
+                        <p:inputText id="productQuantity" value="#{CompanyBean.prod.quantity}" class="form-control"/>
+                    </div>
+                    <!-- Add more fields here as needed -->
+                    <p:commandButton value="Add Product" ajax="true" update="productPrice" action="#{CompanyBean.addproductdata()}" class="btn btn-primary" />
                 </p:panel>
             </div>
         </h:form>
-        <script src="js/main.js"></script>
-
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
-        <script src="simplebar.min.js"></script>
-        <script src="assets/libs/node-waves/waves.min.js"></script>
-
-         apexcharts 
-        <script src="js/apexcharts.min.js"></script>
-
-         dashboard init 
-        <script src="js/dashboard.init.js"></script>
-
-         App js 
-        <script src="js/app.js"></script>
     </h:body>
-</html>-->
+</html>

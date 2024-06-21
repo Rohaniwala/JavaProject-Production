@@ -619,7 +619,7 @@ public class CompanyBean {
             }
         }
 
-        return "OrderDetails.jsf";
+        return "OrderDetailsAdmin.jsf";
     }
 
     public String addStartWork() {
@@ -712,7 +712,7 @@ public class CompanyBean {
         System.out.println(stageForAdd.toString());
         System.out.println(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()).toString());
 
-        return "OrderDetails.jsf";
+        return "OrderDetailsAdmin.jsf";
 
     }
 
@@ -756,7 +756,7 @@ public class CompanyBean {
                 }
             }
         }
-        return "OrderDetails.jsf";
+        return "OrderDetailsAdmin.jsf";
 
     }
 

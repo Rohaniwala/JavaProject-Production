@@ -6,18 +6,11 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
-        <link rel="stylesheet" href="../css/Cartcss.css"></link>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-
-        <link rel="shortcut icon" href="https://jthemes.net/favicon.ico"/>
-
-
-        <link href='http://fonts.googleapis.com/css?family=Raleway:400,200,100,300,500,600,700,800,900' rel='stylesheet' type='text/css' />
-        <link href='http://fonts.googleapis.com/css?family=Lato:400,100,300,300italic,700,900' rel='stylesheet' type='text/css'/>
-        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'/>
-
-
-        <link rel="stylesheet" href="#{request.contextPath}/css/font-awesome/css/font-awesome.css"/>
+        <link rel="stylesheet" href="./css/Cartcss.css"></link>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+        <!--<link rel="stylesheet" href="../css/orderdetails.css"/>-->
+<link rel="stylesheet" href="#{request.contextPath}/css/font-awesome/css/font-awesome.css"/>
         <link rel="stylesheet" href="#{request.contextPath}/css/bootstrap.min_1.css"/>
         <link rel="stylesheet" href="#{request.contextPath}/js/vendors/isotope/isotope.css"/>
         <link rel="stylesheet" href="#{request.contextPath}/js/vendors/slick/slick.css"/>
@@ -33,7 +26,7 @@
     </h:head>
     <h:body class="bg-light">
         <ui:insert name="header">
-            <ui:include src="../Client/HeaderPage.xhtml"></ui:include>
+            <ui:include src="./HeaderPage.xhtml"></ui:include>
         </ui:insert>
 
         <div class="shopping-cart">
@@ -48,7 +41,7 @@
 
 
                     <div class="image">
-                        <img src="../images/#{cart.productID.productimage}" height="70px" width="100px" class="img-responsive" alt="hiii"/>
+                        <img src="./images/#{cart.productID.productimage}" height="70px" width="100px" class="img-responsive" alt="hiii"/>
                     </div>
 
                     <div class="description">

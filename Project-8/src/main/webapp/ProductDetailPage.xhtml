@@ -1,21 +1,23 @@
-<!DOCTYPE html>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Add Product</title>
-        <!-- Include Bootstrap CSS -->
+        <title>Facelet Title</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+        <link rel="stylesheet" href="./css/Productdetails.css"></link>
         <style>
             body {
-                margin: 0;
+                /*margin: 0;*/
                 font-family: Arial, sans-serif;
             }
 
             .sidebar {
-                /*margin-top: -60px;*/
+                margin-top: -50px;
                 height: 100%;
                 width: 250px;
                 background-color: #2a3042;
@@ -295,11 +297,11 @@
     <h:body>
         <div class="sidebar">
             <div class="sidebar-header">
-                <img src="../images/products/logo.png" alt="alt" height="100px" width="250px"/>
+                <img src="./images/products/logo.png" alt="alt" height="100px" width="250px"/>
             </div>
             <ul class="menu">
                 <li class="menu-item">
-                    <a href="#"><i class="fas fa-home"></i> Dashboards</a>
+                    <a href="AdminDashBoard.jsf"><i class="fas fa-home"></i> Dashboards</a>
                 </li>
 
                 <li class="menu-item">
@@ -310,36 +312,13 @@
                             <a href="ProductDisplayAdmin.jsf"><i class="fas fa-box"></i> Products</a>
                         </li>
                     </ul>
+                    
                     <ul class="menu">
                         <li class="menu-item">
-                            <a href="#"><i class="fas fa-info-circle"></i> Product Detail</a>
+                            <a href="DisplyOrders.jsf"><i class="fas fa-list"></i> Orders</a>
                         </li>
                     </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-list"></i> Orders</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-users"></i> Customers</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-shopping-basket"></i> Cart</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-credit-card"></i> Checkout</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-store"></i> Shops</a>
-                        </li>
-                    </ul>
+                    
                     <ul class="menu">
                         <li class="menu-item">
                             <a href="AddProduct.jsf"><i class="fas fa-plus-circle"></i> Add Product</a>
@@ -348,67 +327,92 @@
                 </li>
             </ul>
         </div>
-        <h:form enctype="multipart/form-data" id="prodadd">
-            <div class="container">
-                <p:panel header="Add Product">
-                    <div class="form-group">
-                        <h:outputLabel for="productName" value="Product Name:"/>
-                        <p:inputText id="productName" value="#{CompanyBean.prod.productname}" class="form-control"/>
-                    </div>
 
-                    <div class="form-group">
-                        <h:outputLabel for="productCategory" value="Product Category:"/>
-                        <p:selectOneMenu id="productCategory" value="#{CompanyBean.pcatID}" class="form-control">
-                            <f:selectItems value="#{CompanyBean.cprodcat}" var="data" itemValue="#{data.pcatID}" itemLabel="#{data.pcatname}" />
-                        </p:selectOneMenu>
-                    </div>
+        <div class="container">
+            <div class="card">
+                <div class="container-fliud">
+                    <div class="wrapper row">
+                        <div class="preview col-md-6">
 
-                    <div class="form-group">
-                        <h:outputLabel for="productDescription" value="Product Description:"/>
-                        <p:inputTextarea id="productDescription" value="#{CompanyBean.prod.productdescription}" rows="4" cols="30" class="form-control"/>
-                    </div>
+                            <div class="preview-pic tab-content">
+                                <div class="tab-pane active" id="pic-1"><img src="./images/#{CompanyBean.prod.productimage}" /></div>
+                            </div>
 
-                    <div class="form-group">
-                        <h:outputLabel for="productPrice" value="Product Price:"/>
-                        <p:inputText id="productPrice" value="#{CompanyBean.prod.productprice}" class="form-control"/>
+                        </div>
+                        <div class="details col-md-6">
+                            <h3 class="product-title">#{CompanyBean.prod.productname}</h3>
+                            <div class="rating">
+                                <div class="stars">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </div>
+                                <span class="review-no">41 reviews</span>
+                            </div>
+                            <p class="product-description">#{CompanyBean.prod.productdescription}</p>
+                            <h4 class="price">current price: <span>#{CompanyBean.prod.productprice}</span></h4>
+                            <h4 class="price">Product Category: <span>#{CompanyBean.prod.pcatID.pcatname}</span></h4>
+                            <h4 class="price">Quantity : <span>#{CompanyBean.prod.quantity}</span></h4>
+                            <h4 class="price">Company Name : <span>#{CompanyBean.prod.companyID.companyname}</span></h4>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <h:outputLabel for="productImage" value="Product Image:"/><br/>
-                        <p:fileUpload id="productImage" value="#{CompanyBean.file}" mode="simple" skinSimple="true" />
-                    </div>
-
-                    <div class="form-group">
-                        <h:outputLabel value="Is Image Uploaded:"/>
-                        <p:selectOneRadio id="isImageUploaded" value="#{CompanyBean.prod.isimageinclude}" class="form-control">
-                            <f:selectItem itemLabel="Yes" itemValue="true" />
-                            <f:selectItem itemLabel="No" itemValue="false" />
-                        </p:selectOneRadio>
-                    </div>
-
-                    <div class="form-group">
-                        <h:outputLabel value="Is Text Included:"/>
-                        <p:selectOneRadio id="isTextIncluded" value="#{CompanyBean.prod.istextinclude}" class="form-control">
-                            <f:selectItem itemLabel="Yes" itemValue="true" />
-                            <f:selectItem itemLabel="No" itemValue="false" />
-                        </p:selectOneRadio>
-                    </div>
-
-                    <div class="form-group">
-                        <h:outputLabel for="productCompany" value="Product Company"/>
-                        <p:selectOneMenu id="productCompany" value="#{CompanyBean.companyID}" class="form-control">
-                            <f:selectItems value="#{CompanyBean.ccomp}" var="c" itemValue="#{c.companyID}" itemLabel="#{c.companyname}" />
-                        </p:selectOneMenu>
-                    </div>
-
-                    <div class="form-group">
-                        <h:outputLabel for="productQuantity" value="Quantity:"/>
-                        <p:inputText id="productQuantity" value="#{CompanyBean.prod.quantity}" class="form-control"/>
-                    </div>
-                    <!-- Add more fields here as needed -->
-                    <p:commandButton value="Add Product" ajax="true" update="productPrice" action="#{CompanyBean.addproductdata()}" class="btn btn-primary" />
-                </p:panel>
+                </div>
             </div>
-        </h:form>
+        </div>
+        <div class="container">
+            <!-- Stage Data Card -->
+            <div class="card">
+                <div class="container-fluid">
+                    <div class="wrapper row">
+                        <div class="col-md-12">
+                            <h3 class="product-title">Stage Data</h3>
+                            <h:panelGroup>
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Priority</th>
+                                            <th>Stage Name</th> 
+                                            <th>Stage Description</th>
+                                            <th>Delete Stage</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <h:form>
+                                                <td><h:inputText value="#{CompanyBean.st.priority}"></h:inputText></td>
+                                                <td><h:inputText value="#{CompanyBean.st.stagename}"></h:inputText></td>
+                                                <td><h:inputText value="#{CompanyBean.st.stagedescription}"></h:inputText></td>
+                                                <td>
+
+                                                    <h:commandButton value="Add"  styleClass="btn btn-primary"  action="#{CompanyBean.addStageInProduct()}" />
+
+                                                </td>
+                                            </h:form>
+                                        </tr>
+                                        <ui:repeat value="#{CompanyBean.cst}" var="stage">
+                                            <tr>
+                                                <td>#{stage.priority}</td>
+                                                <td>#{stage.stagename}</td>
+                                                <td>#{stage.stagedescription}</td>
+
+                                                <td>
+                                                    <h:form id="stdel">
+                                                        <p:commandButton value="Delete" action="#{CompanyBean.deleteStage(stage.stageID)}" style="border-radius: 50px; background-color: red" ajax="false" update="stdel" />
+                                                    </h:form>
+                                                </td>
+                                            </tr>
+                                        </ui:repeat>
+                                    </tbody>
+                                </table>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </h:body>
 </html>

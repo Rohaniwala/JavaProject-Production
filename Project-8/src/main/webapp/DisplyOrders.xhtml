@@ -1,23 +1,27 @@
-<!DOCTYPE html>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Update Product</title>
-        <!--<title>Add Product</title>-->
-        <!-- Include Bootstrap CSS -->
+        <title>Facelet Title</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+        <link rel="stylesheet" href="./css/Cartcss.css"></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+        <!--<link rel="stylesheet" href="../css/Cartcss.css"></link>-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+
         <style>
-             body {
+/*            body {
                 margin: 0;
                 font-family: Arial, sans-serif;
-            }
+                  width: 750px;
+                  
+            }*/
 
             .sidebar {
-                /*margin-top: -60px;*/
+                margin-top: -80px;
                 height: 100%;
                 width: 250px;
                 background-color: #2a3042;
@@ -25,6 +29,7 @@
                 position: fixed;
                 overflow-y: auto;
                 z-index: 1;
+                /*margin-left: 100px;*/
             }
 
             .sidebar-header {
@@ -295,13 +300,14 @@
         </style>
     </h:head>
     <h:body>
-        <div class="sidebar">
+    
+            <div class="sidebar">
             <div class="sidebar-header">
-                <img src="../images/products/logo.png" alt="alt" height="100px" width="250px"/>
+                <img src="./images/products/logo.png" alt="alt" height="100px" width="250px"/>
             </div>
             <ul class="menu">
                 <li class="menu-item">
-                    <a href="#"><i class="fas fa-home"></i> Dashboards</a>
+                    <a href="AdminDashBoard.jsf"><i class="fas fa-home"></i> Dashboards</a>
                 </li>
 
                 <li class="menu-item">
@@ -312,36 +318,13 @@
                             <a href="ProductDisplayAdmin.jsf"><i class="fas fa-box"></i> Products</a>
                         </li>
                     </ul>
+                    
                     <ul class="menu">
                         <li class="menu-item">
-                            <a href="#"><i class="fas fa-info-circle"></i> Product Detail</a>
+                            <a href="DisplyOrders.jsf"><i class="fas fa-list"></i> Orders</a>
                         </li>
                     </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-list"></i> Orders</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-users"></i> Customers</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-shopping-basket"></i> Cart</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-credit-card"></i> Checkout</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-store"></i> Shops</a>
-                        </li>
-                    </ul>
+                    
                     <ul class="menu">
                         <li class="menu-item">
                             <a href="AddProduct.jsf"><i class="fas fa-plus-circle"></i> Add Product</a>
@@ -350,72 +333,52 @@
                 </li>
             </ul>
         </div>
-        <h:form enctype="multipart/form-data">
-            <div class="container">
-                <p:panel header="Update Product">
-                    <div class="form-group">
-                        <h:outputLabel for="productID" value="Product ID:"/>
-                        <h:inputHidden value="#{CompanyBean.prod.productID}" />
-                    </div>
-                    
-                    <div class="form-group">
-                        <h:outputLabel for="productName" value="Product Name:"/>
-                        <p:inputText id="productName" value="#{CompanyBean.prod.productname}" class="form-control"/>
+
+
+
+
+        <div class="shopping-cart">
+                <!-- Title -->
+                <div class="title">
+                    Your Orders
+                </div>
+
+                <!-- Use ui:repeat to loop over products -->
+                <ui:repeat value="#{CompanyBean.cod}" var="order">
+                    <div class="item">
+
+
+                        <div class="image">
+                            <img src="./images/#{order.productID.productimage}" height="70px" width="100px" class="img-responsive" alt="hiii"/>
+                        </div>
+
+                        <div class="description">
+                            <span>#{order.productID.productname}</span>
+
+                        </div>
+
+                        <div class="description">
+                            <span>#{order.orderdate}</span>
+
+                        </div>
+
+                        <div class="description">
+                            <span>#{order.orderID.orderStatus}</span>
+
+                        </div>
+
+                        <div class="order-button" style="margin-top: 5px; margin-right: 5px;">
+                            <h:form>
+                                <h:commandButton  action="#{CompanyBean.getdetails(order)}" class="btn btn-primary" style="margin-top: 5px;" value="Order Details"></h:commandButton>
+                            </h:form>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <h:outputLabel for="productCategory" value="Product Category:"/>
-                        <p:selectOneMenu id="productCategory" value="#{CompanyBean.pcatID}" class="form-control">
-                            <f:selectItems value="#{CompanyBean.cprodcat}" var="data" itemValue="#{data.pcatID}" itemLabel="#{data.pcatname}" />
-                        </p:selectOneMenu>
-                    </div>
+                </ui:repeat>
 
-                    <div class="form-group">
-                        <h:outputLabel for="productDescription" value="Product Description:"/>
-                        <p:inputTextarea id="productDescription" value="#{CompanyBean.prod.productdescription}" rows="4" cols="30" class="form-control"/>
-                    </div>
-
-                    <div class="form-group">
-                        <h:outputLabel for="productPrice" value="Product Price:"/>
-                        <p:inputText id="productPrice" value="#{CompanyBean.prod.productprice}" class="form-control"/>
-                    </div>
-
-                    <div class="form-group">
-                        <h:outputLabel for="productImage" value="Product Image:"/><br/>
-                        <p:fileUpload id="productImage" value="#{CompanyBean.file}" mode="simple" skinSimple="true" />
-                    </div>
-
-                    <div class="form-group">
-                        <h:outputLabel value="Is Image Uploaded:"/>
-                        <p:selectOneRadio id="isImageUploaded" value="#{CompanyBean.prod.isimageinclude}" class="form-control">
-                            <f:selectItem itemLabel="Yes" itemValue="true" />
-                            <f:selectItem itemLabel="No" itemValue="false" />
-                        </p:selectOneRadio>
-                    </div>
-
-                    <div class="form-group">
-                        <h:outputLabel value="Is Text Included:"/>
-                        <p:selectOneRadio id="isTextIncluded" value="#{CompanyBean.prod.istextinclude}" class="form-control">
-                            <f:selectItem itemLabel="Yes" itemValue="true" />
-                            <f:selectItem itemLabel="No" itemValue="false" />
-                        </p:selectOneRadio>
-                    </div>
-
-                    <div class="form-group">
-                        <h:outputLabel for="productCompany" value="Product Company"/>
-                        <p:selectOneMenu id="productCompany" value="#{CompanyBean.companyID}" class="form-control">
-                            <f:selectItems value="#{CompanyBean.ccomp}" var="c" itemValue="#{c.companyID}" itemLabel="#{c.companyname}" />
-                        </p:selectOneMenu>
-                    </div>
-
-                    <div class="form-group">
-                        <h:outputLabel for="productQuantity" value="Quantity:"/>
-                        <p:inputText id="productQuantity" value="#{CompanyBean.prod.quantity}" class="form-control"/>
-                    </div>
-                    <!-- Add more fields here as needed -->
-                    <p:commandButton value="Update Product" action="#{CompanyBean.updateProddata()}" class="btn btn-primary" />
-                </p:panel>
             </div>
-        </h:form>
+        
+
+        <script src="js/main.js"></script>
     </h:body>
 </html>

@@ -441,7 +441,7 @@ public class ClientBean {
     }
 
     public String getregisterpage() {
-        return "Client/UserRegistration.jsf";
+        return "UserRegistration.jsf";
     }
 
 //    public void addCompany() {
@@ -479,6 +479,7 @@ public class ClientBean {
     }
 
     public String orderForm(CartTB carttb) {
+        System.out.println("order");
 
         this.carttb = carttb;
         TempData.cartTB = carttb;
@@ -525,7 +526,7 @@ public class ClientBean {
             }
         }
 
-        return "OrderDetails.jsf";
+        return "OrderDetailsClient.jsf";
     }
 
     public String getBill() {

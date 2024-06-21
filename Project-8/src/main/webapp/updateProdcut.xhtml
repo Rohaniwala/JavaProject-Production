@@ -1,125 +1,23 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <h:head>
+        <title>Update Product</title>
+        <!--<title>Add Product</title>-->
+        <!-- Include Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
-
-        <title>Facelet Title</title>
         <style>
-
-            body {
-                background-color: #edf2f7;
-                font-family: Arial, sans-serif;
-            }
-
-            .container {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-top: 50px;
-                padding: 20px;
-            }
-
-            .card {
-                width: 500px;
-                max-width: 400px;
-                background-color: #fff;
-                border: 1px solid #d2d2dc;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                border-radius: 10px;
-                text-align: center;
-                overflow: hidden;
-                margin-bottom: 20px;
-                transition: transform 0.3s, box-shadow 0.3s;
-            }
-
-            .card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            }
-
-            .card-body {
-                padding: 20px;
-            }
-
-            .img-lg {
-                width: 150px;
-                height: 150px;
-                border-radius: 50%;
-                object-fit: cover;
-                margin-bottom: 20px;
-                border: 3px solid #3da5f4;
-            }
-
-            .btn-info {
-                color: #fff;
-                background-color: #3da5f4;
-                border-color: #3da5f4;
-                display: inline-block;
-                padding: 10px 20px;
-                border-radius: 25px;
-                text-decoration: none;
-                margin: 5px;
-                transition: background-color 0.3s;
-            }
-
-            .btn-info:hover {
-                background-color: #3182ce;
-            }
-
-            h3 {
-                margin-bottom: 10px;
-                font-size: 3rem;
-                color: #333;
-            }
-
-            p {
-                margin-bottom: 10px;
-                color: #777;
-            }
-
-            .contact-info {
-                font-size: 1rem;
-                color: #555;
-                margin-bottom: 20px;
-            }
-
-            .border-top {
-                border-top: 1px solid #e2e8f0;
-                padding-top: 15px;
-                margin-top: 15px;
-            }
-
-            .row {
-                display: flex;
-                justify-content: space-around;
-            }
-
-            .col-4 {
-                flex: 1;
-                padding: 10px;
-            }
-
-            .col-4 h6 {
-                font-size: 1rem;
-                color: #333;
-                margin-bottom: 5px;
-            }
-
-            .col-4 p {
-                margin-bottom: 0;
-                color: #777;
-            }
-
-            body {
+             body {
                 margin: 0;
                 font-family: Arial, sans-serif;
             }
 
             .sidebar {
-                margin-top: -60px;
+                /*margin-top: -60px;*/
                 height: 100%;
                 width: 250px;
                 background-color: #2a3042;
@@ -309,7 +207,6 @@
                 flex: 1;
                 min-width: 250px;
                 height: 100%;
-                margin-top: 50px;
             }
 
             .welcome-card {
@@ -394,16 +291,17 @@
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
                 padding: 20px;
             }
+
         </style>
     </h:head>
     <h:body>
         <div class="sidebar">
             <div class="sidebar-header">
-                <img src="../images/products/logo.png" alt="alt" height="100px" width="250px"/>
+                <img src="./images/products/logo.png" alt="alt" height="100px" width="250px"/>
             </div>
             <ul class="menu">
                 <li class="menu-item">
-                    <a href="#"><i class="fas fa-home"></i> Dashboards</a>
+                    <a href="AdminDashBoard.jsf"><i class="fas fa-home"></i> Dashboards</a>
                 </li>
 
                 <li class="menu-item">
@@ -411,113 +309,90 @@
                     <!--                <ul class="submenu">-->
                     <ul class="menu">
                         <li class="menu-item">
-                            <a href="Admin/ProductDisplayAdmin.jsf"><i class="fas fa-box"></i> Products</a>
+                            <a href="ProductDisplayAdmin.jsf"><i class="fas fa-box"></i> Products</a>
                         </li>
                     </ul>
+                    
                     <ul class="menu">
                         <li class="menu-item">
-                            <a href="#"><i class="fas fa-info-circle"></i> Product Detail</a>
+                            <a href="DisplyOrders.jsf"><i class="fas fa-list"></i> Orders</a>
                         </li>
                     </ul>
+                    
                     <ul class="menu">
                         <li class="menu-item">
-                            <a href="Admin/DisplyOrders.jsf"><i class="fas fa-list"></i> Orders</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-users"></i> Customers</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-shopping-basket"></i> Cart</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-credit-card"></i> Checkout</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="#"><i class="fas fa-store"></i> Shops</a>
-                        </li>
-                    </ul>
-                    <ul class="menu">
-                        <li class="menu-item">
-                            <a href="Admin/AddProduct.jsf"><i class="fas fa-plus-circle"></i> Add Product</a>
+                            <a href="AddProduct.jsf"><i class="fas fa-plus-circle"></i> Add Product</a>
                         </li>
                     </ul>
                 </li>
             </ul>
         </div>
-        <div class="top-navbar">
-            <div class="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
-            <!--            <div class="search-bar">
-                            <i class="fas fa-search"></i>
-                            <input type="text" placeholder="Search..." />
-                        </div>-->
-            <div class="menu-items">
-                <div class="mega-menu">
-                    Mega Menu <i class="fas fa-caret-down"></i>
-                </div>
-                <div class="icon-items">
-                    <i class="fas fa-flag-usa"></i>
-                    <i class="fas fa-th"></i>
-                    <i class="fas fa-expand"></i>
-                    <i class="fas fa-bell">
-                        <span class="badge">3</span>
-                    </i>
-                    <div class="profile">
-                        <img src="profile.jpg" alt="Profile Image"/>
-                        <span>Jkhkjhn</span> <i class="fas fa-caret-down"></i>
+        <h:form enctype="multipart/form-data">
+            <div class="container">
+                <p:panel header="Update Product">
+                    <div class="form-group">
+                        <h:outputLabel for="productID" value="Product ID:"/>
+                        <h:inputHidden value="#{CompanyBean.prod.productID}" />
                     </div>
-                    <i class="fas fa-cog"></i>
-                </div>
+                    
+                    <div class="form-group">
+                        <h:outputLabel for="productName" value="Product Name:"/>
+                        <p:inputText id="productName" value="#{CompanyBean.prod.productname}" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="productCategory" value="Product Category:"/>
+                        <p:selectOneMenu id="productCategory" value="#{CompanyBean.pcatID}" class="form-control">
+                            <f:selectItems value="#{CompanyBean.cprodcat}" var="data" itemValue="#{data.pcatID}" itemLabel="#{data.pcatname}" />
+                        </p:selectOneMenu>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="productDescription" value="Product Description:"/>
+                        <p:inputTextarea id="productDescription" value="#{CompanyBean.prod.productdescription}" rows="4" cols="30" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="productPrice" value="Product Price:"/>
+                        <p:inputText id="productPrice" value="#{CompanyBean.prod.productprice}" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="productImage" value="Product Image:"/><br/>
+                        <p:fileUpload id="productImage" value="#{CompanyBean.file}" mode="simple" skinSimple="true" />
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Is Image Uploaded:"/>
+                        <p:selectOneRadio id="isImageUploaded" value="#{CompanyBean.prod.isimageinclude}" class="form-control">
+                            <f:selectItem itemLabel="Yes" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" />
+                        </p:selectOneRadio>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Is Text Included:"/>
+                        <p:selectOneRadio id="isTextIncluded" value="#{CompanyBean.prod.istextinclude}" class="form-control">
+                            <f:selectItem itemLabel="Yes" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" />
+                        </p:selectOneRadio>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="productCompany" value="Product Company"/>
+                        <p:selectOneMenu id="productCompany" value="#{CompanyBean.companyID}" class="form-control">
+                            <f:selectItems value="#{CompanyBean.ccomp}" var="c" itemValue="#{c.companyID}" itemLabel="#{c.companyname}" />
+                        </p:selectOneMenu>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="productQuantity" value="Quantity:"/>
+                        <p:inputText id="productQuantity" value="#{CompanyBean.prod.quantity}" class="form-control"/>
+                    </div>
+                    <!-- Add more fields here as needed -->
+                    <p:commandButton value="Update Product" action="#{CompanyBean.updateProddata()}" class="btn btn-primary" />
+                </p:panel>
             </div>
-        </div>
-
-
-
-        <div class="container">
-            <div class="row">
-                <h:dataTable value="#{CompanyBean.accomp}" var="abc" styleClass="w-full">
-                    <h:column>
-                        <h:panelGroup layout="block">
-                            <div class="card">
-                                <!--<button style="float: right">hiiii</button>-->
-                                <div class="card-body">
-                                    <div style="margin-top: -20px;">
-                                        <img src="../images/products/male-call-center-agent-vector.jpg" class="img-lg mb-4" alt="profile image" style="margin-top: 10px;"/>
-                                        <h3 style="margin-top:-10px;"><h:outputText value="#{abc.companyname}"/></h3>
-                                        <p class="text-muted mb-0"><h:outputText value="#{abc.companyemail}"/></p>
-                                        <p class="contact-info">
-                                            <h:outputText value="#{abc.contactno}"/>
-                                        </p>
-                                        <p class="contact-info" style="margin-top: -8px;">
-                                            <h:outputText value="#{abc.companydescription}"/>
-                                        </p>
-                                    </div>
-
-                                    <div class="border-top pt-3">
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <h:form>
-                                                    <h:commandButton value="Edit Profile"  class="btn-info"></h:commandButton>
-                                                </h:form>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </h:panelGroup>
-                    </h:column>
-                </h:dataTable>
-            </div>
-        </div>
+        </h:form>
     </h:body>
 </html>
